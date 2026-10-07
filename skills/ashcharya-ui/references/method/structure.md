@@ -62,7 +62,8 @@ landing) are in `../page-recipes.md`.
 Inside drawers use container queries (e.g. 880px) rather than viewport breakpoints.
 
 ## 5. Density rules
-- Ops users prefer density: 13px table text, 36–40px controls on desktop web; 46/38dp on mobile; any
+- Density is a personality dial (`personality.md`), not a constant. Dense identities: 13px table text, 36–40px
+  controls on desktop web; spacious identities: 15–16px text, 48–56px rows. Mobile 46/38dp; any
   touch device (`pointer: coarse`) gets ≥ 48dp targets.
 - Offer a compact mode where lists are long; persist it per user.
 - Never trade density for decoration; whitespace is for grouping, not for looking "clean".

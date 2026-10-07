@@ -103,6 +103,7 @@ skills/ashcharya-ui/
 ├── references/
 │   ├── method/
 │   │   ├── identity.md          deriving a unique identity from the domain (+ identity card template)
+│   │   ├── personality.md       six dials (density, scale, shape, edges, voice, ornament) so products really look different
 │   │   ├── layouts.md           7 web + 5 mobile layout archetypes and how to pick one
 │   │   ├── structure.md         structural principles, why each exists, layout skeletons
 │   │   ├── craft.md             depth, texture, shape, marks, type and motion without glow

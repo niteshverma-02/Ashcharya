@@ -20,7 +20,7 @@ looks are kept only as worked examples.
 **Never copy an example's whole identity into a new product.** Derive a new one with §2 — a hue may repeat if
 the new product's own material is that colour, but texture, shape, mark and type should come from its world.
 
-**Read before building:** this file, then `references/method/identity.md`, `layouts.md`, `structure.md`,
+**Read before building:** this file, then `references/method/identity.md`, `personality.md`, `layouts.md`, `structure.md`,
 `craft.md` (and `process.md` when iterating). Use `page-recipes.md`, `interaction-pack.md` and
 `assets/token-template.css` while building.
 
@@ -63,7 +63,10 @@ Do this before writing any CSS. Output a one-page **identity card** (template in
    any other screen.
 6. **Type pairing:** a workhorse sans for body, a characterful display face for titles + numbers, optionally
    one serif or mono for a human/precise accent. Never the same pairing as a sibling product.
-7. **Name it** ("Harvest", "Command OS", "Ledger", "Tidewater") and check: if a screenshot could be mistaken
+7. **Set the six personality dials** (`references/method/personality.md`): density, scale contrast, shape,
+   edges, voice, ornament. They decide type sizes, row heights, radii, borders, label style and decoration —
+   without them, different colours still look like the same UI.
+8. **Name it** ("Harvest", "Command OS", "Ledger", "Tidewater") and check: if a screenshot could be mistaken
    for a sibling product or a generic template, push the material further.
 
 ## 3. Layout + structural principles
@@ -82,8 +85,9 @@ The principles below are **behaviours**, not drawings. Each can be drawn many wa
 3. **Controls live where the eyes are.** Filters, scope and the page's primary action sit next to the data
    they change (header bar, chip row, facet panel or a query bar); applied filters show as removable chips with
    a result count. An app-wide create action may live in the top bar; only one of the two gets the accent style.
-4. **Lists are real grids.** One value per column, rules between rows and columns, sticky header, sort state
-   visible, an accent edge on the row you can open. On phones, use cards whose fields keep the same order and
+4. **Lists are real grids.** One value per column in aligned columns, sticky header, sort state visible, a
+   clear marker on the row you can open. Ruled (lines between rows and columns) or borderless (zebra/tone),
+   following the edges dial. On phones, use cards whose fields keep the same order and
    position in every card (a grid folded into cards), never free-form cards.
 5. **Records open without losing your place; forms open in the same place.** A docked drawer, a right sheet,
    a split pane, inline expansion or a push screen on mobile; add/edit uses the same container; centred dialogs
@@ -132,7 +136,8 @@ The principles below are **behaviours**, not drawings. Each can be drawn many wa
 
 ## 7. Done checklist
 
-- [ ] An identity card exists and the screen is recognisably *that* identity, not a sibling or a template
+- [ ] An identity card exists (with the six dials) and the screen is recognisably *that* identity, not a sibling or a template
+- [ ] Differs from every sibling on ≥ 3 dials and in palette structure or archetype
 - [ ] Palette: one hue family + one accent; contrast checked with `assets/tools/check-contrast.py`
 - [ ] Shared components reused or created once; no page-specific forks
 - [ ] Layout archetype chosen from the job (not copied from a sibling); variety check done

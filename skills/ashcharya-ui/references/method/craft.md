@@ -27,7 +27,8 @@ Use the identity card's choices (see `identity.md`). Rules:
 
 ## 3. Type as craft
 - Titles: display face, heavy weight (700–800), tight tracking (−0.02 to −0.035em).
-- Eyebrows: 10–11px, 700–750 weight, 0.12–0.16em caps, with a short accent rule after them.
+- Labels follow the voice dial: tiny tracked caps eyebrows are a *loud/ruled* choice (Harvest used them);
+  quiet identities use sentence-case labels in a muted colour; loud ones may use condensed caps blocks.
 - Numbers: tabular figures, display face; a figure is never smaller than its label.
 - A serif or mono accent only for human/precise moments (dates, sign-in headline, clocks, codes).
 
