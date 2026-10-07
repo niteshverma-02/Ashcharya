@@ -1,0 +1,284 @@
+/* Ashcharya UI — colour themes. Load after ashcharya-tokens.css.
+   Pick one with <html data-ash-theme="indigo"> (add class="dark" for night).
+   Every theme keeps the same structure and craft; only the palette changes.
+   All text pairs are contrast-checked (>= 4.5:1, non-text >= 3:1) in light and night. */
+
+/* Canopy (default) — green + harvest gold on warm paper */
+:root, html[data-ash-theme="canopy"] {
+  --canvas: #F6F5F1;
+  --surface: #FFFFFF;
+  --surface-ivory: #FBF8F1;
+  --line: #E5E3DA;
+  --line-soft: #EFEDE5;
+  --ink: #16211B;
+  --ink-2: #5B6B62;
+  --ink-faint: #838A80;
+  --canopy: #0F4033;
+  --canopy-1: #0B3328;
+  --canopy-2: #13503F;
+  --on-canopy: #F6F2E7;
+  --action: #15683F;
+  --action-hover: #0F4F30;
+  --on-action: #FFFFFF;
+  --action-text: #146137;
+  --brand-surface: #E8F1EB;
+  --accent: #E2B864;
+  --gold: #E2B864;
+  --accent-ink: #2A1D02;
+  --gold-ink: #2A1D02;
+  --accent-text: #8F6410;
+  --gold-text: #8F6410;
+  --drop: #061F18;
+}
+
+html.dark, html.dark[data-ash-theme="canopy"] {
+  --canvas: #15181D;
+  --surface: #1C2128;
+  --surface-ivory: #161B22;
+  --surface-raised: #21262D;
+  --line: #30363D;
+  --line-soft: #21262D;
+  --ink: #E6EDF3;
+  --ink-2: #D1D9E0;
+  --ink-faint: #8B949E;
+  --canopy: #161B22;
+  --canopy-1: #161B22;
+  --canopy-2: #21262D;
+  --on-canopy: #E6EDF3;
+  --action: #2EA043;
+  --action-hover: #3FB950;
+  --on-action: #0D1117;
+  --action-text: #3FB950;
+  --brand-surface: #2B3C36;
+  --accent: #D29922;
+  --gold: #D29922;
+  --accent-ink: #2A1D02;
+  --gold-ink: #2A1D02;
+  --accent-text: #D29922;
+  --gold-text: #D29922;
+  --drop: #000000;
+}
+
+/* Indigo Ledger — deep indigo + amber on cool paper — finance, ledgers, admin */
+html[data-ash-theme="indigo"] {
+  --canvas: #F4F5F9;
+  --surface: #FFFFFF;
+  --surface-ivory: #FAFAFD;
+  --line: #E2E4EC;
+  --line-soft: #ECEEF4;
+  --ink: #161A2E;
+  --ink-2: #545A75;
+  --ink-faint: #7F849A;
+  --canopy: #1E2350;
+  --canopy-1: #171B42;
+  --canopy-2: #2A3170;
+  --on-canopy: #F2F3FB;
+  --action: #3A44B0;
+  --action-hover: #2E3790;
+  --on-action: #FFFFFF;
+  --action-text: #3A44B0;
+  --brand-surface: #E8EAF8;
+  --accent: #E8B04B;
+  --gold: #E8B04B;
+  --accent-ink: #2B1B00;
+  --gold-ink: #2B1B00;
+  --accent-text: #835600;
+  --gold-text: #835600;
+  --drop: #0E1130;
+}
+
+html.dark[data-ash-theme="indigo"] {
+  --canvas: #15181D;
+  --surface: #1C2128;
+  --surface-ivory: #161B22;
+  --surface-raised: #21262D;
+  --line: #30363D;
+  --line-soft: #21262D;
+  --ink: #E6EDF3;
+  --ink-2: #D1D9E0;
+  --ink-faint: #8B949E;
+  --canopy: #161B22;
+  --canopy-1: #161B22;
+  --canopy-2: #232842;
+  --on-canopy: #E6EDF3;
+  --action: #7C86F2;
+  --action-hover: #959DF5;
+  --on-action: #0D1117;
+  --action-text: #959DF5;
+  --brand-surface: #2A2F4A;
+  --accent: #E8B04B;
+  --gold: #E8B04B;
+  --accent-ink: #2B1B00;
+  --gold-ink: #2B1B00;
+  --accent-text: #E8B04B;
+  --gold-text: #E8B04B;
+  --drop: #000000;
+}
+
+/* Terracotta — clay red + mustard on warm sand — retail, food, craft brands */
+html[data-ash-theme="terracotta"] {
+  --canvas: #F7F2EC;
+  --surface: #FFFFFF;
+  --surface-ivory: #FCF8F2;
+  --line: #E8DED3;
+  --line-soft: #F0E9E0;
+  --ink: #2A1A14;
+  --ink-2: #6B5A50;
+  --ink-faint: #8C7C72;
+  --canopy: #4A2219;
+  --canopy-1: #3B1A13;
+  --canopy-2: #5E2C20;
+  --on-canopy: #FBF1E8;
+  --action: #A63E25;
+  --action-hover: #86311C;
+  --on-action: #FFFFFF;
+  --action-text: #A13E26;
+  --brand-surface: #F6E6DF;
+  --accent: #E3A93A;
+  --gold: #E3A93A;
+  --accent-ink: #2E1D00;
+  --gold-ink: #2E1D00;
+  --accent-text: #7E5408;
+  --gold-text: #7E5408;
+  --drop: #24100A;
+}
+
+html.dark[data-ash-theme="terracotta"] {
+  --canvas: #15181D;
+  --surface: #1C2128;
+  --surface-ivory: #161B22;
+  --surface-raised: #21262D;
+  --line: #30363D;
+  --line-soft: #21262D;
+  --ink: #E6EDF3;
+  --ink-2: #D1D9E0;
+  --ink-faint: #8B949E;
+  --canopy: #161B22;
+  --canopy-1: #161B22;
+  --canopy-2: #2B201D;
+  --on-canopy: #E6EDF3;
+  --action: #E0734F;
+  --action-hover: #EA8B6B;
+  --on-action: #0D1117;
+  --action-text: #EA8B6B;
+  --brand-surface: #3A2A25;
+  --accent: #E3A93A;
+  --gold: #E3A93A;
+  --accent-ink: #2E1D00;
+  --gold-ink: #2E1D00;
+  --accent-text: #E3A93A;
+  --gold-text: #E3A93A;
+  --drop: #000000;
+}
+
+/* Ocean — teal-navy + coral on cool mist — logistics, health, travel */
+html[data-ash-theme="ocean"] {
+  --canvas: #F3F6F7;
+  --surface: #FFFFFF;
+  --surface-ivory: #F9FBFB;
+  --line: #DDE5E9;
+  --line-soft: #E9EFF1;
+  --ink: #0F1E26;
+  --ink-2: #4F6470;
+  --ink-faint: #778893;
+  --canopy: #0E2F44;
+  --canopy-1: #0A2536;
+  --canopy-2: #15435E;
+  --on-canopy: #EEF6F9;
+  --action: #0E6680;
+  --action-hover: #0B5268;
+  --on-action: #FFFFFF;
+  --action-text: #0D6680;
+  --brand-surface: #E2F0F4;
+  --accent: #F08A6C;
+  --gold: #F08A6C;
+  --accent-ink: #3A1206;
+  --gold-ink: #3A1206;
+  --accent-text: #A8452A;
+  --gold-text: #A8452A;
+  --drop: #06141D;
+}
+
+html.dark[data-ash-theme="ocean"] {
+  --canvas: #15181D;
+  --surface: #1C2128;
+  --surface-ivory: #161B22;
+  --surface-raised: #21262D;
+  --line: #30363D;
+  --line-soft: #21262D;
+  --ink: #E6EDF3;
+  --ink-2: #D1D9E0;
+  --ink-faint: #8B949E;
+  --canopy: #161B22;
+  --canopy-1: #161B22;
+  --canopy-2: #1B2A33;
+  --on-canopy: #E6EDF3;
+  --action: #39A9C9;
+  --action-hover: #5BBAD5;
+  --on-action: #0D1117;
+  --action-text: #5BBAD5;
+  --brand-surface: #1F3540;
+  --accent: #F08A6C;
+  --gold: #F08A6C;
+  --accent-ink: #3A1206;
+  --gold-ink: #3A1206;
+  --accent-text: #F08A6C;
+  --gold-text: #F08A6C;
+  --drop: #000000;
+}
+
+/* Graphite — charcoal + electric lime on stone — dev tools, tech, monitoring */
+html[data-ash-theme="graphite"] {
+  --canvas: #F4F4F2;
+  --surface: #FFFFFF;
+  --surface-ivory: #FAFAF8;
+  --line: #E2E3E0;
+  --line-soft: #ECECEA;
+  --ink: #18191B;
+  --ink-2: #55595E;
+  --ink-faint: #7E8287;
+  --canopy: #1C1F22;
+  --canopy-1: #15171A;
+  --canopy-2: #2A2E33;
+  --on-canopy: #F2F3F0;
+  --action: #24292E;
+  --action-hover: #111417;
+  --on-action: #FFFFFF;
+  --action-text: #4A6300;
+  --brand-surface: #EEF3DD;
+  --accent: #C6E35A;
+  --gold: #C6E35A;
+  --accent-ink: #1F2A00;
+  --gold-ink: #1F2A00;
+  --accent-text: #4A6300;
+  --gold-text: #4A6300;
+  --drop: #000000;
+}
+
+html.dark[data-ash-theme="graphite"] {
+  --canvas: #15181D;
+  --surface: #1C2128;
+  --surface-ivory: #161B22;
+  --surface-raised: #21262D;
+  --line: #30363D;
+  --line-soft: #21262D;
+  --ink: #E6EDF3;
+  --ink-2: #D1D9E0;
+  --ink-faint: #8B949E;
+  --canopy: #161B22;
+  --canopy-1: #161B22;
+  --canopy-2: #24282D;
+  --on-canopy: #E6EDF3;
+  --action: #C6E35A;
+  --action-hover: #D4EB7A;
+  --on-action: #1F2A00;
+  --action-text: #C6E35A;
+  --brand-surface: #2A3020;
+  --accent: #C6E35A;
+  --gold: #C6E35A;
+  --accent-ink: #1F2A00;
+  --gold-ink: #1F2A00;
+  --accent-text: #C6E35A;
+  --gold-text: #C6E35A;
+  --drop: #000000;
+}

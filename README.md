@@ -13,13 +13,17 @@ Every colour, size and rule in it exists in shipped code.
 |---|---|
 | **Palette** | deep canopy green `#0F4033` + harvest gold `#E2B864` on warm paper `#F6F5F1`; actions in forest `#15683F` |
 | **Night** | GitHub-style dark: `#15181D` canvas, `#1C2128` cards, `#30363D` lines, green `#2EA043`, gold `#D29922` |
-| **Type** | Plus Jakarta Sans · Bricolage Grotesque · Fraunces (accent) · JetBrains Mono — Inter on mobile |
+| **Type** | Plus Jakarta Sans · Bricolage Grotesque · Fraunces (accent) · JetBrains Mono; Inter on mobile |
 | **Structure** | trays of raised keys, a page header with a KPI slab, real-grid tables, Dashboard ⇄ Table, docked drawers, forms in the drawer |
 | **Craft** | field furrows, gold notch, diagonal slab cut, rubber stamp, wax seal, pen underline, one hard-offset gold key |
 | **Mobile** | ivory capsule header, canopy tab bar with a gold beam, flat list cards, bottom sheets, offline-first sync states |
+| **Themes** | Canopy (default) · Indigo Ledger · Terracotta · Ocean · Graphite — or your own, with a contrast checker |
+| **Screens** | list pages plus recipes for dashboards, record pages, kanban, calendar, settings, analytics, inbox, maps, wizards, sign-in, landing |
+| **Interactions** | ⌘K palette, keyboard rows, click-to-filter charts, inline edit, drag, Undo toasts, live numbers, swipe + haptics |
 | **Never** | neon, glass, glow, gradient buttons, fake numbers, marketing copy |
 
-Open `skills/ashcharya-ui/assets/showcase.html` in a browser to see it in light and night.
+Open `skills/ashcharya-ui/assets/showcase.html` in a browser to see it in light and night, and switch themes
+with the palette picker (or `?palette=ocean`).
 
 ---
 
@@ -68,7 +72,8 @@ It triggers by itself on UI work, or call it directly:
 ```
 /ashcharya-ui build a "Supplier Payments" list page with filters, KPIs and a drawer
 /ashcharya-ui make a retailer visit-history screen for the mobile app
-/ashcharya-ui design a sales performance dashboard
+/ashcharya-ui design a sales performance dashboard in the Indigo Ledger theme
+/ashcharya-ui make a kanban board for the lead pipeline, Ocean theme
 /ashcharya-ui ye screen basic lag rahi hai, isko extraordinary banao
 ```
 
@@ -86,12 +91,16 @@ skills/ashcharya-ui/
 ├── SKILL.md                 the identity, 5 laws, web + mobile layout grammar, workflow, checklist
 ├── references/
 │   ├── foundations.md       every token, the type scale, spacing, shape, motion and component specs
+│   ├── themes.md            other colour themes and how to make your own
+│   ├── page-recipes.md      dashboards, detail, kanban, calendar, settings, inbox, maps, wizards, landing
+│   ├── interaction-pack.md  ⌘K, inline edit, drag, undo, optimistic updates, live numbers, gestures
 │   ├── next-gen-patterns.md ⌘K, keyboard tables, live data, dashboards, forms, states, accessibility
 │   ├── taste-and-rejections.md  looks that were rejected, and what to do instead
 │   └── sources/             notes on the three original apps (only for editing those codebases)
 └── assets/
     ├── ashcharya-tokens.css drop-in web tokens + grid + craft classes
     ├── ashcharya-tokens.ts  drop-in mobile tokens
+    ├── themes/              themes.css · themes.ts · check-contrast.py
     ├── showcase.html        live demo, light + night
     ├── templates/           a full list-page example
     └── sources/             the original apps' token files

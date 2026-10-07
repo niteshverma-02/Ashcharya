@@ -1,11 +1,13 @@
-/* Ashcharya UI — web tokens (light + night). Drop into your global CSS.
+/* Ashcharya UI — web tokens (light + night), default theme Canopy. Drop into your global CSS.
+   For other colours, also load themes/themes.css and set <html data-ash-theme="indigo|terracotta|ocean|graphite">.
    Night follows `.dark` on <html> (next-themes / Tailwind darkMode: "class"). */
 :root {
   --canvas: #F6F5F1;  --surface: #FFFFFF;  --surface-ivory: #FBF8F1;  --surface-raised: #FFFFFF;
   --line: #E5E3DA;    --line-soft: #EFEDE5;
   --ink: #16211B;     --ink-2: #5B6B62;    --ink-faint: #838A80;
   --canopy: #0F4033;  --canopy-1: #0B3328; --canopy-2: #13503F; --on-canopy: #F6F2E7;
-  --action: #15683F;  --action-hover: #0F4F30; --action-text: #146137; --brand-surface: #E8F1EB;
+  --action: #15683F;  --action-hover: #0F4F30; --on-action: #FFFFFF; --action-text: #146137; --brand-surface: #E8F1EB;
+  --accent: var(--gold); --accent-ink: var(--gold-ink); --accent-text: var(--gold-text);
   --gold: #E2B864;    --gold-ink: #2A1D02; --gold-text: #8F6410; --mint: #74E5B0; --drop: #061F18;
   --success: #1F7A4D; --success-surface: #E4F2EA;
   --warning: #93610E; --warning-surface: #F7EEDC;
@@ -32,7 +34,7 @@
   --line: #30363D;    --line-soft: #21262D;
   --ink: #E6EDF3;     --ink-2: #D1D9E0;    --ink-faint: #8B949E;
   --canopy: #161B22;  --canopy-1: #161B22; --canopy-2: #21262D; --on-canopy: #E6EDF3;
-  --action: #2EA043;  --action-hover: #3FB950; --action-text: #3FB950; --brand-surface: #2B3C36;
+  --action: #2EA043;  --action-hover: #3FB950; --on-action: #0D1117; --action-text: #3FB950; --brand-surface: #2B3C36;
   --gold: #D29922;    --gold-text: #D29922; --mint: #3FB950;
   --success: #3FB950; --success-surface: #2A3D30;
   --warning: #D29922; --warning-surface: #403828;

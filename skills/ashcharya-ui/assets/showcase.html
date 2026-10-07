@@ -30,7 +30,7 @@ body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:hsl(var(--b
 .side{background:var(--space);border-radius:.9rem;padding:.8rem .6rem;color:var(--ink);display:flex;flex-direction:column;gap:.6rem;
   background-image:repeating-linear-gradient(-38deg,transparent 0 13px,rgba(255,255,255,.03) 13px 14px)}
 .brand{display:flex;gap:.6rem;align-items:center;padding:.3rem .4rem .6rem}
-.mark{width:2.2rem;height:2.2rem;border-radius:.7rem .7rem .7rem .25rem;background:var(--rim);color:#2a1d02;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:700}
+.mark{width:2.2rem;height:2.2rem;border-radius:.7rem .7rem .7rem .25rem;background:var(--rim);color:var(--gink,#2a1d02);display:grid;place-items:center;font-family:Fraunces,serif;font-weight:700}
 .brand b{font-family:Fraunces,serif;font-size:.95rem;font-weight:600;display:block}
 .brand small{font-size:.59rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
 .tray{padding:.4rem;border-radius:1rem;background:var(--tray);border:1px solid rgba(255,255,255,.04);box-shadow:inset 0 1px 3px rgba(0,0,0,.28),0 1px 0 rgba(255,255,255,.04)}
@@ -41,24 +41,26 @@ body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:hsl(var(--b
 .key:hover{transform:translateY(-1px);background:rgba(255,255,255,.09)}
 .key i{width:1.8rem;height:1.8rem;border-radius:.55rem;display:grid;place-items:center;font-style:normal;background:rgba(var(--hue),.16);color:rgb(var(--hue))}
 .key::after{content:"›";margin-left:auto;opacity:.5}
-.key[aria-current]{border:1.5px solid var(--rim);background:rgba(226,184,100,.14);font-weight:700}
-.key[aria-current] i{background:var(--rim);color:#2a1d02}
+.key[aria-current]{border:1.5px solid var(--rim);background:color-mix(in srgb,var(--rim) 14%,transparent);font-weight:700}
+.key[aria-current] i{background:var(--rim);color:var(--gink,#2a1d02)}
 .key[aria-current]::before{content:"";position:absolute;left:-.62rem;top:50%;width:.4rem;height:.4rem;border-radius:9px;background:var(--rim);transform:translateY(-50%)}
 /* Top bar */
 .top{display:flex;align-items:center;gap:.8rem;height:3.9rem;padding:0 1rem;border-radius:16px;background:var(--bar);border:1px solid hsl(var(--border))}
 .shape{position:relative;isolation:isolate;display:flex;align-items:center;gap:.6rem;padding:0 1.1rem;color:#f6f2e7}
 .shape::before{content:"";position:absolute;z-index:-1;inset:-.3rem 0;border-radius:14px;transform:skewX(-12deg);
-  background:repeating-linear-gradient(-32deg,transparent 0 11px,rgba(255,255,255,.04) 11px 12px),linear-gradient(115deg,#0b3328,#13503f);
+  background:repeating-linear-gradient(-32deg,transparent 0 11px,rgba(255,255,255,.04) 11px 12px),linear-gradient(115deg,var(--sh1,#0b3328),var(--sh2,#13503f));
   box-shadow:inset 0 0 0 1px rgba(226,184,100,.35),0 8px 18px -10px rgba(6,31,24,.7)}
-.stamp{padding:.05rem .4rem;border:1.5px solid #86ba8c;color:#86ba8c;border-radius:.25rem;font-size:.594rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;transform:rotate(-1.5deg)}
+.stamp{padding:.05rem .4rem;border:1.5px solid var(--stampc,#86ba8c);color:var(--stampc,#86ba8c);border-radius:.25rem;font-size:.594rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;transform:rotate(-1.5deg)}
 .shape h1{margin:0;font:600 1.2rem Fraunces,serif}
 .search{flex:1;max-width:30rem;margin:0 auto;height:2.4rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--card));display:flex;align-items:center;padding:0 1rem;color:hsl(var(--mfg));font:italic .9rem Fraunces,serif}
 .search kbd{margin-left:auto;font:500 .7rem "JetBrains Mono",monospace;font-style:normal;border:1px solid hsl(var(--border));border-radius:5px;padding:.05rem .35rem}
 .date{text-align:right;line-height:1.1}.date b{font:italic 600 .9rem Fraunces,serif;display:block}.date span{font:500 .66rem "JetBrains Mono",monospace;opacity:.7}
-.sale{height:2.2rem;display:inline-flex;align-items:center;gap:.45rem;padding:0 .9rem 0 .4rem;border:1.5px solid #2a1d02;border-radius:.6rem;background:var(--rim);color:#2a1d02;font:800 .81rem "Plus Jakarta Sans";box-shadow:3px 3px 0 #061f18;cursor:pointer;transition:transform 120ms,box-shadow 120ms}
-.sale:hover{box-shadow:4px 4px 0 #061f18;transform:translate(-1px,-1px)}.sale:active{box-shadow:1px 1px 0 #061f18;transform:translate(2px,2px)}
-.sale span{width:1.35rem;height:1.35rem;border-radius:99px;background:#2a1d02;color:var(--rim);display:grid;place-items:center}
-.seal{width:2.2rem;height:2.2rem;border-radius:99px;background:#ebe2cc;color:#13302a;display:grid;place-items:center;font:700 1rem Fraunces,serif;box-shadow:0 0 0 2px #13503f,0 0 0 3.5px var(--rim)}
+.sale{height:2.2rem;display:inline-flex;align-items:center;gap:.45rem;padding:0 .9rem 0 .4rem;border:1.5px solid var(--gink,#2a1d02);border-radius:.6rem;background:var(--rim);color:#2a1d02;font:800 .81rem "Plus Jakarta Sans";box-shadow:3px 3px 0 var(--drop,#061f18);cursor:pointer;transition:transform 120ms,box-shadow 120ms}
+.sale:hover{box-shadow:4px 4px 0 var(--drop,#061f18);transform:translate(-1px,-1px)}.sale:active{box-shadow:1px 1px 0 var(--drop,#061f18);transform:translate(2px,2px)}
+.sale span{width:1.35rem;height:1.35rem;border-radius:99px;background:var(--gink,#2a1d02);color:var(--rim);display:grid;place-items:center}
+.seal{width:2.2rem;height:2.2rem;border-radius:99px;background:#ebe2cc;color:#13302a;display:grid;place-items:center;font:700 1rem Fraunces,serif;box-shadow:0 0 0 2px var(--sh2,#13503f),0 0 0 3.5px var(--rim)}
+.pick{height:2.1rem;max-width:8.5rem;border-radius:99px;border:1px solid rgba(246,242,231,.3);background:transparent;color:inherit;font:600 .75rem "Plus Jakarta Sans";padding:0 .6rem;cursor:pointer}.pick option{color:#111}
+@media (max-width:640px){.pick{max-width:5.5rem}}
 .theme{width:2.1rem;height:2.1rem;border-radius:99px;border:1px solid rgba(246,242,231,.3);background:transparent;color:inherit;cursor:pointer}
 main{display:flex;flex-direction:column;gap:.75rem;min-width:0}
 /* Page header */
@@ -85,16 +87,16 @@ main{display:flex;flex-direction:column;gap:.75rem;min-width:0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bar{background:hsl(216 20% 11%)}}
 .ctl{height:2.25rem;padding:0 12px;border:0;border-radius:9px;background:hsl(var(--card));color:inherit;box-shadow:inset 0 0 0 1px hsl(var(--border));font:600 .8rem "Plus Jakarta Sans";display:inline-flex;align-items:center;gap:6px;cursor:pointer}
 .ctl[data-set]{box-shadow:inset 0 0 0 1px hsl(var(--primary)/.55),0 0 0 3px hsl(var(--primary)/.08)}
-.ctl .n{min-width:1.1rem;height:1.1rem;border-radius:5px;background:hsl(var(--primary));color:#fff;font-size:10px;display:grid;place-items:center}
+.ctl .n{min-width:1.1rem;height:1.1rem;border-radius:5px;background:hsl(var(--primary));color:var(--onp,#fff);font-size:10px;display:grid;place-items:center}
 .primary{margin-left:auto;background:hsl(var(--slab2));color:#fff;box-shadow:0 8px 16px -10px hsl(var(--slab1)/.9),inset 0 -2px 0 hsl(var(--gold)/.6)}
 .view{display:inline-flex;padding:3px;border-radius:11px;background:hsl(var(--card));box-shadow:inset 0 0 0 1px hsl(var(--border))}
 .view button{height:30px;padding:0 13px;border:0;border-radius:8px;background:none;color:inherit;font:700 12.5px "Plus Jakarta Sans";cursor:pointer}
-.view button[data-on]{background:hsl(164 58% 17%);color:#fff;box-shadow:inset 0 -2px 0 hsl(var(--gold)/.7)}
+.view button[data-on]{background:hsl(var(--slab2));color:#fff;box-shadow:inset 0 -2px 0 hsl(var(--gold)/.7)}
 .tabs{display:flex;gap:4px;padding:8px 14px;border-top:1px solid hsl(var(--border))}
 .tab{position:relative;height:30px;padding:0 12px;border:0;border-radius:8px;background:none;color:hsl(var(--mfg));font:600 12.5px "Plus Jakarta Sans";cursor:pointer}
 .tab[data-on]{background:hsl(var(--card));color:hsl(var(--fg));box-shadow:0 1px 2px hsl(168 40% 10%/.08),0 0 0 1px hsl(var(--border))}
-:root[data-theme="dark"] .tab[data-on]{background:hsl(var(--primary));color:#fff;box-shadow:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[data-on]{background:hsl(var(--primary));color:#fff;box-shadow:none}}.tab[data-on]::after{content:"";position:absolute;right:4px;top:4px;width:4px;height:4px;background:hsl(var(--gold))}
+:root[data-theme="dark"] .tab[data-on]{background:hsl(var(--primary));color:var(--onp,#fff);box-shadow:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[data-on]{background:hsl(var(--primary));color:var(--onp,#fff);box-shadow:none}}.tab[data-on]::after{content:"";position:absolute;right:4px;top:4px;width:4px;height:4px;background:hsl(var(--gold))}
 .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 14px;border-top:1px solid hsl(var(--border));font-size:12px}
 .chip{display:inline-flex;gap:6px;align-items:center;border:1px solid hsl(var(--border));border-radius:6px;padding:2px 3px 2px 8px;background:hsl(var(--card))}
 .chip button{border:0;background:hsl(var(--muted));border-radius:4px;color:inherit;cursor:pointer}
@@ -135,7 +137,7 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:0 1rem 1rem;p
 dt{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:hsl(var(--mfg))}dd{margin:2px 0 0;font-weight:600}
 .foot{display:flex;justify-content:flex-end;gap:8px;padding:.8rem 1rem;border-top:1px solid hsl(var(--border))}
 .btn{height:2.5rem;padding:0 1rem;border-radius:.6rem;border:1px solid hsl(var(--border));background:hsl(var(--card));color:inherit;font:600 .85rem "Plus Jakarta Sans";cursor:pointer}
-.btn.go{background:hsl(var(--primary));border-color:transparent;color:#fff;min-width:8rem}
+.btn.go{background:hsl(var(--primary));border-color:transparent;color:var(--onp,#fff);min-width:8rem}
 .empty{text-align:center;padding:1.4rem;color:hsl(var(--mfg));font-size:13px}
 .empty .art{width:4rem;height:4rem;margin:0 auto .6rem;border-radius:1rem;background:hsl(var(--primary)/.07);display:grid;place-items:center;color:hsl(var(--primary))}
 @keyframes dock{from{opacity:0;transform:translateX(24px)}}
@@ -167,6 +169,7 @@ dt{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercas
       <div class="shape">
         <div class="date"><b>Tuesday, 7 Oct</b><span>10:42 AM</span></div>
         <button class="sale"><span>+</span><b>New sale</b></button>
+        <select id="ashTheme" class="pick" aria-label="Colour theme"></select>
         <button class="theme" id="theme" aria-label="Toggle theme">◐</button>
         <span class="seal">N</span>
       </div>
@@ -238,7 +241,36 @@ dt{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercas
     const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
     root.dataset.theme = dark ? "light" : "dark";
     try { localStorage.setItem(KEY, root.dataset.theme); } catch (e) {}
+    applyPalette();
   };
+  const THEMES = {"canopy": {"label": "Canopy (default)", "light": {"canvas": "#F6F5F1", "surface": "#FFFFFF", "surfaceIvory": "#FBF8F1", "line": "#E5E3DA", "lineSoft": "#EFEDE5", "ink": "#16211B", "ink2": "#5B6B62", "inkFaint": "#838A80", "canopy": "#0F4033", "canopy1": "#0B3328", "canopy2": "#13503F", "onCanopy": "#F6F2E7", "action": "#15683F", "actionHover": "#0F4F30", "onAction": "#FFFFFF", "actionText": "#146137", "brandSurface": "#E8F1EB", "accent": "#E2B864", "accentInk": "#2A1D02", "accentText": "#8F6410", "drop": "#061F18"}, "night": {"canvas": "#15181D", "surface": "#1C2128", "surfaceIvory": "#161B22", "surfaceRaised": "#21262D", "line": "#30363D", "lineSoft": "#21262D", "ink": "#E6EDF3", "ink2": "#D1D9E0", "inkFaint": "#8B949E", "canopy": "#161B22", "canopy1": "#161B22", "canopy2": "#21262D", "onCanopy": "#E6EDF3", "action": "#2EA043", "actionHover": "#3FB950", "onAction": "#0D1117", "actionText": "#3FB950", "brandSurface": "#2B3C36", "accent": "#D29922", "accentInk": "#2A1D02", "accentText": "#D29922", "drop": "#000000"}}, "indigo": {"label": "Indigo Ledger", "light": {"canvas": "#F4F5F9", "surface": "#FFFFFF", "surfaceIvory": "#FAFAFD", "line": "#E2E4EC", "lineSoft": "#ECEEF4", "ink": "#161A2E", "ink2": "#545A75", "inkFaint": "#7F849A", "canopy": "#1E2350", "canopy1": "#171B42", "canopy2": "#2A3170", "onCanopy": "#F2F3FB", "action": "#3A44B0", "actionHover": "#2E3790", "onAction": "#FFFFFF", "actionText": "#3A44B0", "brandSurface": "#E8EAF8", "accent": "#E8B04B", "accentInk": "#2B1B00", "accentText": "#835600", "drop": "#0E1130"}, "night": {"canvas": "#15181D", "surface": "#1C2128", "surfaceIvory": "#161B22", "surfaceRaised": "#21262D", "line": "#30363D", "lineSoft": "#21262D", "ink": "#E6EDF3", "ink2": "#D1D9E0", "inkFaint": "#8B949E", "canopy": "#161B22", "canopy1": "#161B22", "canopy2": "#232842", "onCanopy": "#E6EDF3", "action": "#7C86F2", "actionHover": "#959DF5", "onAction": "#0D1117", "actionText": "#959DF5", "brandSurface": "#2A2F4A", "accent": "#E8B04B", "accentInk": "#2B1B00", "accentText": "#E8B04B", "drop": "#000000"}}, "terracotta": {"label": "Terracotta", "light": {"canvas": "#F7F2EC", "surface": "#FFFFFF", "surfaceIvory": "#FCF8F2", "line": "#E8DED3", "lineSoft": "#F0E9E0", "ink": "#2A1A14", "ink2": "#6B5A50", "inkFaint": "#8C7C72", "canopy": "#4A2219", "canopy1": "#3B1A13", "canopy2": "#5E2C20", "onCanopy": "#FBF1E8", "action": "#A63E25", "actionHover": "#86311C", "onAction": "#FFFFFF", "actionText": "#A13E26", "brandSurface": "#F6E6DF", "accent": "#E3A93A", "accentInk": "#2E1D00", "accentText": "#7E5408", "drop": "#24100A"}, "night": {"canvas": "#15181D", "surface": "#1C2128", "surfaceIvory": "#161B22", "surfaceRaised": "#21262D", "line": "#30363D", "lineSoft": "#21262D", "ink": "#E6EDF3", "ink2": "#D1D9E0", "inkFaint": "#8B949E", "canopy": "#161B22", "canopy1": "#161B22", "canopy2": "#2B201D", "onCanopy": "#E6EDF3", "action": "#E0734F", "actionHover": "#EA8B6B", "onAction": "#0D1117", "actionText": "#EA8B6B", "brandSurface": "#3A2A25", "accent": "#E3A93A", "accentInk": "#2E1D00", "accentText": "#E3A93A", "drop": "#000000"}}, "ocean": {"label": "Ocean", "light": {"canvas": "#F3F6F7", "surface": "#FFFFFF", "surfaceIvory": "#F9FBFB", "line": "#DDE5E9", "lineSoft": "#E9EFF1", "ink": "#0F1E26", "ink2": "#4F6470", "inkFaint": "#778893", "canopy": "#0E2F44", "canopy1": "#0A2536", "canopy2": "#15435E", "onCanopy": "#EEF6F9", "action": "#0E6680", "actionHover": "#0B5268", "onAction": "#FFFFFF", "actionText": "#0D6680", "brandSurface": "#E2F0F4", "accent": "#F08A6C", "accentInk": "#3A1206", "accentText": "#A8452A", "drop": "#06141D"}, "night": {"canvas": "#15181D", "surface": "#1C2128", "surfaceIvory": "#161B22", "surfaceRaised": "#21262D", "line": "#30363D", "lineSoft": "#21262D", "ink": "#E6EDF3", "ink2": "#D1D9E0", "inkFaint": "#8B949E", "canopy": "#161B22", "canopy1": "#161B22", "canopy2": "#1B2A33", "onCanopy": "#E6EDF3", "action": "#39A9C9", "actionHover": "#5BBAD5", "onAction": "#0D1117", "actionText": "#5BBAD5", "brandSurface": "#1F3540", "accent": "#F08A6C", "accentInk": "#3A1206", "accentText": "#F08A6C", "drop": "#000000"}}, "graphite": {"label": "Graphite", "light": {"canvas": "#F4F4F2", "surface": "#FFFFFF", "surfaceIvory": "#FAFAF8", "line": "#E2E3E0", "lineSoft": "#ECECEA", "ink": "#18191B", "ink2": "#55595E", "inkFaint": "#7E8287", "canopy": "#1C1F22", "canopy1": "#15171A", "canopy2": "#2A2E33", "onCanopy": "#F2F3F0", "action": "#24292E", "actionHover": "#111417", "onAction": "#FFFFFF", "actionText": "#4A6300", "brandSurface": "#EEF3DD", "accent": "#C6E35A", "accentInk": "#1F2A00", "accentText": "#4A6300", "drop": "#000000"}, "night": {"canvas": "#15181D", "surface": "#1C2128", "surfaceIvory": "#161B22", "surfaceRaised": "#21262D", "line": "#30363D", "lineSoft": "#21262D", "ink": "#E6EDF3", "ink2": "#D1D9E0", "inkFaint": "#8B949E", "canopy": "#161B22", "canopy1": "#161B22", "canopy2": "#24282D", "onCanopy": "#E6EDF3", "action": "#C6E35A", "actionHover": "#D4EB7A", "onAction": "#1F2A00", "actionText": "#C6E35A", "brandSurface": "#2A3020", "accent": "#C6E35A", "accentInk": "#1F2A00", "accentText": "#C6E35A", "drop": "#000000"}}};
+  const TKEY = "ashcharya-ui-palette";
+  const hsl = (hex) => { const n = parseInt(hex.slice(1), 16), r = (n >> 16) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+    let h = 0, s = 0; if (d) { s = d / (1 - Math.abs(2 * l - 1));
+      h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h = (h * 60 + 360) % 360; }
+    return Math.round(h) + " " + Math.round(s * 100) + "% " + Math.round(l * 100) + "%"; };
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const pick = document.getElementById("ashTheme");
+  Object.entries(THEMES).forEach(([k, t]) => pick.add(new Option(t.label.replace(" (default)", ""), k)));
+  function applyPalette() {
+    const name = pick.value, t = THEMES[name], dark = isDark(), P = dark ? t.night : t.light, st = root.style;
+    if (name === "canopy") { ["--bg","--fg","--card","--primary","--glow","--gold","--muted","--mfg","--border","--slab1","--slab2","--space","--rim","--bar","--sh1","--sh2","--gink","--drop","--stampc","--tbl-hover","--ok","--onp","--tbl-head","--tbl-stripe","--tbl-head-rule"].forEach(v => st.removeProperty(v)); return; }
+    const set = (v, x) => st.setProperty(v, x);
+    set("--bg", hsl(P.canvas)); set("--fg", hsl(P.ink)); set("--card", hsl(P.surface)); set("--primary", hsl(P.action));
+    set("--glow", hsl(P.actionHover)); set("--gold", hsl(P.accent)); set("--muted", hsl(P.lineSoft)); set("--mfg", hsl(P.ink2));
+    set("--border", hsl(P.line)); set("--slab1", hsl(dark ? "#0D1117" : P.canopy1)); set("--slab2", hsl(dark ? P.canopy2 : P.canopy2));
+    set("--space", P.canopy); set("--rim", P.accent); set("--gink", P.accentInk); set("--drop", P.drop);
+    set("--sh1", dark ? "#0D1117" : P.canopy1); set("--sh2", P.canopy2); set("--stampc", P.accent); set("--onp", P.onAction);
+    if (!dark) { set("--tbl-head", "color-mix(in srgb, " + P.canopy + " 9%, #fff)"); set("--tbl-stripe", "color-mix(in srgb, " + P.canopy + " 2.5%, #fff)"); set("--tbl-head-rule", "color-mix(in srgb, " + P.canopy + " 20%, #fff)"); } else { ["--tbl-head","--tbl-stripe","--tbl-head-rule"].forEach(v => st.removeProperty(v)); }
+    set("--bar", dark ? "#1c2128" : "color-mix(in srgb, " + P.canopy + " 6%, #fff)");
+    set("--tbl-hover", "color-mix(in srgb, " + P.action + " " + (dark ? 12 : 7) + "%, transparent)");
+  }
+  try { const saved = localStorage.getItem(TKEY); if (saved && THEMES[saved]) pick.value = saved; } catch (e) {}
+  const q = new URLSearchParams(location.search).get("palette"); if (q && THEMES[q]) pick.value = q;
+  pick.onchange = () => { applyPalette(); try { localStorage.setItem(TKEY, pick.value); } catch (e) {} };
+  applyPalette();
+
   document.querySelectorAll("tbody tr").forEach(tr => tr.onclick = () => {
     document.querySelectorAll("tbody tr").forEach(r => r.removeAttribute("aria-selected")); tr.setAttribute("aria-selected", "true");
   });

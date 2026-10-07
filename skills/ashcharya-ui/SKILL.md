@@ -3,7 +3,9 @@ name: ashcharya-ui
 description: >
   Ashcharya UI — one hand-crafted, next-generation design language for business and operations software:
   deep canopy green + harvest gold on warm paper, GitHub-style night mode, real-grid tables, docked drawers,
-  trays of raised keys, KPI slabs, offline-first mobile patterns. Use it whenever you create or restyle ANY
+  trays of raised keys, KPI slabs, offline-first mobile patterns — plus ready colour themes (Indigo Ledger,
+  Terracotta, Ocean, Graphite), page recipes (dashboards, detail pages, kanban, calendar, settings, inbox,
+  maps, wizards, landing) and an interaction pack (⌘K, inline edit, drag, undo, live numbers). Use it whenever you create or restyle ANY
   screen, page, component, dashboard, table, list, filter bar, drawer, bottom sheet, form, sidebar, tab bar,
   top bar, login/OTP screen, empty/offline state or chart — web (React/Tailwind/shadcn) or mobile
   (React Native/NativeWind) — and whenever the user asks for UI that looks "extraordinary", "premium",
@@ -16,12 +18,22 @@ One design language. It was distilled from three production apps (a mobile field
 head-office portal) and every value below exists in shipped code. The result looks **hand-made, dense,
 keyboard-first and calm**, never like an AI template.
 
-Read with it: `references/foundations.md` (full tokens + component specs),
-`references/taste-and-rejections.md` (what was rejected and why), `references/next-gen-patterns.md`.
-Drop-in tokens: `assets/ashcharya-tokens.css` (web) and `assets/ashcharya-tokens.ts` (mobile).
-Visual reference: `assets/showcase.html`.
+| Need | Read |
+|---|---|
+| Tokens + component specs | `references/foundations.md` |
+| Another colour (Indigo, Terracotta, Ocean, Graphite, or your own) | `references/themes.md` |
+| A screen other than a list page | `references/page-recipes.md` |
+| More interactive behaviour | `references/interaction-pack.md` |
+| What was rejected and why | `references/taste-and-rejections.md` |
+| Shipped patterns (⌘K, tables, live data, a11y) | `references/next-gen-patterns.md` |
+
+Drop-in files: `assets/ashcharya-tokens.css` + `assets/themes/themes.css` (web), `assets/ashcharya-tokens.ts` +
+`assets/themes/themes.ts` (mobile). Live demo with a palette picker: `assets/showcase.html`.
 
 ## 1. The identity in one breath
+
+Default theme **Canopy** below. Other themes swap only these colours (see `references/themes.md`);
+if the user names a colour or a mood, pick the closest theme or build one with the contrast checker.
 
 | Element | Ashcharya |
 |---|---|
@@ -46,8 +58,8 @@ Visual reference: `assets/showcase.html`.
    one status-tone map. Fix the shared component; never fork a page-specific variant.
 3. **A real grid.** Tables have a header row, rules between every row *and* column, zebra, hover, an accent
    edge on clickable rows. **One value per column**: never stack name-over-phone or date-over-time.
-4. **One accent moment.** Gold marks exactly one thing per screen: the active nav key, the primary key or the
-   hero metric. Everything else is ink, paper and green.
+4. **One accent moment.** The accent (gold in Canopy) marks exactly one thing per screen: the active nav key, the primary key or the
+   hero metric. Everything else is ink, paper and the theme's hue.
 5. **Truth over decoration.** Copy names real modules and actions; every figure comes from real data
    (missing = `—`, partial = trailing `+`). No marketing lines, no apologies, no fake analytics.
 
@@ -98,22 +110,30 @@ Visual reference: `assets/showcase.html`.
 - Capsule buttons (radius = height/2, 46 / compact 38), press scale .98, ≥48dp targets, haptics per event
   (select · press · threshold · commit · warn · error); navigation is silent.
 
+### Other screens
+
+Dashboards, full record pages, kanban, calendar, settings, analytics, inbox, map + list, wizards, sign-in and
+landing pages each have a recipe in `references/page-recipes.md`, built only from the parts above.
+
 ## 4. Workflow
 
 1. **Read the codebase first.** If the project already has shared kits (header, table, drawer, form, sheet,
    list card), reuse them. If it already ships its own tokens, keep them; apply the Ashcharya grammar, laws
    and craft on top (`references/sources/` documents the three original apps if you're inside one of them).
-2. **Sketch the structure** with §3: which header KPIs, which filters, which 6 panels, which columns (one
+2. **Pick the theme** (Canopy unless the user or product says otherwise) and the recipe for the screen type.
+3. **Sketch the structure** with §3: which header KPIs, which filters, which 6 panels, which columns (one
    value each), which drawer tabs, which mobile sections.
-3. **Style with tokens only.** No raw hex in components, no new hues; status colour from the tone map;
+4. **Style with tokens only.** No raw hex in components, no new hues; status colour from the tone map;
    numbers in tabular figures with the display face.
-4. **Give every data surface four faces:** loading (real-shaped skeleton), empty (line-art + one sentence +
+5. **Give every data surface four faces:** loading (real-shaped skeleton), empty (line-art + one sentence +
    one action; "Clear filters" when filters emptied it), error (plain cause + Retry), denied. Stale data shows
    a thin pulse bar, never a spinner over everything.
-5. **Check both themes and all widths.** Web 375 / 768 / 1024 / 1280 / 1536. Mobile 320 / 375 / 412dp, Hindi
+6. **Check light + night and all widths.** Web 375 / 768 / 1024 / 1280 / 1536. Mobile 320 / 375 / 412dp, Hindi
    strings (~25% longer), font scale 1.3, reduced motion, offline.
-6. **Decide, don't survey.** Pick the strongest direction, build it, show it (screenshot if a dev server runs).
-7. **Run the checklist** in §6.
+7. **Add the interactions** that fit (`references/interaction-pack.md`): ⌘K, keyboard rows, click-to-filter charts,
+   undo toasts, live numbers — each with a keyboard path and reduced-motion fallback.
+8. **Decide, don't survey.** Pick the strongest direction, build it, show it (screenshot if a dev server runs).
+9. **Run the checklist** in §6.
 
 ## 5. Making a screen "extraordinary"
 
@@ -133,12 +153,13 @@ When a screen feels plain, add structure and craft, never glow:
 ## 6. Done checklist
 
 - [ ] Reuses the shared header / table / drawer / form / sheet kit; no page-specific forks
-- [ ] Tokens only; one gold moment; status via the tone map; light **and** night both checked
+- [ ] Tokens only (one theme, no extra hues); one accent moment; status via the tone map; light **and** night both checked
 - [ ] Tables: real grid, one value per column, accent edge on clickable rows, sort state visible
 - [ ] List pages: filters in the header bar, applied chips, Dashboard | Table on the same line
 - [ ] Dashboards from loaded rows (no new API calls); chart click filters the list
 - [ ] Records and forms open in the drawer / sheet; confirms state exactly what happens to how many records
 - [ ] Loading / empty / error / denied faces exist and look intentional
 - [ ] Web 375 → 1536 and mobile 320 → 412 verified; no horizontal scroll; touch ≥48dp / 2.5rem; reduced motion respected
+- [ ] Interactions have keyboard paths and reduced-motion fallbacks; reversible actions use Undo, not confirms
 - [ ] No glow, glass, neon, gradient CTA, fake figures or marketing copy
 - [ ] Keyboard path works (⌘K, Esc, ←/→, Tab order, visible focus ring); mobile haptics per event, offline + sync visible
