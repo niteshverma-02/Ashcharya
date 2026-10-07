@@ -1,5 +1,5 @@
 /* Prasar POS — "Harvest" tokens (light) + GitHub-dark (.dark). Copied from franchise-pos/src/index.css.
-   Use as hsl(var(--x) / alpha). Pair with the Tailwind config in references/pos-harvest.md §1. */
+   Use as hsl(var(--x) / alpha). Pair with the Tailwind config in references/sources/pos.md §1. */
 @layer base {
   :root {
     --background: 150 20% 97%;

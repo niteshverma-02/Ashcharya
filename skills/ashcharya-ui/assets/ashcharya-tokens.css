@@ -1,0 +1,91 @@
+/* Ashcharya UI — web tokens (light + night). Drop into your global CSS.
+   Night follows `.dark` on <html> (next-themes / Tailwind darkMode: "class"). */
+:root {
+  --canvas: #F6F5F1;  --surface: #FFFFFF;  --surface-ivory: #FBF8F1;  --surface-raised: #FFFFFF;
+  --line: #E5E3DA;    --line-soft: #EFEDE5;
+  --ink: #16211B;     --ink-2: #5B6B62;    --ink-faint: #838A80;
+  --canopy: #0F4033;  --canopy-1: #0B3328; --canopy-2: #13503F; --on-canopy: #F6F2E7;
+  --action: #15683F;  --action-hover: #0F4F30; --action-text: #146137; --brand-surface: #E8F1EB;
+  --gold: #E2B864;    --gold-ink: #2A1D02; --gold-text: #8F6410; --mint: #74E5B0; --drop: #061F18;
+  --success: #1F7A4D; --success-surface: #E4F2EA;
+  --warning: #93610E; --warning-surface: #F7EEDC;
+  --danger:  #B4342C; --danger-surface:  #FAE7E4;
+  --info:    #2C6E8F; --info-surface:    #E5EFF4;
+  --tbl-head: hsl(160 18% 91%); --tbl-stripe: hsl(160 20% 97.5%);
+  --viz-1:#2A78D6; --viz-2:#EB6834; --viz-3:#1BAF7A; --viz-4:#EDA100; --viz-5:#E87BA4;
+  --viz-6:#008300; --viz-7:#4A3AA7; --viz-8:#E34948; --viz-other:#9A9A94;
+
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --r-sm: 8px; --r-control: 12px; --r-card: 16px; --r-panel: 20px; --r-hero: 24px; --r-sheet: 28px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --shadow-card: 0 1px 2px rgb(15 64 51 / .05), 0 16px 32px -26px rgb(11 51 40 / .5);
+  --shadow-key: 3px 3px 0 var(--drop);
+  --furrows: repeating-linear-gradient(-38deg, transparent 0 13px, rgb(255 255 255 / .06) 13px 14px);
+  color-scheme: light;
+}
+.dark {
+  --canvas: #15181D;  --surface: #1C2128;  --surface-ivory: #161B22;  --surface-raised: #21262D;
+  --line: #30363D;    --line-soft: #21262D;
+  --ink: #E6EDF3;     --ink-2: #D1D9E0;    --ink-faint: #8B949E;
+  --canopy: #161B22;  --canopy-1: #161B22; --canopy-2: #21262D; --on-canopy: #E6EDF3;
+  --action: #2EA043;  --action-hover: #3FB950; --action-text: #3FB950; --brand-surface: #2B3C36;
+  --gold: #D29922;    --gold-text: #D29922; --mint: #3FB950;
+  --success: #3FB950; --success-surface: #2A3D30;
+  --warning: #D29922; --warning-surface: #403828;
+  --danger:  #FF7B72; --danger-surface:  #4A3335;
+  --info:    #58A6FF; --info-surface:    #303A47;
+  --tbl-head: hsl(215 15% 17%); --tbl-stripe: hsl(216 16% 14.5%);
+  --viz-1:#3987E5; --viz-2:#D95926; --viz-3:#199E70; --viz-4:#C98500; --viz-5:#D55181;
+  --viz-7:#9085E9; --viz-8:#E66767; --viz-other:#6E7681;
+  --shadow-card: none;
+  --furrows: repeating-linear-gradient(-38deg, transparent 0 13px, rgb(255 255 255 / .025) 13px 14px);
+  color-scheme: dark;
+}
+
+body { background: var(--canvas); color: var(--ink); font-family: var(--font-body); letter-spacing: -.005em; }
+h1, h2, h3, .num { font-family: var(--font-display); letter-spacing: -.02em; }
+td, .num, [data-numeric] { font-variant-numeric: tabular-nums; }
+
+/* The real grid */
+table.ash-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.ash-table th { height: 2.6rem; padding: 0 .85rem; background: var(--tbl-head); text-align: left; white-space: nowrap;
+  font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
+  border-right: 1px solid var(--line); border-bottom: 2px solid var(--line); }
+.ash-table td { padding: .7rem .85rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background 120ms; }
+.ash-table :is(th, td):last-child { border-right: 0; }
+.ash-table tbody tr:nth-child(even) td { background: var(--tbl-stripe); }
+.ash-table tbody tr:hover td { background: color-mix(in srgb, var(--action) 7%, transparent); }
+.ash-table tbody tr[data-clickable]:hover td:first-child { box-shadow: inset 3px 0 var(--action); }
+
+/* Craft */
+.ash-canopy { color: var(--on-canopy); background: var(--furrows), linear-gradient(115deg, var(--canopy-1), var(--canopy-2)); }
+.ash-tray { padding: .4rem; border-radius: 1rem; background: rgba(3, 20, 15, .28); border: 1px solid rgba(255, 255, 255, .04);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .28), 0 1px 0 rgba(255, 255, 255, .04); }
+.ash-key { min-height: 2.5rem; border-radius: .75rem; background: rgba(255, 255, 255, .055); border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 2px 5px -2px rgba(0, 0, 0, .45); transition: transform 140ms ease, background-color 140ms ease; }
+.ash-key:hover { transform: translateY(-1px); background: rgba(255, 255, 255, .09); }
+.ash-key[aria-current="page"] { border: 1.5px solid var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); }
+.ash-gold-key { border: 1.5px solid var(--gold-ink); border-radius: .6rem; background: var(--gold); color: var(--gold-ink); font-weight: 800;
+  box-shadow: var(--shadow-key); transition: transform 120ms ease, box-shadow 120ms ease; }
+.ash-gold-key:hover { box-shadow: 4px 4px 0 var(--drop); transform: translate(-1px, -1px); }
+.ash-gold-key:active { box-shadow: 1px 1px 0 var(--drop); transform: translate(2px, 2px); }
+.ash-slab { clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%); padding-left: 42px; }
+.ash-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 10.5px; font-weight: 750; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--action-text); }
+.ash-eyebrow::after { content: ""; width: 22px; height: 1px; background: var(--gold); }
+.ash-stamp { display: inline-flex; padding: .05rem .4rem; border: 1.5px solid currentColor; border-radius: .25rem;
+  font-size: .59375rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; transform: rotate(-1.5deg); }
+.ash-seal { width: 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 999px; background: #EBE2CC; color: #13302A;
+  font: 700 1rem var(--font-serif); box-shadow: 0 0 0 2px var(--canopy-2), 0 0 0 3.5px var(--gold); }
+
+/* One scrollbar */
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track, *::-webkit-scrollbar-corner { background: transparent; }
+*::-webkit-scrollbar-thumb { border-radius: 9999px; background-color: rgba(128, 138, 133, .42); }
+@supports (-moz-appearance: none) { * { scrollbar-width: thin; scrollbar-color: rgba(128, 138, 133, .5) transparent; } }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

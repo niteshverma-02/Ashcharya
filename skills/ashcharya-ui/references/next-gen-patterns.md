@@ -1,25 +1,22 @@
-# Next-gen patterns — the layer above both apps
+# Next-gen patterns — Ashcharya UI
 
 Patterns that make an operations app feel *next generation* without looking AI-made. Each item says where it
 already ships (**POS**, **HO**, **Prasar**). Anything marked **(suggestion — not in code yet)** exists in none of
 the three codebases — treat it as a proposal, not as an established pattern.
 
-## 1. Creating a new identity in the family
+## 1. Applying Ashcharya to any app
 
-Keep the **grammar** (trays + raised keys, header with KPI slab, real-grid tables, docked drawer, FilterKit,
-Dashboard|Table) and change the **skin**:
+Use the one Ashcharya identity as-is (tokens in `assets/ashcharya-tokens.css` / `.ts`, specs in
+`foundations.md`). What may change per product is **content**, not skin:
 
-| Choose | POS did | HO did | A new app could |
-|---|---|---|---|
-| Brand hue | jade 162° | forest ~154° (`#1B4A36`) + mint `#74E5B0` | indigo-slate, terracotta, mustard-olive… (one hue) |
-| Accent moment | harvest gold | mint on ink / brass | one warm contrast colour |
-| Canvas | cool mist `150 20% 97%` | warm paper `#F6F5F1` | e.g. stone `#F3F1EC`, ledger blue-white |
-| Texture | field furrows −38° | dot paper + survey grid + field rings | ledger rules, contour lines, woven hatch |
-| Signature shape | diagonal slab cut, skewed polygons | SVG shoulder tab, asymmetric capsules | stepped corners, ticket notches, perforations |
-| Display face | Bricolage Grotesque | Manrope 800 | Space Grotesk, Instrument Sans, Fraunces-led editorial |
-| Hand-made mark | rubber stamp, wax seal, pen underline | "data spine" with live node | punch-hole, receipt tear, ink date stamp |
+| Keep identical | Adapt per product |
+|---|---|
+| canopy green + harvest gold on warm paper, GitHub-dark night | module names, nav groups, KPI choices |
+| trays of raised keys, KPI slab header, real-grid tables, docked drawer | which filters, which 6 dashboard panels |
+| furrows, gold notch, diagonal slab, stamp, seal, hard-offset gold key | the one action that gets the gold key |
+| type scale, spacing, radii, motion | mobile vs web layout grammar (SKILL.md §3) |
 
-Rule: if a screenshot could be mistaken for POS or HO, push the skin further.
+Section headings below name the source app where each pattern ships today.
 
 ## 2. Command palette (⌘K) — POS + HO
 - One search pill in the top bar (`HeaderSearch.tsx`, cmdk); Ctrl/⌘K opens it and focuses + selects the field;

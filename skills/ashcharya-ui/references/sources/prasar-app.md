@@ -1,12 +1,14 @@
 # Prasar app — field-staff mobile system (Expo / React Native)
 
+> **Source reference.** This documents the original mobile field app that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for everything else use `../foundations.md`.
+
 Source repo: `Nitesh_projects/Prasar`. Expo + **NativeWind 4** (Tailwind 3.4), **Inter only**, **Lucide only**.
 Light = forest `#15683F` on **sand ivory** `#F4EFE4`; dark = **GitHub Night** (`#0D1015` page, `#3FB950` green).
 Target register: "Microsoft Dynamics / Salesforce Field Service" — **flat-enterprise core, genuinely elevated**.
 Tokens are generated from `src/design-system/tokens.ts` → CSS vars → Tailwind classes. Trust the code over the
 prose docs (docs lag: page is sand not white, list gap 6 not 16, tabs are a travelling pill not underlined, gutter `px-base`).
 
-Copies of the real token/motion/haptics files: `assets/prasar-mobile/`.
+Copies of the real token/motion/haptics files: `assets/sources/prasar-app/`.
 
 ## 1. Token pipeline rules (test-enforced: no `dark:`, no `bg-[#…]`, no `style` function, no raw icon size; lint: icon imports)
 - Never write `dark:` — `bg-surface` flips by itself. Never `bg-[#…]`. Never a function in `style`.

@@ -1,13 +1,18 @@
 {
   "name": "ashcharya",
-  "owner": { "name": "Nitesh Verma", "url": "https://github.com/niteshverma-02" },
-  "metadata": { "description": "Ashcharya — UI skills built from the Katyayani / Prasar apps." },
+  "owner": {
+    "name": "Nitesh Verma",
+    "url": "https://github.com/niteshverma-02"
+  },
+  "metadata": {
+    "description": "Ashcharya — one hand-crafted UI design language for Claude Code."
+  },
   "plugins": [
     {
-      "name": "prasar-ui",
+      "name": "ashcharya-ui",
       "source": "./",
-      "description": "Next-gen UI design system skill for the Prasar app, Franchisee POS and Franchise Hub (HO portal).",
-      "version": "1.0.0"
+      "description": "Ashcharya UI: one hand-crafted, next-gen design language for web and mobile apps.",
+      "version": "2.0.0"
     }
   ]
 }

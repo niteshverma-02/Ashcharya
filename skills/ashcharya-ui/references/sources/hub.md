@@ -1,5 +1,7 @@
 # HO Portal — "Command OS" system (head-office app)
 
+> **Source reference.** This documents the original head-office portal that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for everything else use `../foundations.md`.
+
 Source repo: `Nitesh_projects/franchise-hub`. Everything is scoped to `.command-os`; portalled surfaces (Sheet, Dialog, Select, Dropdown) must add `className="command-os"` themselves.
 
 > ⚠️ The HO portal's *luxe* layer (aurora, cursor spotlight, glass stat chips, glow dots) is its existing look — keep it when editing HO screens, but **do not carry glow/glass/aurora into POS or new identities** (see taste-and-rejections.md).

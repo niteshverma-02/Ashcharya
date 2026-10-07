@@ -1,37 +1,49 @@
-# Ashcharya — `prasar-ui` skill for Claude Code
+# Ashcharya UI — a design-language skill for Claude Code
 
-A **Claude Code skill** that teaches Claude to build next-generation, hand-crafted UI in the exact style of three
-production apps. Every token, size, component and rule in it was taken from the live code and checked line by line.
+**Ashcharya UI** is one hand-crafted, next-generation design language for business and operations software,
+packaged as a Claude Code skill. Install it, ask Claude for a screen, and the result comes out in this one
+consistent style: dense, keyboard-first, calm, and never like an AI template.
 
-| App | Stack | Identity |
-|---|---|---|
-| **Prasar app** — field staff, mobile | Expo / React Native + NativeWind | "Prasar field": forest `#15683F` on sand ivory, ivory capsules, GitHub Night |
-| **Franchisee POS** — store counter, web | React + Vite + Tailwind + shadcn | "Harvest": jade + harvest gold, furrows, GitHub-dark night |
-| **Franchise Hub** — head-office portal, web | React + Vite + Tailwind + shadcn | "Command OS": forest + mint on warm paper |
+It was distilled from three production apps (a mobile field app, a store POS and a head-office portal).
+Every colour, size and rule in it exists in shipped code.
+
+## 🎨 The look
+
+| | |
+|---|---|
+| **Palette** | deep canopy green `#0F4033` + harvest gold `#E2B864` on warm paper `#F6F5F1`; actions in forest `#15683F` |
+| **Night** | GitHub-style dark: `#15181D` canvas, `#1C2128` cards, `#30363D` lines, green `#2EA043`, gold `#D29922` |
+| **Type** | Plus Jakarta Sans · Bricolage Grotesque · Fraunces (accent) · JetBrains Mono — Inter on mobile |
+| **Structure** | trays of raised keys, a page header with a KPI slab, real-grid tables, Dashboard ⇄ Table, docked drawers, forms in the drawer |
+| **Craft** | field furrows, gold notch, diagonal slab cut, rubber stamp, wax seal, pen underline, one hard-offset gold key |
+| **Mobile** | ivory capsule header, canopy tab bar with a gold beam, flat list cards, bottom sheets, offline-first sync states |
+| **Never** | neon, glass, glow, gradient buttons, fake numbers, marketing copy |
+
+Open `skills/ashcharya-ui/assets/showcase.html` in a browser to see it in light and night.
 
 ---
 
 ## 🚀 Install
 
-### Option 1 — as a plugin (recommended)
+### Option 1 — plugin (recommended)
 
 Inside Claude Code:
 
 ```
 /plugin marketplace add niteshverma-02/Ashcharya
-/plugin install prasar-ui@ashcharya
+/plugin install ashcharya-ui@ashcharya
 ```
 
 Or from a terminal:
 
 ```bash
 claude plugin marketplace add niteshverma-02/Ashcharya
-claude plugin install prasar-ui@ashcharya
+claude plugin install ashcharya-ui@ashcharya
 ```
 
 Update later with `claude plugin marketplace update ashcharya`.
 
-### Option 2 — one-line install as a personal skill
+### Option 2 — one line
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/niteshverma-02/Ashcharya/main/install.sh | bash
@@ -41,9 +53,8 @@ curl -fsSL https://raw.githubusercontent.com/niteshverma-02/Ashcharya/main/insta
 
 ```bash
 git clone https://github.com/niteshverma-02/Ashcharya.git
-cp -r Ashcharya/skills/prasar-ui ~/.claude/skills/            # for every project
-# or, to share with a team through one repo:
-cp -r Ashcharya/skills/prasar-ui <your-repo>/.claude/skills/  # then commit it
+cp -r Ashcharya/skills/ashcharya-ui ~/.claude/skills/            # for every project
+cp -r Ashcharya/skills/ashcharya-ui <your-repo>/.claude/skills/  # or share with a team through one repo
 ```
 
 Restart Claude Code after installing.
@@ -52,54 +63,41 @@ Restart Claude Code after installing.
 
 ## 🎯 Use
 
-It triggers by itself on UI work. You can also call it directly:
+It triggers by itself on UI work, or call it directly:
 
 ```
-/prasar-ui POS me "Supplier Payments" ka naya list page banao
-/prasar-ui Prasar app me retailer visit history screen banao
-/prasar-ui HO portal me franchise performance dashboard banao
-/prasar-ui ye screen basic lag rahi hai, isko extraordinary banao
+/ashcharya-ui build a "Supplier Payments" list page with filters, KPIs and a drawer
+/ashcharya-ui make a retailer visit-history screen for the mobile app
+/ashcharya-ui design a sales performance dashboard
+/ashcharya-ui ye screen basic lag rahi hai, isko extraordinary banao
 ```
 
-| Where you use it | Result |
-|---|---|
-| Inside the POS / HO / Prasar repos | Very close to the real apps, because Claude reuses the real kit components (`PageHeading`, `FilterKit`, `DetailDrawer`, `HeaderCapsule`, `ListCard`…) |
-| In a new project | The same look rebuilt from the tokens, CSS and rules. Similar, but not pixel-identical, since the component code isn't bundled |
+Works for **web** (React, Tailwind, shadcn) and **mobile** (React Native, NativeWind). In a project that
+already has shared components, Claude reuses them and applies the Ashcharya rules on top.
 
 ---
 
-## 📁 What's inside
+## 📁 Inside
 
 ```
-.claude-plugin/
-├── plugin.json                    ← plugin manifest
-└── marketplace.json               ← lets `/plugin marketplace add` find it
-install.sh                         ← one-line personal install
-skills/prasar-ui/
-├── SKILL.md                       ← entry point: pick the surface, 5 laws, web + mobile grammar, workflow, checklist
+.claude-plugin/              plugin + marketplace manifests
+install.sh                   one-line install
+skills/ashcharya-ui/
+├── SKILL.md                 the identity, 5 laws, web + mobile layout grammar, workflow, checklist
 ├── references/
-│   ├── prasar-mobile.md           ← Prasar field app tokens + components
-│   ├── pos-harvest.md             ← POS tokens + components
-│   ├── ho-command-os.md           ← HO portal tokens + components
-│   ├── next-gen-patterns.md       ← ⌘K, keyboard tables, live data, dashboards, forms, states, a11y (each says which app ships it; unshipped ideas are marked as suggestions)
-│   └── taste-and-rejections.md    ← every look that was rejected, and what to do instead
+│   ├── foundations.md       every token, the type scale, spacing, shape, motion and component specs
+│   ├── next-gen-patterns.md ⌘K, keyboard tables, live data, dashboards, forms, states, accessibility
+│   ├── taste-and-rejections.md  looks that were rejected, and what to do instead
+│   └── sources/             notes on the three original apps (only for editing those codebases)
 └── assets/
-    ├── harvest-tokens.css         ← drop-in POS tokens, grid and motifs
-    ├── command-os-tokens.css      ← drop-in HO tokens
-    ├── prasar-mobile/*.ts         ← real Prasar design-system source (tokens, type, motion, haptics, layout, sheet)
-    ├── showcase.html              ← open in a browser: the POS grammar in light + dark
-    └── templates/PosListPage.tsx  ← canonical list page (type-checks against the POS kit)
+    ├── ashcharya-tokens.css drop-in web tokens + grid + craft classes
+    ├── ashcharya-tokens.ts  drop-in mobile tokens
+    ├── showcase.html        live demo, light + night
+    ├── templates/           a full list-page example
+    └── sources/             the original apps' token files
 ```
-
-## ✅ How it was checked
-
-- About 1,170 claims were compared with the source code line by line, and about 45 corrections were made.
-- Every hex colour in the docs exists in the source code.
-- The template passes `tsc` against the real POS kit.
-- The POS look was compared on screen with the live app in light and dark.
-- Ideas that aren't in any app yet are labelled **"(suggestion — not in code yet)"**.
 
 ## ⚠️ Notes
 
-- This is a set of rules and tokens, not a component library. Review what Claude produces.
-- It only works automatically in **Claude Code**. In other tools, read the `.md` files as a design guide.
+- This is a design language (rules + tokens), not a component library. Review what Claude produces.
+- It works automatically only in **Claude Code**. Elsewhere, read the `.md` files as a design guide.
