@@ -12,7 +12,7 @@
       "name": "ashcharya-ui",
       "source": "./",
       "description": "Ashcharya: a UI design approach, not a theme. Teaches Claude to derive a unique, hand-crafted identity from any product's domain and build dense, keyboard-first, honest screens for web and mobile, distilled from three production apps.",
-      "version": "3.0.0"
+      "version": "3.1.0"
     }
   ]
 }

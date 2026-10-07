@@ -19,6 +19,8 @@
   --canopy: ;  --canopy-1: ;  --canopy-2: ;   /* L 10–20% of your hue. A shallow 1→2 ramp (115deg) is the ONLY
                                               allowed gradient: canopy surfaces, never buttons or cards */
   --on-canopy: ;                              /* >= 4.5:1 on canopy */
+  --on-canopy-2: ;                            /* secondary text on canopy, >= 4.5:1 */
+  --sig-good: ; --sig-warn: ; --sig-bad: ;    /* light status hues for dots/labels ON canopy, >= 3:1 */
 
   /* Action */
   --action: ;  --action-hover: ;  --on-action: #FFFFFF;   /* white text >= 4.5:1 */

@@ -12,7 +12,7 @@ Two products built with Ashcharya should look clearly different from each other 
 |---|---|
 | **1. Understand** | who uses the product, where, on what device, and what they do 50 times a day |
 | **2. Derive an identity** | mines the product's own physical world (e.g. soil furrows and stamps for agriculture, ledgers for finance, shipping labels for logistics) and turns it into a palette, a texture, a signature shape, a hand-made mark and a type pairing, written down as an identity card |
-| **3. Structure** | builds screens from jobs with fixed principles: one shared component per role, a header that carries status, filters where the eyes are, real-grid tables, records beside lists, dashboards from data already loaded |
+| **3. Layout + structure** | picks a layout archetype from the main job (workspace, top-nav, control board, three-pane, canvas-first, focus flow, feed; 5 mobile types), then applies fixed principles: one shared component per role, a header that carries status, filters where the eyes are, real-grid tables, records beside lists, dashboards from data already loaded |
 | **4. Craft** | adds depth through physical metaphors (trays, keys, paper, ink, stamps), never glow, glass or gradient buttons; one accent moment per screen |
 | **5. Truth** | real copy, real numbers, honest loading / empty / error / offline states |
 | **6. Iterate** | builds the strongest version, shows it, turns every rejection into a rule, changes one shared thing at a time |
@@ -31,6 +31,16 @@ Two products built with Ashcharya should look clearly different from each other 
   `skills/ashcharya-ui/assets/examples/showcase.html`.
 
 ---
+
+## 🇮🇳 Jaldi samjho (Hinglish)
+
+- **Ye kya hai?** Ek "design approach". Ye Claude ko sikhata hai ki kisi bhi app ke liye uski apni unique UI
+  kaise banaye — same quality, lekin har app ka look alag.
+- **Kaise kaam karta hai?** Claude pehle aapke users aur unke kaam samajhta hai → unki duniya ki cheezon se
+  (jaise kheti me mitti ki kyariyan, school me register, gym me barbell) colours, texture, shape aur font
+  nikalta hai → kaam ke hisaab se layout chunta hai → phir screen banata hai, bina glow/glass/fake numbers ke.
+- **Kaise use karein?** Install karke bolo: `/ashcharya-ui hamare <app> ke liye <screen> banao`.
+- **Claude Code nahi hai?** Cursor, Copilot, ChatGPT ke saath bhi chalta hai — dekho `docs/use-with-other-tools.md`.
 
 ## 🚀 Install
 
@@ -93,6 +103,7 @@ skills/ashcharya-ui/
 ├── references/
 │   ├── method/
 │   │   ├── identity.md          deriving a unique identity from the domain (+ identity card template)
+│   │   ├── layouts.md           7 web + 5 mobile layout archetypes and how to pick one
 │   │   ├── structure.md         structural principles, why each exists, layout skeletons
 │   │   ├── craft.md             depth, texture, shape, marks, type and motion without glow
 │   │   └── process.md           iterating with users, decoding feedback, guard rails, verification
@@ -111,6 +122,8 @@ skills/ashcharya-ui/
     ├── examples/                Canopy tokens (web + mobile), 5 palettes, live showcase, a list-page template
     └── sources/                 the original apps' token files
 ```
+
+Using it in Cursor, Copilot or ChatGPT: see `docs/use-with-other-tools.md`.
 
 ## ⚠️ Notes
 

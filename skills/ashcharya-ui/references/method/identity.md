@@ -17,6 +17,8 @@ The goal is a look that could only belong to *this* product. Generic UIs come fr
 ## Step 2 — Mine the material world
 
 List 10 physical things the users see or touch at work. Circle 2–3 that are distinctive and pleasant.
+The table below only shows the *kind* of list to write — make your own from the real workplace (visit it,
+look at photos, ask users); two products in the same domain should not end up with the same materials.
 
 | Domain | Possible materials |
 |---|---|
@@ -39,22 +41,59 @@ List 10 physical things the users see or touch at work. Circle 2–3 that are di
 | **Hand-made mark** | 1–2 human traces, used sparingly | rubber stamp, wax-seal avatar, pen underline |
 | **Type** | workhorse sans + characterful display (+ optional serif/mono accent) | Plus Jakarta Sans + Bricolage Grotesque + Fraunces |
 
-Type checks before choosing: the face has the currency glyph you need (₹ needs a fallback in many display
+Type checks before choosing: on mobile or weak networks use at most two families, self-host and subset
+them (or use system fonts), and always give a system fallback. The face has the currency glyph you need (₹ needs a fallback in many display
 faces), the scripts you need (e.g. Devanagari), and lining tabular figures — set
 `font-variant-numeric: lining-nums tabular-nums` on numbers and tables.
 
 ### Palette recipe
-1. Choose the hue from the material (soil → green-brown, steel → blue-grey, labels → orange, ledgers → indigo).
-2. `canopy` = very deep tone (L 10–20%) for sidebar, header slab, hero, tab bar.
-3. `action` = mid tone (L 25–40%) that carries white text at ≥ 4.5:1.
-4. `accent` = the warm or contrasting colour the material has; must read on canopy (≥ 3:1) and carry dark text.
-5. `canvas` = near-white tinted toward the hue (HSL saturation ≤ 25%, lightness ≥ 94%); cards white; ink = very dark hue tone.
-6. Status colours (success/warning/danger/info) are fixed meanings, not brand: keep them standard.
-7. Night: GitHub-style neutrals for canvas, cards and lines (`#15181D`/`#1C2128`/`#30363D`), never pure black.
+1. **Take the hue straight from the material** and write its source on the card: "action = the green of a
+   phenyl bottle", "canopy = the navy of a railway ticket". Soil → green-brown, steel → blue-grey, labels →
+   orange, ledgers → indigo, milk/cold → blue, brick → red-orange, turmeric → yellow, khadi → off-white + ink.
+   A cold product may be blue; a farm product may be green. **The examples in this skill are not reserved.**
+2. **Draft three candidates before choosing.** Take three *different* materials from your list and build a
+   palette from each, in three different hue families (e.g. one warm: red/orange/yellow/brown; one green/olive;
+   one cool or neutral). Write each in one line with its material source. Then pick the one that is most
+   *specific* to this domain — the one a user would recognise from their workplace. Blue is allowed only if it is
+   clearly the most specific; "it looks professional" is not a reason.
+3. **Choose the palette structure from the context**, not by habit:
+   | Context | Structure |
+   |---|---|
+   | control rooms, night shifts, long monitoring | *Dark canopy* — deep chrome around light content |
+   | bright counters, sunlight, quick transactions | *Light chrome* — paper nav and header, colour only in action/accent/status |
+   | reading and judging documents, analysis | *Ink-led* — black-on-paper like print, one vivid accent |
+   | brand-led or customer-facing tools | *Mid-tone band* — one strong colour bar on paper |
+4. `canopy` = the deep tone (L 10–20%) for dark chrome; for the other structures it is the band/chrome colour.
+5. `action` = mid tone (L 25–40%) that carries white text at ≥ 4.5:1.
+6. `accent` = the contrasting colour the material has — either pale with dark ink (for dark chrome) or
+   mid-tone with white ink (for light chrome). If it sits within ~25° of a status colour, keep it off status
+   chips and give every status an icon + word.
+7. `canvas` = near-white tinted toward the hue (HSL saturation ≤ 25%, lightness ≥ 94%) or a warm paper grey;
+   cards white; ink = a very dark tone of the hue.
+8. Status colours (success/warning/danger/info) are fixed meanings, not brand: keep them standard.
+9. Night: GitHub-style neutrals for canvas, cards and lines (`#15181D`/`#1C2128`/`#30363D`), never pure black.
    Keep the brand alive on the **canopy only**: a very dark, low-saturation tone of the hue (L 10–16%,
    HSL S ≤ 30%) for sidebar, header slab and tab bar. Lighten the action until dark ink `#0D1117` reads on it.
    Secondary text at night ≈ `#B1BAC4` so it stays distinct from primary `#E6EDF3`.
-8. Run `python3 assets/tools/check-contrast.py identity.json`; every pair must pass.
+10. Run `python3 assets/tools/check-contrast.py identity.json`; every pair must pass.
+
+### Avoiding look-alikes (siblings only)
+"Taken" means **used by a sibling product of the same company or product family** — the apps a user might
+open side by side. The skill's examples are illustrations, not reservations.
+If the material's colour is within ~25° of a real sibling: change lightness or temperature, change the palette
+structure (dark canopy ↔ light chrome ↔ band ↔ ink-led), use a second material for the colour, or swap roles
+(material colour becomes the accent).
+
+### The AI-default trap
+Generated palettes drift to the same places: **dark corporate blue + steel/paper**, **violet/aubergine + a pale
+accent on a lilac-grey canvas**, indigo-purple, teal + coral, and navy + gold. If your palette lands there, check that a material on your card
+really is that colour; if not, re-derive. Never pick a hue to "stay away" from other hues — pick it *from* the
+material.
+
+### Night-first products
+If users work mostly at night or in dim rooms (wards, security, call centres): make night the default, dim
+large white areas (cards `#1C2128`, never pure white), keep the accent away from alarm red, avoid bright fills
+on big surfaces, and offer an even dimmer "low light" level (reduce surface lightness ~20%).
 
 ### Texture recipe
 Pick a pattern a CSS gradient can draw: diagonal rows (furrows — *used by Harvest*), horizontal rules
@@ -79,6 +118,8 @@ slight wobble), masking tape, pinned photo, punch holes, a handwritten date. Nev
 # <Identity name>
 Users: … · Context: … · Device: … · 50×/day jobs: …
 Materials: …, …, …
+Candidates: 1) <material> → <hues>  2) <material> → <hues>  3) <material> → <hues>  → chosen: … because …
+Structure: dark canopy | light chrome | mid-tone band | ink-led (because <context>)
 Palette: canopy #… · action #… (on #FFF) · accent #… (ink #…) · canvas #… · ink #… · night: GitHub dark + action #…
 Texture: … (CSS: …)
 Shape: … (used on header / active nav / primary key)

@@ -40,3 +40,5 @@ rules: it is how a team's taste becomes a system.
 - Long text: Hindi or other long strings, large font scale.
 - Network: slow, offline, failed write, empty cache.
 - States: loading, empty, filtered-empty, error, no-access.
+- Demo / prototype data: realistic for the domain and internally consistent — every header number, tab
+  count, chart and footer is computed from the same rows, so nothing on screen contradicts anything else.

@@ -3,6 +3,8 @@
 Identity decides how things *look*. Structure decides how work *flows*. These principles stay the same in
 every product; their drawing changes with the identity.
 
+Pick the layout archetype first (`layouts.md`); this file covers the principles inside any archetype.
+
 ## 1. Start from jobs, not from components
 
 For each screen write: *"The user comes here to ___, ___ and ___."* Then:
@@ -23,7 +25,9 @@ For each screen write: *"The user comes here to ___, ___ and ___."* Then:
 | Forms where records open | "add karne par dialog kyu, jab side drawer use kar rahe" | form shell inside the same drawer/sheet |
 | Insight from loaded data | extra dashboard calls slowed the server | charts computed from rows on screen; click to filter |
 | Everything reachable | one-module-at-a-time nav hid features | all modules visible as grouped trays; ⌘K for the rest |
-| Four faces | blank screens and spinners felt broken | skeleton in real shape, empty + action, error + retry, no-access |
+| Four faces | blank screens and spinners felt broken | skeleton in real shape, empty + action, error + retry, no-access — per panel/tile, not only per page |
+| Refresh keeps data | blanking a list on refetch lost the user's place | old rows stay; a light sweep or thin pulse bar shows it is updating |
+| Keyboard-first lists | mouse-only lists were slow for power users | j/k or arrows move, Enter opens, x selects, `/` searches, `?` shows all shortcuts |
 | Offline visible (mobile) | staff didn't know if work was saved | header tint, sync banner with counts, row-level "waiting to send" |
 
 ## 3. Layout skeletons (draw them in the identity's shapes)
@@ -53,7 +57,7 @@ landing) are in `../page-recipes.md`.
 | < 768 | nav → sheet + bottom bar; drawers → bottom sheets; header KPIs → scrolling row |
 | ≥ 768 | header side by side; dashboard two columns |
 | 768–1279 | nav collapses to an icon rail with hover fly-outs (⌘B expands) |
-| ≥ 1024 | record drawer docks beside the list; if that would squeeze the grid under ~640px, the drawer overlays instead, or low-priority columns hide |
+| ≥ 1024 | record drawer docks beside the list (width 420 → 480 at 1280 → 540 at 1536, or `clamp(380px, 32vw, 560px)`); if that would leave the grid under ~640px — e.g. 1024 with a rail — the drawer overlays instead and low-priority columns hide |
 | ≥ 1280 | nav open by default; dashboard 40/30/30 |
 Inside drawers use container queries (e.g. 880px) rather than viewport breakpoints.
 

@@ -17,21 +17,26 @@ different from each other and still feel equally crafted. The method was distill
 (a store POS, a head-office portal and a mobile field app) whose looks came out of this process; those
 looks are kept only as worked examples.
 
-**Never copy an example's colours, textures or shapes into a new product.** Derive new ones with §2.
+**Never copy an example's whole identity into a new product.** Derive a new one with §2 — a hue may repeat if
+the new product's own material is that colour, but texture, shape, mark and type should come from its world.
+
+**Read before building:** this file, then `references/method/identity.md`, `layouts.md`, `structure.md`,
+`craft.md` (and `process.md` when iterating). Use `page-recipes.md`, `interaction-pack.md` and
+`assets/token-template.css` while building.
 
 ## 1. The method at a glance
 
 ```
 1 UNDERSTAND   who uses it, where, for how long, on what device, what they do 50× a day
 2 DERIVE       an identity from the product's own world: material → palette, texture, shapes, marks, type
-3 STRUCTURE    screens from jobs, with the structural principles (one shared component per role)
+3 STRUCTURE    pick a layout archetype from the main job, then apply the structural principles
 4 CRAFT        depth and delight through physical metaphors, never glow
 5 TRUTH        real copy, real numbers, honest states
 6 ITERATE      build the strongest version, show it, log every rejection as a rule, fix shared parts
 7 VERIFY       contrast, both themes, all widths, keyboard/touch, reduced motion, screenshots
 ```
 
-Detailed guides: `references/method/identity.md`, `structure.md`, `craft.md`, `process.md`.
+Detailed guides: `references/method/identity.md`, `layouts.md`, `structure.md`, `craft.md`, `process.md`.
 Worked derivations (3 shipped + new domains): `references/examples/derivations.md`.
 
 ## 2. Derive the identity (the heart of the approach)
@@ -43,38 +48,51 @@ Do this before writing any CSS. Output a one-page **identity card** (template in
    wristbands, sterile steel; for logistics, route maps, shipping labels, pallets. Pick **2–3 materials**.
 2. **Palette from the material:** one hue family (deep tone for "canopy" surfaces, mid tone for actions) +
    **one accent** that the material naturally has (harvest gold, a warning-label orange, a stamp red) +
-   neutrals tinted toward the hue + a calm night mode (default: GitHub-style dark neutrals).
+   neutrals tinted toward the hue + a calm night mode (default: GitHub-style dark neutrals). Also choose a
+   **palette structure** from the context (dark canopy, light chrome, mid-tone band or ink-led). Draft **three
+   candidate palettes** from three different materials in different hue families, then pick the most
+   domain-specific one. Write the material source of each colour; avoid only real sibling products' colours,
+   and beware the AI-default traps (corporate blue, violet/aubergine) — see `method/identity.md`.
 3. **Texture from the material:** one repeating pattern drawn in CSS (furrows, ledger rules, contour lines,
    label perforations, survey grid) used only on dark/hero surfaces at 3–6% alpha.
 4. **Signature shape:** one structural shape that repeats (a diagonal cut, a notch, a ticket edge, an
-   asymmetric capsule, a folder tab). Used on the header, the active state and the primary key.
-5. **Hand-made mark:** one or two objects with a human trace (stamp, seal, tape, pen underline, punch hole,
-   handwritten date). Used sparingly: sign-in, top bar, empty states, and at most one small mark on any other screen.
+   asymmetric capsule, a folder tab). Used in three places: the frame of the main work object (page header,
+   bill, file, tile), the "current place" marker, and the primary key.
+5. **Hand-made mark:** one or two mark *concepts* with a human trace (stamp, seal, tape, pen underline, punch
+   hole, handwritten date). A concept may appear on sign-in, in the top bar, in empty states and at most once on
+   any other screen.
 6. **Type pairing:** a workhorse sans for body, a characterful display face for titles + numbers, optionally
    one serif or mono for a human/precise accent. Never the same pairing as a sibling product.
 7. **Name it** ("Harvest", "Command OS", "Ledger", "Tidewater") and check: if a screenshot could be mistaken
    for a sibling product or a generic template, push the material further.
 
-## 3. Structural principles (what stays constant across every identity)
+## 3. Layout + structural principles
 
-These are behaviours, not looks. Each identity draws them in its own shapes and colours.
+**First pick a layout archetype** from the screen's main job (`references/method/layouts.md`): A Workspace,
+B Top-nav canvas, C Control board, D Three-pane, E Canvas-first, F Focus flow, G Feed; on mobile M1 Tab app,
+M2 Single-task flow, M3 Status-first, M4 List → detail, M5 Map-first. The source apps used A and M1;
+don't default to them.
+
+The principles below are **behaviours**, not drawings. Each can be drawn many ways (layouts.md §3).
 
 1. **One shared component per role.** One page header, one table, one record view, one form shell, one
    filter kit, one tone map, one scrollbar. Iterate the shared part; never fork a page-specific variant.
-2. **The header carries status.** Every page header shows identity + the 2–4 numbers that matter now, and
-   those numbers are clickable shortcuts into filtered views.
-3. **Controls live where the eyes are.** Filters, scope pickers and the page's primary action sit in the
-   header bar (an app-wide create action, like "New sale", may live in the top bar; one of the two gets the
-   accent style, never both); applied filters show as removable chips with a result count; view switches share that line.
+2. **Status is visible where work starts.** The 2–4 numbers that matter now are on screen before any click
+   (a KPI slab, a status strip, counts in tabs, a hero number or a tile wall) and work as shortcuts.
+3. **Controls live where the eyes are.** Filters, scope and the page's primary action sit next to the data
+   they change (header bar, chip row, facet panel or a query bar); applied filters show as removable chips with
+   a result count. An app-wide create action may live in the top bar; only one of the two gets the accent style.
 4. **Lists are real grids.** One value per column, rules between rows and columns, sticky header, sort state
-   visible, an accent edge on the row you can open.
-5. **Records open beside the list, forms open in the same place.** No context loss: a drawer docks next to
-   the list on wide screens, a sheet on phones; add/edit uses the same container; centred dialogs only for
-   yes/no.
-6. **Insight comes from the data already on screen.** Dashboards are computed from loaded rows (no extra
-   calls), every chart filters the list, and the page can flip Dashboard ⇄ Table.
-7. **Everything is reachable at once.** Navigation shows all modules (grouped), never one module at a time;
-   a keyboard path exists for every frequent action (⌘K, ⌘B, arrows, Esc) and touch targets are ≥ 48dp on touch devices (desktop controls stay 36–40px for density).
+   visible, an accent edge on the row you can open. On phones, use cards whose fields keep the same order and
+   position in every card (a grid folded into cards), never free-form cards.
+5. **Records open without losing your place; forms open in the same place.** A docked drawer, a right sheet,
+   a split pane, inline expansion or a push screen on mobile; add/edit uses the same container; centred dialogs
+   only for yes/no.
+6. **Insight comes from the data already on screen.** Charts and summaries are computed from loaded rows (no
+   extra calls) and clicking them filters the list (a Dashboard ⇄ Table switch, a stats strip, inline sparklines).
+7. **Everything is reachable.** No hidden modules: grouped sidebar, top tabs + ⌘K, or a module home; a
+   keyboard path for every frequent action (⌘K, arrows, Esc). Touch: every hit area ≥ 48dp (a 46dp button may
+   reach 48 with hit slop); desktop controls stay 36–40px for density.
 8. **Every data surface has four faces:** loading in the real shape, empty with one next step, error with
    the cause and a retry, no-access with who can see it. Offline and sync state are always visible on mobile.
 
@@ -101,7 +119,8 @@ These are behaviours, not looks. Each identity draws them in its own shapes and 
 1. **Find the context.** New product → run §2 and write the identity card first. Existing product → read its
    code; keep its identity and kits, apply §3–§5 on top. A sibling of an existing product → derive a
    *different* identity with the same quality bar.
-2. **List the jobs** of the screen (what the user does 50× a day) and pick a recipe from
+2. **List the jobs** of the screen (what the user does 50× a day), **pick a layout archetype**
+   (`references/method/layouts.md`, run its variety check) and a recipe from
    `references/page-recipes.md` (list, dashboard, record, kanban, calendar, settings, inbox, map, wizard,
    sign-in, landing).
 3. **Build with tokens only**: write the identity's tokens first (`assets/token-template.css`), then components.
@@ -116,7 +135,8 @@ These are behaviours, not looks. Each identity draws them in its own shapes and 
 - [ ] An identity card exists and the screen is recognisably *that* identity, not a sibling or a template
 - [ ] Palette: one hue family + one accent; contrast checked with `assets/tools/check-contrast.py`
 - [ ] Shared components reused or created once; no page-specific forks
-- [ ] Header carries status; controls in the header bar; applied chips; real-grid lists; records beside lists
+- [ ] Layout archetype chosen from the job (not copied from a sibling); variety check done
+- [ ] Status visible before any click; controls next to the data; applied chips; real-grid lists (fixed-position cards on phones); records open without losing place
 - [ ] Four faces for every data surface; offline/sync visible on mobile
 - [ ] Craft from the identity's material; no glow/glass/gradient buttons; accent reserved (one filled element + you-are-here markers)
 - [ ] Real copy and real numbers only

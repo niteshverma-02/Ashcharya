@@ -36,6 +36,20 @@ are the contrast-checked sets from `palettes.md`.
 
 **Note how the same approach gave three different looks** for three different users, even inside one company.
 
+### What the approach took from each app
+| Idea in the method | From |
+|---|---|
+| Identity derived from the domain's material (furrows, stamps, field notebook); craft without glow; "AI generated" smell test | Harvest (POS) |
+| Real grid, one value per column; one shared header; filters + chips + Dashboard ⇄ Table; docked drawer for records *and* forms; insight from loaded rows | Harvest (POS) |
+| Two-tier header (identity band + toolbar); status chips in the header; a single "ink" hero block for the one metric that matters | Command OS (Hub) |
+| One brand hue only — "info" is a neutral, never a second colour; a fixed colour-blind-safe chart order, extra series fold into "Other" | Command OS (Hub) |
+| Borders drawn as inset 1px shadows, elevation as one long soft drop | Command OS (Hub) |
+| Every tile/panel has its own loading, no-access and error face; refresh shown as a light sweep over stale data, never a blank | Command OS (Hub) |
+| Keyboard-first lists (j/k, Enter, x to select, ←/→ pages), `/` search, `?` shortcut sheet, go-to chords; bulk-selection bar | Command OS (Hub) |
+| Numbers count up once; charts draw in once; entrance stagger — all off under reduced motion | Command OS (Hub) |
+| Offline-first states, sync banner with counts, haptics by event, one-hand targets, bottom sheets that commit on tap, tokens enforced by tests | Prasar field (mobile) |
+| Contrast tests on every token pair; "no fake analytics" (missing = `—`, partial = `+`) | Prasar field (mobile) |
+
 ## Part B — new domains
 
 ### "Ledger" — accounting / finance back-office (web)
@@ -98,6 +112,8 @@ app for Indian school office staff". It is the proof that the approach generalis
   register-paper canvas `#F6F2F3`; all 32 contrast pairs pass.
 - Texture: four-line copy rules. Shape: swallowtail bookmark ribbon (header, active nav, primary key).
 - Marks: a wobbly hand-drawn circle around the hero number; handwritten dates. Type: Hind + Zilla Slab + Kalam.
+- Built before the night rule changed: its night canopy is neutral `#161B22`; today the rule would keep a very
+  dark maroon there.
 - Files: `assets/examples/register/identity-card.md`, `identity.json`, and the full working page
   `fees.html` (fee collection: grouped nav, KPI slab, filters + chips, Dashboard ⇄ Table, real grid, docked
   drawer, light + night, 1440 → 390px).

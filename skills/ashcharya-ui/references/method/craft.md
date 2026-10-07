@@ -10,10 +10,12 @@ to something physical. If it can't be named as an object (tray, key, paper, ink,
 | Sunk tray | `inset 0 1px 3px rgba(0,0,0,.28)` on a darker fill | grouping nav items, kanban columns, settings lists |
 | Raised key | `inset 0 1px 0 rgba(255,255,255,.06), 0 2px 5px -2px rgba(0,0,0,.45)`; hover lifts 1px | nav items, segmented controls, cards in trays |
 | Paper on a desk | white card, 1px hairline, long soft drop `0 16px 32px -26px` | page header, panels |
-| Hard offset | `3px 3px 0 <darkest canopy>`; hover 4px, press 1px | the ONE primary key |
+| Hard offset | `3px 3px 0 <darkest canopy>`; hover 4px, press 1px. If the key has a `clip-path` shape, put `filter: drop-shadow(3px 3px 0 …)` on a wrapper, because clip-path also clips box-shadow | the ONE primary key |
 | Inset rim | `inset 0 0 0 1px <accent>/.35` | shapes on dark surfaces |
 | Hairline grid | `gap: 1px` on a line-coloured background | stat strips, KPI grids |
 | Flat by default | border only, no shadow | records, drawers, list cards |
+| Inset borders | borders as `inset 0 0 0 1px <line>` shadows (no layout shift on hover/focus) | panels, buttons, inputs |
+| Ink block | one dark canopy block holding the single most important number | dashboards, home screens |
 
 Shadows only for things that float (popovers, sheets, dialogs, tab bars, FABs).
 
@@ -30,8 +32,14 @@ Use the identity card's choices (see `identity.md`). Rules:
 - A serif or mono accent only for human/precise moments (dates, sign-in headline, clocks, codes).
 
 ## 4. Colour discipline
-- One hue family + one accent. At most one filled accent element per screen (usually the primary key) plus
+- One hue family + one accent. At most one filled accent element per surface layer (a page, or a sheet/drawer
+  on top of it — hide the page's accent key while a sheet with its own is open; filled *action*-colour buttons
+  don't count) plus
   small you-are-here markers (active nav rim, tab dot). The signature shape is drawn in canopy/action colours.
+- A **pale accent** (dark ink on it) only appears on dark chrome: put the accent-filled key on a canopy bar
+  (decision bar, payment panel, tab bar) or use the action colour for the primary key on white. A mid-tone
+  accent with white ink may sit on white. Accent rules/ticks on light surfaces use `accent-text`, not the pale accent.
+- Dark chrome at night: add a 1px inset line (`inset 0 0 0 1px rgba(255,255,255,.06)`) so it separates from the canvas.
 - If the brand hue is close to red (within ~30° of danger), shift danger toward crimson or orange and always pair
   danger with an icon and a word, so errors never read as branding.
 - Status colours mean status only; tags carry categories, never status.

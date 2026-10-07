@@ -75,6 +75,31 @@ Bottom sheet on mobile: next stop · distance · Navigate (primary) · Skip
 ```
 - Stops: pending blue, visited orange, skipped red (fixed meaning, every theme).
 
+## 8b. Counter / billing — Focus flow (layout F)
+```
+top bar: shift status strip (bills, cash, UPI) · tabs · ⌘K
+left: queue (who's next, held bills, last bills) │ centre: the work object (bill/order) with a scan/query bar on top │ right: totals + payment + the ONE key
+bottom: function-key strip (F2 new, F4 batch, F7 pay, F9 print)
+```
+- Everything keyboard-driven; scanning adds a line and focuses its quantity; batch/variant choice expands inline.
+- The primary key and the total are the biggest things on screen.
+
+## 8c. Review / approvals — Three-pane (layout D)
+```
+saved views + facets │ queue of fixed-field cards (amount, age/SLA, flags) │ the file: summary strip, tabs (documents, history, checks), flags list
+decision bar pinned under the file: reason picker · secondary actions · the accent key (Approve)
+```
+- j/k moves the queue; the file follows; a decision moves to the next item automatically with Undo.
+- Status lives in a thin strip of clickable counts above the panes.
+
+## 8d. Live monitoring — Control board (layout C)
+```
+status slab of clickable state counts │ tile wall grouped by type, worst first │ alert rail (open / acknowledged)
+selection detail docks under the wall (trace, cause, actions)
+```
+- Size tiles so the whole fleet fits one screen at 1440×900 (≈ 90–110px wide); overflow scrolls inside a group.
+- Every tile: id · main reading · cause word + icon (never colour alone).
+
 ## 9. Multi-step form / onboarding wizard
 ```
 Drawer or full page; step rail at the top: numbered dots, done = action, current = accent ring
