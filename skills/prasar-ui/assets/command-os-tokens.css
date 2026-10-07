@@ -1,0 +1,141 @@
+/* HO portal — "Command OS" tokens. Copied from franchise-hub/src/styles/{command-os,os-header,os-kit}.css.
+   Wrap the app root (and every portalled Sheet/Dialog/Select) in class="command-os". */
+.command-os {
+  /* forest foundation */
+  --os-nav-1:     #1B4A36;
+  --os-nav-2:     #0F2E1E;
+  --os-nav-3:     #143A26;
+  --os-nav-edge:  #143A26;
+
+  /* on-nav text */
+  --os-on-1:      #FFFFFF;
+  --os-on-2:      rgba(232, 244, 236, 0.80);
+  --os-on-3:      rgba(232, 244, 236, 0.58);
+  --os-on-4:      rgba(232, 244, 236, 0.42);
+  --os-lift-1:    rgba(255, 255, 255, 0.055);
+  --os-lift-2:    rgba(255, 255, 255, 0.09);
+
+  --p-paper:      #F6F5F1;
+  --p-surface:    #FFFFFF;
+  --p-surface-2:  rgba(255, 255, 255, 0.74);
+  --p-surface-3:  rgba(255, 255, 255, 0.46);
+
+  --p-line:       #E5E3DA;
+  --p-line-soft:  #EFEDE5;
+  --p-line-hair:  #F4F3EB;
+
+  --p-text:       #121714;
+  --p-text-2:     #464C44;
+  --p-muted:      #5C635A;
+  --p-faint:      #838A80;
+  --p-ghost:      #9CA298;
+
+  --p-accent:     #2E7D56;
+  --p-accent-2:   #55A47D;
+  --p-accent-lit: #74E5B0;
+  --p-accent-bg:  rgba(46, 125, 86, 0.09);
+
+  --p-amber:      #AD7526;
+  --p-clay:       #B14D2C;
+  --p-slate:      #66705F; /* a neutral sage-grey: the brand has one hue, so "informational" is grey, not blue */
+
+  --p-ease:       cubic-bezier(0.22, 0.85, 0.28, 1);
+
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  color: var(--p-text);
+  background: var(--p-paper);
+  letter-spacing: -0.006em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark .command-os {
+  /* One hue family in dark mode: the navigation is the raised surface, the
+     content sits deeper, panels come back up. Nothing reads as black. */
+  --os-nav-1:     #1A452F;
+  --os-nav-2:     #123522;
+  --os-nav-3:     #163B27;
+  --os-nav-edge:  #163B27;
+
+  --p-paper:      #0A1E14;
+  --p-surface:    #10301F;
+  --p-surface-2:  rgba(255, 255, 255, 0.045);
+  --p-surface-3:  rgba(255, 255, 255, 0.02);
+
+  --p-line:       rgba(190, 235, 210, 0.13);
+  --p-line-soft:  rgba(190, 235, 210, 0.085);
+  --p-line-hair:  rgba(190, 235, 210, 0.055);
+
+  --p-text:       #F1F2EE;
+  --p-text-2:     rgba(255, 255, 255, 0.8);
+  --p-muted:      rgba(255, 255, 255, 0.64);
+  --p-faint:      rgba(255, 255, 255, 0.52);
+  --p-ghost:      rgba(255, 255, 255, 0.42);
+
+  --p-accent:     #5FD39A;
+  --p-accent-2:   #7FE0B2;
+  --p-accent-bg:  rgba(95, 211, 154, 0.12);
+
+  --p-amber:      #E0A852;
+  --p-clay:       #E48A6B;
+}
+
+.command-os {
+  --ach-h: 72px;
+  --ach-forest: #17402E;
+  --ach-forest-hi: #1F5139;
+  --ach-ivory: #F6EFDF;
+  --ach-brass: #C69A4A;
+  --ach-brass-deep: #A97C2F;
+  --ach-on-1: #FFFFFF;
+  --ach-on-2: rgba(240, 236, 222, 0.66);
+  --ach-on-3: rgba(240, 236, 222, 0.46);
+  --ach-ease: cubic-bezier(0.22, 0.85, 0.28, 1);
+  --ach-shoulder: 48px;
+  /* the tab is one width on every page: a long title truncates, the deck never shifts */
+  --ach-tab-w: 300px;
+}
+
+.dark .command-os {
+  --ach-forest: #163B27;
+  --ach-forest-hi: #1C4A33;
+}
+
+.command-os {
+  /* Light is earthy — no blue, no violet, so charts wear the brand. c3 (amber =
+     pending) and c5 (clay = rejected/over) keep their meaning across screens.
+     Passes adjacent CVD ≥ 9.1 and normal ≥ 17.6 on #FCFCFB; the wrap-around
+     pairs (c4↔c1, c2↔c5) hold ≥ 8.1. Validated 2026-09-30. */
+  --c1: #23885A;  /* green */
+  --c2: #813935;  /* earth */
+  --c3: #B87818;  /* amber */
+  --c4: #3AA273;  /* sage  */
+  --c5: #C24E2A;  /* clay  */
+  --c-other: #9CA298;
+
+  /* sequential: one hue, light → dark, for heat cells */
+  --seq-0: #EEF4EF;
+  --seq-1: #CFE5D7;
+  --seq-2: #9DCCB0;
+  --seq-3: #5FAE84;
+  --seq-4: #2E8A5C;
+  --seq-5: #16603E;
+}
+
+.dark .command-os {
+  /* Dark keeps blue and violet on purpose: on the forest surface (#10301F) no
+     green/earth set separates — green↔sage fell to ΔE 1.3. The user chose
+     readable dark charts over a brand-only palette (2026-09-30). */
+  --c1: #35A872;
+  --c2: #5B98D8;
+  --c3: #B8822A;
+  --c4: #9A7EE0;
+  --c5: #D06848;
+  --c-other: rgba(255, 255, 255, 0.4);
+
+  --seq-0: rgba(255, 255, 255, 0.05);
+  --seq-1: #1D4A33;
+  --seq-2: #226647;
+  --seq-3: #2F8A5E;
+  --seq-4: #45B07C;
+  --seq-5: #7FE0B2;
+}

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prasar UI Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Harvest light */
+:root{--bg:150 20% 97%;--fg:165 30% 9%;--card:0 0% 100%;--primary:162 70% 28%;--glow:160 58% 38%;--gold:42 95% 55%;
+  --muted:160 18% 94.5%;--mfg:165 8% 40%;--border:160 14% 89%;--warn:36 92% 46%;--ok:154 60% 30%;--bad:356 66% 47%;
+  --tbl-head:hsl(160 18% 91%);--tbl-head-rule:hsl(160 14% 80%);--tbl-stripe:hsl(160 20% 97.5%);--tbl-hover:hsl(162 70% 28%/.07);
+  --slab1:168 50% 9%;--slab2:164 58% 17%;--space:#0f4033;--tray:rgba(3,20,15,.28);--ink:#f6f2e7;--rim:#e2b864;
+  --bar:color-mix(in srgb,#0f4033 6%,#fff);--ease:cubic-bezier(.16,1,.3,1)}
+/* GitHub dark */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:217 16% 10%;--fg:212 20% 86%;--card:216 17% 13%;--primary:137 50% 42%;--glow:134 52% 48%;--gold:39 72% 52%;
+  --muted:215 15% 15%;--mfg:212 9% 58%;--border:212 12% 21%;--warn:39 72% 52%;--ok:128 46% 52%;--bad:3 85% 64%;
+  --tbl-head:hsl(215 15% 17%);--tbl-head-rule:hsl(212 12% 26%);--tbl-stripe:hsl(216 16% 14.5%);--tbl-hover:hsl(137 50% 42%/.12);
+  --slab1:160 40% 8%;--slab2:150 38% 14%;--space:#161b22;--ink:#e6edf3;--bar:#1c2128;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:217 16% 10%;--fg:212 20% 86%;--card:216 17% 13%;--primary:137 50% 42%;--glow:134 52% 48%;--gold:39 72% 52%;
+  --muted:215 15% 15%;--mfg:212 9% 58%;--border:212 12% 21%;--warn:39 72% 52%;--ok:128 46% 52%;--bad:3 85% 64%;
+  --tbl-head:hsl(215 15% 17%);--tbl-head-rule:hsl(212 12% 26%);--tbl-stripe:hsl(216 16% 14.5%);--tbl-hover:hsl(137 50% 42%/.12);
+  --slab1:160 40% 8%;--slab2:150 38% 14%;--space:#161b22;--ink:#e6edf3;--bar:#1c2128;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:hsl(var(--bg));color:hsl(var(--fg));font-size:14px;letter-spacing:-.005em}
+.app{display:grid;grid-template-columns:17.5rem minmax(0,1fr);gap:.75rem;padding:.6rem;min-height:100dvh}
+/* Sidebar */
+.side{background:var(--space);border-radius:.9rem;padding:.8rem .6rem;color:var(--ink);display:flex;flex-direction:column;gap:.6rem;
+  background-image:repeating-linear-gradient(-38deg,transparent 0 13px,rgba(255,255,255,.03) 13px 14px)}
+.brand{display:flex;gap:.6rem;align-items:center;padding:.3rem .4rem .6rem}
+.mark{width:2.2rem;height:2.2rem;border-radius:.7rem .7rem .7rem .25rem;background:var(--rim);color:#2a1d02;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:700}
+.brand b{font-family:Fraunces,serif;font-size:.95rem;font-weight:600;display:block}
+.brand small{font-size:.59rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+.tray{padding:.4rem;border-radius:1rem;background:var(--tray);border:1px solid rgba(255,255,255,.04);box-shadow:inset 0 1px 3px rgba(0,0,0,.28),0 1px 0 rgba(255,255,255,.04)}
+.tray h4{margin:.15rem .4rem .4rem;font-size:.656rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgb(var(--hue))}
+.key{position:relative;display:flex;align-items:center;gap:.6rem;min-height:2.5rem;margin-top:.3rem;padding:0 .6rem 0 .35rem;border-radius:.75rem;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);color:inherit;text-decoration:none;font-size:.844rem;font-weight:600;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 2px 5px -2px rgba(0,0,0,.45);transition:transform 140ms,background 140ms}
+.key:hover{transform:translateY(-1px);background:rgba(255,255,255,.09)}
+.key i{width:1.8rem;height:1.8rem;border-radius:.55rem;display:grid;place-items:center;font-style:normal;background:rgba(var(--hue),.16);color:rgb(var(--hue))}
+.key::after{content:"›";margin-left:auto;opacity:.5}
+.key[aria-current]{border:1.5px solid var(--rim);background:rgba(226,184,100,.14);font-weight:700}
+.key[aria-current] i{background:var(--rim);color:#2a1d02}
+.key[aria-current]::before{content:"";position:absolute;left:-.62rem;top:50%;width:.4rem;height:.4rem;border-radius:9px;background:var(--rim);transform:translateY(-50%)}
+/* Top bar */
+.top{display:flex;align-items:center;gap:.8rem;height:3.9rem;padding:0 1rem;border-radius:16px;background:var(--bar);border:1px solid hsl(var(--border))}
+.shape{position:relative;isolation:isolate;display:flex;align-items:center;gap:.6rem;padding:0 1.1rem;color:#f6f2e7}
+.shape::before{content:"";position:absolute;z-index:-1;inset:-.3rem 0;border-radius:14px;transform:skewX(-12deg);
+  background:repeating-linear-gradient(-32deg,transparent 0 11px,rgba(255,255,255,.04) 11px 12px),linear-gradient(115deg,#0b3328,#13503f);
+  box-shadow:inset 0 0 0 1px rgba(226,184,100,.35),0 8px 18px -10px rgba(6,31,24,.7)}
+.stamp{padding:.05rem .4rem;border:1.5px solid #86ba8c;color:#86ba8c;border-radius:.25rem;font-size:.594rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;transform:rotate(-1.5deg)}
+.shape h1{margin:0;font:600 1.2rem Fraunces,serif}
+.search{flex:1;max-width:30rem;margin:0 auto;height:2.4rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--card));display:flex;align-items:center;padding:0 1rem;color:hsl(var(--mfg));font:italic .9rem Fraunces,serif}
+.search kbd{margin-left:auto;font:500 .7rem "JetBrains Mono",monospace;font-style:normal;border:1px solid hsl(var(--border));border-radius:5px;padding:.05rem .35rem}
+.date{text-align:right;line-height:1.1}.date b{font:italic 600 .9rem Fraunces,serif;display:block}.date span{font:500 .66rem "JetBrains Mono",monospace;opacity:.7}
+.sale{height:2.2rem;display:inline-flex;align-items:center;gap:.45rem;padding:0 .9rem 0 .4rem;border:1.5px solid #2a1d02;border-radius:.6rem;background:var(--rim);color:#2a1d02;font:800 .81rem "Plus Jakarta Sans";box-shadow:3px 3px 0 #061f18;cursor:pointer;transition:transform 120ms,box-shadow 120ms}
+.sale:hover{box-shadow:4px 4px 0 #061f18;transform:translate(-1px,-1px)}.sale:active{box-shadow:1px 1px 0 #061f18;transform:translate(2px,2px)}
+.sale span{width:1.35rem;height:1.35rem;border-radius:99px;background:#2a1d02;color:var(--rim);display:grid;place-items:center}
+.seal{width:2.2rem;height:2.2rem;border-radius:99px;background:#ebe2cc;color:#13302a;display:grid;place-items:center;font:700 1rem Fraunces,serif;box-shadow:0 0 0 2px #13503f,0 0 0 3.5px var(--rim)}
+.theme{width:2.1rem;height:2.1rem;border-radius:99px;border:1px solid rgba(246,242,231,.3);background:transparent;color:inherit;cursor:pointer}
+main{display:flex;flex-direction:column;gap:.75rem;min-width:0}
+/* Page header */
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:16px;overflow:hidden;box-shadow:0 1px 2px hsl(168 40% 10%/.05),0 16px 32px -26px hsl(168 50% 9%/.5)}
+.ph{display:flex;min-height:84px}
+.ph-main{flex:1;display:flex;gap:.9rem;align-items:center;padding:14px 18px}
+.glyph{position:relative;width:44px;height:44px;flex:none;border-radius:13px 13px 13px 4px;background:hsl(var(--slab2));color:hsl(42 60% 92%);display:grid;place-items:center;font-size:1.2rem;box-shadow:inset 0 -3px 0 hsl(var(--slab1)/.6),0 8px 16px -10px hsl(var(--slab1)/.9)}
+.glyph::after{content:"";position:absolute;right:-3px;top:-3px;width:10px;height:10px;border:2px solid hsl(var(--card));border-radius:3px;background:hsl(var(--gold))}
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:750;letter-spacing:.15em;text-transform:uppercase;color:hsl(var(--primary))}
+.eyebrow::after{content:"";width:22px;height:1px;background:hsl(var(--gold))}
+.ph h2{margin:2px 0;font:800 25px/1.1 "Bricolage Grotesque";letter-spacing:-.03em}
+.ph p{margin:0;color:hsl(var(--mfg));font-size:13px}
+.slab{position:relative;isolation:isolate;display:flex;max-width:62%;padding:10px 14px 10px 42px;color:#fff;clip-path:polygon(26px 0,100% 0,100% 100%,0 100%);
+  background:repeating-linear-gradient(-32deg,transparent 0 12px,hsl(0 0% 100%/.045) 12px 13px),linear-gradient(115deg,hsl(var(--slab1)),hsl(var(--slab2)))}
+.slab::before{content:"";position:absolute;z-index:-1;inset:0 auto 0 0;width:30px;background:hsl(var(--gold));clip-path:polygon(26px 0,29px 0,3px 100%,0 100%)}
+.stat{display:flex;flex-direction:column;justify-content:center;min-width:92px;padding:4px 16px;border-left:1px solid rgba(255,255,255,.14);border-radius:9px;background:none;color:inherit;border-top:0;border-right:0;border-bottom:0;cursor:pointer;text-align:left}
+.stat:first-child{border-left:0}.stat:hover{background:rgba(255,255,255,.08)}
+.stat small{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;opacity:.8}
+.stat small::before{content:"";width:5px;height:5px;background:var(--tone,hsl(var(--gold)))}
+.stat b{font:750 20px "Bricolage Grotesque";font-variant-numeric:tabular-nums}
+.stat[data-on]{background:hsl(42 45% 96%);color:hsl(165 28% 10%)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 14px;background:hsl(42 30% 97%);border-top:1px solid hsl(var(--border))}
+:root[data-theme="dark"] .bar{background:hsl(216 20% 11%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bar{background:hsl(216 20% 11%)}}
+.ctl{height:2.25rem;padding:0 12px;border:0;border-radius:9px;background:hsl(var(--card));color:inherit;box-shadow:inset 0 0 0 1px hsl(var(--border));font:600 .8rem "Plus Jakarta Sans";display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.ctl[data-set]{box-shadow:inset 0 0 0 1px hsl(var(--primary)/.55),0 0 0 3px hsl(var(--primary)/.08)}
+.ctl .n{min-width:1.1rem;height:1.1rem;border-radius:5px;background:hsl(var(--primary));color:#fff;font-size:10px;display:grid;place-items:center}
+.primary{margin-left:auto;background:hsl(var(--slab2));color:#fff;box-shadow:0 8px 16px -10px hsl(var(--slab1)/.9),inset 0 -2px 0 hsl(var(--gold)/.6)}
+.view{display:inline-flex;padding:3px;border-radius:11px;background:hsl(var(--card));box-shadow:inset 0 0 0 1px hsl(var(--border))}
+.view button{height:30px;padding:0 13px;border:0;border-radius:8px;background:none;color:inherit;font:700 12.5px "Plus Jakarta Sans";cursor:pointer}
+.view button[data-on]{background:hsl(164 58% 17%);color:#fff;box-shadow:inset 0 -2px 0 hsl(var(--gold)/.7)}
+.tabs{display:flex;gap:4px;padding:8px 14px;border-top:1px solid hsl(var(--border))}
+.tab{position:relative;height:30px;padding:0 12px;border:0;border-radius:8px;background:none;color:hsl(var(--mfg));font:600 12.5px "Plus Jakarta Sans";cursor:pointer}
+.tab[data-on]{background:hsl(var(--card));color:hsl(var(--fg));box-shadow:0 1px 2px hsl(168 40% 10%/.08),0 0 0 1px hsl(var(--border))}
+:root[data-theme="dark"] .tab[data-on]{background:hsl(var(--primary));color:#fff;box-shadow:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[data-on]{background:hsl(var(--primary));color:#fff;box-shadow:none}}.tab[data-on]::after{content:"";position:absolute;right:4px;top:4px;width:4px;height:4px;background:hsl(var(--gold))}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 14px;border-top:1px solid hsl(var(--border));font-size:12px}
+.chip{display:inline-flex;gap:6px;align-items:center;border:1px solid hsl(var(--border));border-radius:6px;padding:2px 3px 2px 8px;background:hsl(var(--card))}
+.chip button{border:0;background:hsl(var(--muted));border-radius:4px;color:inherit;cursor:pointer}
+/* Board + panels */
+.split{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:.75rem;align-items:start}
+.board{display:grid;gap:.875rem;grid-template-columns:4fr 3fr 3fr}
+.panel{position:relative;overflow:hidden;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:20px;padding:14px 16px}
+.panel::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;opacity:.75;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--gold)) 70%,transparent)}
+.panel h5{margin:0 0 2px;font:700 15px "Bricolage Grotesque"}.panel small{color:hsl(var(--mfg));font-size:11.5px}
+.bars{display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:12px}.bars span{flex:1;border-radius:4px 4px 0 0;background:hsl(var(--primary)/.75)}
+.bars span:last-child{background:hsl(var(--gold))}
+.rank{margin-top:10px;display:grid;gap:7px;font-size:12px}.rank div{display:grid;grid-template-columns:1fr auto;gap:2px 8px}
+.rank i{grid-column:1/-1;height:5px;border-radius:9px;background:hsl(var(--muted))}.rank i b{display:block;height:100%;border-radius:9px;background:hsl(var(--primary))}
+.delta{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:99px;font-size:11px;font-weight:700;color:hsl(var(--ok));background:hsl(var(--ok)/.1)}
+.big{font:800 28px "Bricolage Grotesque";font-variant-numeric:tabular-nums;margin-top:8px}
+/* Real grid */
+.tablewrap{overflow:auto;border:1px solid hsl(var(--border));border-radius:1rem;background:hsl(var(--card))}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;font-variant-numeric:tabular-nums}
+th{height:2.6rem;padding:0 .85rem;background:var(--tbl-head);text-align:left;white-space:nowrap;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:hsl(var(--mfg));border-right:1px solid hsl(var(--border));border-bottom:2px solid var(--tbl-head-rule)}
+th[aria-sort]{color:hsl(var(--primary))}
+td{padding:.7rem .85rem;border-right:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));transition:background 120ms;white-space:nowrap}
+:is(th,td):last-child{border-right:0}tbody tr:nth-child(even) td{background:var(--tbl-stripe)}
+tbody tr{cursor:pointer}tbody tr:hover td{background:var(--tbl-hover)}tbody tr:hover td:first-child,tbody tr[aria-selected] td:first-child{box-shadow:inset 3px 0 hsl(var(--primary))}
+tbody tr[aria-selected] td{background:hsl(var(--primary)/.1)}
+.r{text-align:right}
+.badge{display:inline-flex;height:1.4rem;align-items:center;padding:0 .6rem;border-radius:99px;font-size:11px;font-weight:700}
+.good{background:hsl(var(--ok)/.1);color:hsl(var(--ok))}.warn{background:hsl(var(--warn)/.12);color:hsl(30 90% 32%)}.bad{background:hsl(var(--bad)/.1);color:hsl(var(--bad))}
+:root[data-theme="dark"] .warn{color:hsl(var(--warn))}
+/* Drawer */
+.drawer{position:sticky;top:.6rem;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:16px;overflow:hidden;animation:dock 280ms var(--ease)}
+.drawer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--glow)) 60%,hsl(var(--gold)))}
+.dr-head{padding:1rem;border-bottom:1px solid hsl(var(--border));background:repeating-linear-gradient(-38deg,transparent 0 13px,hsl(var(--primary)/.045) 13px 14px) right top/45% 100% no-repeat}
+.dr-head h3{margin:0;font:800 19px "Bricolage Grotesque"}.dr-head p{margin:2px 0 8px;color:hsl(var(--mfg));font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:1rem;border:1px solid hsl(var(--border));border-radius:16px;overflow:hidden;background:hsl(var(--border))}
+.stats div{background:hsl(var(--card));padding:.7rem .8rem}.stats small{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:hsl(var(--mfg))}
+.stats b{font:700 18px "Bricolage Grotesque"}
+dl{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:0 1rem 1rem;padding:.9rem 1rem;border:1px solid hsl(var(--border));border-radius:16px;background:hsl(var(--muted)/.3)}
+dt{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:hsl(var(--mfg))}dd{margin:2px 0 0;font-weight:600}
+.foot{display:flex;justify-content:flex-end;gap:8px;padding:.8rem 1rem;border-top:1px solid hsl(var(--border))}
+.btn{height:2.5rem;padding:0 1rem;border-radius:.6rem;border:1px solid hsl(var(--border));background:hsl(var(--card));color:inherit;font:600 .85rem "Plus Jakarta Sans";cursor:pointer}
+.btn.go{background:hsl(var(--primary));border-color:transparent;color:#fff;min-width:8rem}
+.empty{text-align:center;padding:1.4rem;color:hsl(var(--mfg));font-size:13px}
+.empty .art{width:4rem;height:4rem;margin:0 auto .6rem;border-radius:1rem;background:hsl(var(--primary)/.07);display:grid;place-items:center;color:hsl(var(--primary))}
+@keyframes dock{from{opacity:0;transform:translateX(24px)}}
+*::-webkit-scrollbar{width:6px;height:6px}*::-webkit-scrollbar-thumb{border-radius:9px;background:rgba(128,138,133,.42)}
+@media (max-width:1279px){.board{grid-template-columns:1fr 1fr}.board>:first-child{grid-column:span 2}.split{grid-template-columns:1fr}.drawer{position:static}}
+@media (max-width:899px){.app{grid-template-columns:1fr}.side{display:none}.ph{flex-direction:column}.slab{max-width:none;clip-path:none;padding:10px 14px;box-shadow:inset 0 3px 0 hsl(var(--gold));overflow-x:auto}.date,.search kbd{display:none}}
+@media (max-width:640px){.board{grid-template-columns:1fr}.board>:first-child{grid-column:auto}.top{gap:.4rem;padding:0 .5rem}.shape h1{font-size:1rem}.sale b{display:none}.search{display:none}.app{padding:.5rem 16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" aria-label="Modules">
+    <div class="brand"><span class="mark">K</span><div><b>Katyayani</b><small>Organics · POS</small></div></div>
+    <section class="tray" style="--hue:217,180,96"><h4>Sales</h4>
+      <a class="key" href="#"><i>₹</i>Orders</a><a class="key" href="#"><i>☺</i>Walk-ins</a><a class="key" href="#"><i>✎</i>Prescriptions</a></section>
+    <section class="tray" style="--hue:86,186,140"><h4>Stock</h4>
+      <a class="key" href="#"><i>▦</i>Inventory</a><a class="key" href="#" aria-current="page"><i>⇄</i>Refills</a><a class="key" href="#"><i>✓</i>Audit</a></section>
+    <section class="tray" style="--hue:110,170,214"><h4>Money</h4>
+      <a class="key" href="#"><i>≡</i>Ledger</a><a class="key" href="#"><i>↗</i>P&amp;L</a></section>
+    <section class="tray" style="--hue:204,140,108"><h4>People</h4>
+      <a class="key" href="#"><i>◷</i>Attendance</a></section>
+  </aside>
+
+  <main>
+    <header class="top">
+      <div class="shape"><span class="stamp">Stock</span><h1>Refills</h1></div>
+      <div class="search">Search orders, farmers, products… <kbd>⌘K</kbd></div>
+      <div class="shape">
+        <div class="date"><b>Tuesday, 7 Oct</b><span>10:42 AM</span></div>
+        <button class="sale"><span>+</span><b>New sale</b></button>
+        <button class="theme" id="theme" aria-label="Toggle theme">◐</button>
+        <span class="seal">N</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="ph">
+        <div class="ph-main"><span class="glyph">⇄</span><div>
+          <div class="eyebrow">Stock</div><h2>Refill Orders</h2><p><b>128</b> refill orders · past orders only</p></div></div>
+        <div class="slab">
+          <button class="stat"><small>Total value</small><b>₹4.8L</b></button>
+          <button class="stat" style="--tone:hsl(36 95% 62%)" data-on><small>Pending</small><b>12</b></button>
+          <button class="stat" style="--tone:hsl(4 88% 72%)"><small>Cancelled</small><b>3</b></button>
+        </div>
+      </div>
+      <div class="bar">
+        <button class="ctl">🔒 Indore Store</button>
+        <button class="ctl" data-set>Last 30 days</button>
+        <button class="ctl" data-set>Supplier <span class="n">2</span></button>
+        <button class="ctl">Newest first</button>
+        <button class="ctl primary">+ New refill order</button>
+        <div class="view"><button data-on>Dashboard</button><button>Table</button></div>
+      </div>
+      <div class="chips">
+        <span class="chip">Last 30 days <button aria-label="Remove">✕</button></span>
+        <span class="chip">Supplier: Agro Hub, Kisan Depot <button aria-label="Remove">✕</button></span>
+        <a href="#" style="color:hsl(var(--primary));font-weight:600">Clear all</a>
+        <span style="margin-left:auto;color:hsl(var(--mfg))">12 of 128</span>
+      </div>
+      <div class="tabs"><button class="tab">All 128</button><button class="tab" data-on>Pending 12</button><button class="tab">Received 113</button><button class="tab">Cancelled 3</button></div>
+    </section>
+
+    <div class="board">
+      <article class="panel"><h5>Refill value</h5><small>Ordered value over time · last 30 days</small>
+        <div class="bars"><span style="height:30%"></span><span style="height:45%"></span><span style="height:38%"></span><span style="height:60%"></span><span style="height:52%"></span><span style="height:72%"></span><span style="height:66%"></span><span style="height:88%"></span></div></article>
+      <article class="panel"><h5>Top suppliers</h5><small>By ordered value · click to filter</small>
+        <div class="rank"><div>Agro Hub<b>₹1.9L</b><i><b style="width:90%"></b></i></div><div>Kisan Depot<b>₹1.1L</b><i><b style="width:55%"></b></i></div><div>Bharat Seeds<b>₹62K</b><i><b style="width:30%"></b></i></div></div></article>
+      <article class="panel"><h5>Order sizes</h5><small>Across the orders in view</small>
+        <div class="big">₹37,400<span class="delta">▲ 12%</span></div><small>Average refill · vs previous 30 days</small></article>
+    </div>
+
+    <div class="split">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Refill ID</th><th>Supplier</th><th>Status</th><th class="r" aria-sort="descending">Value ↓</th><th>Date</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr aria-selected="true"><td>RF-2041</td><td>Agro Hub</td><td><span class="badge warn">Pending</span></td><td class="r">₹48,200</td><td>06 Oct 2026</td><td>4:18 PM</td></tr>
+            <tr><td>RF-2039</td><td>Kisan Depot</td><td><span class="badge warn">Pending</span></td><td class="r">₹31,750</td><td>05 Oct 2026</td><td>11:02 AM</td></tr>
+            <tr><td>RF-2034</td><td>Bharat Seeds</td><td><span class="badge good">Received</span></td><td class="r">₹22,900</td><td>03 Oct 2026</td><td>9:40 AM</td></tr>
+            <tr><td>RF-2030</td><td>Agro Hub</td><td><span class="badge bad">Cancelled</span></td><td class="r">₹12,480</td><td>01 Oct 2026</td><td>6:55 PM</td></tr>
+            <tr><td>RF-2027</td><td>Kisan Depot</td><td><span class="badge good">Received</span></td><td class="r">₹9,300</td><td>29 Sep 2026</td><td>1:20 PM</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="drawer" aria-label="Refill RF-2041">
+        <div class="dr-head"><h3>RF-2041</h3><p>Agro Hub · raised by Nitesh</p><span class="badge warn">Pending</span></div>
+        <div class="stats"><div><small>Value</small><b>₹48.2K</b></div><div><small>Items</small><b>14</b></div><div><small>Age</small><b>1 d</b></div></div>
+        <dl><div><dt>Warehouse</dt><dd>Indore Central</dd></div><div><dt>Expected</dt><dd>09 Oct 2026</dd></div><div><dt>Payment</dt><dd>Credit 30d</dd></div><div><dt>Placed via</dt><dd>POS</dd></div></dl>
+        <div class="empty"><div class="art">✎</div><b>No notes yet</b><br>Add a note for the warehouse team.</div>
+        <div class="foot"><button class="btn">Cancel order</button><button class="btn go">Mark received</button></div>
+      </aside>
+    </div>
+  </main>
+</div>
+<script>
+  const root = document.documentElement, KEY = "prasar-ui-theme";
+  try { const t = localStorage.getItem(KEY); if (t) root.dataset.theme = t; } catch (e) {}
+  document.getElementById("theme").onclick = () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem(KEY, root.dataset.theme); } catch (e) {}
+  };
+  document.querySelectorAll("tbody tr").forEach(tr => tr.onclick = () => {
+    document.querySelectorAll("tbody tr").forEach(r => r.removeAttribute("aria-selected")); tr.setAttribute("aria-selected", "true");
+  });
+</script>
+</body>
+</html>

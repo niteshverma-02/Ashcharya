@@ -1,0 +1,208 @@
+/* Prasar POS — "Harvest" tokens (light) + GitHub-dark (.dark). Copied from franchise-pos/src/index.css.
+   Use as hsl(var(--x) / alpha). Pair with the Tailwind config in references/pos-harvest.md §1. */
+@layer base {
+  :root {
+    --background: 150 20% 97%;
+    --foreground: 165 30% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 165 30% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 165 30% 9%;
+
+    --primary: 162 70% 28%;          /* jade */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 160 58% 38%;
+
+    --secondary: 160 20% 93%;
+    --secondary-foreground: 165 30% 16%;
+
+    --muted: 160 18% 94.5%;
+    --muted-foreground: 165 8% 40%;
+
+    --accent: 160 36% 94%;
+    --accent-foreground: 162 70% 20%;
+
+    --brand-lime: 42 95% 55%;        /* harvest gold (name kept for callers) */
+    --brand-ink: 168 40% 10%;        /* deep jade-slate */
+
+    --destructive: 356 66% 47%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 160 14% 89%;
+    --input: 160 13% 85%;
+    --ring: 162 70% 32%;
+
+    --radius: 0.75rem;
+
+    /* The rail is LIGHT: a floating white panel on the mist. */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 165 22% 18%;
+    --sidebar-primary: 162 70% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 26% 95%;
+    --sidebar-accent-foreground: 165 30% 9%;
+    --sidebar-border: 160 14% 90%;
+    --sidebar-ring: 162 70% 32%;
+
+    --warning: 36 92% 46%;
+    --warning-foreground: 0 0% 100%;
+    --success: 154 60% 30%;
+    --success-foreground: 0 0% 100%;
+    --info: 208 72% 40%;
+    --info-foreground: 0 0% 100%;
+
+    --navbar-green: 162 70% 28%;
+
+    --shadow-tint: 168 40% 10%;
+    --shadow-xs: 0 1px 2px hsl(var(--shadow-tint) / 0.05);
+    --shadow-sm: 0 1px 2px hsl(var(--shadow-tint) / 0.04),
+      0 4px 14px -6px hsl(var(--shadow-tint) / 0.08);
+    --shadow-md: 0 2px 4px hsl(var(--shadow-tint) / 0.04),
+      0 14px 30px -12px hsl(var(--shadow-tint) / 0.16);
+    --shadow-lg: 0 4px 10px hsl(var(--shadow-tint) / 0.05),
+      0 28px 60px -20px hsl(var(--shadow-tint) / 0.28);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --mobile-nav-h: 4.25rem;
+
+    /* Field furrows: fine diagonal rows, the POS's signature texture. */
+    --furrows: repeating-linear-gradient(
+      -38deg,
+      transparent 0 13px,
+      hsl(0 0% 100% / 0.06) 13px 14px
+    );
+  }
+
+  /* Night — GitHub-style dark. Blue-tinted charcoal canvas (#15181d),
+     overlay cards (#1c2128), hairline borders (#30363d), soft blue-white
+     text (not paper white) and GitHub's own status hues. Built for a
+     counter that runs all night: no pure black, no neon. */
+  .dark {
+    --background: 217 16% 10%;       /* #15181d canvas */
+    --foreground: 212 20% 86%;       /* #d1d9e0 */
+
+    --card: 216 17% 13%;             /* #1c2128 */
+    --card-foreground: 212 20% 86%;
+
+    --popover: 215 15% 15%;          /* #21262d */
+    --popover-foreground: 212 20% 86%;
+
+    --primary: 137 50% 42%;          /* GitHub green button */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 134 52% 48%;
+
+    --secondary: 215 15% 15%;        /* #21262d */
+    --secondary-foreground: 212 20% 86%;
+
+    --muted: 215 15% 15%;
+    --muted-foreground: 212 9% 58%;  /* #8b949e */
+
+    --accent: 213 13% 19%;           /* hover row #282e36 */
+    --accent-foreground: 210 30% 93%;
+
+    --brand-lime: 39 72% 52%;        /* GitHub attention gold */
+    --brand-ink: 216 28% 7%;         /* #0d1117 */
+
+    --destructive: 3 85% 64%;        /* #f0605a */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 212 12% 21%;           /* #30363d */
+    --input: 212 12% 24%;
+    --ring: 212 92% 62%;             /* GitHub focus blue */
+
+    --sidebar-background: 216 20% 11%; /* #161b22 */
+    --sidebar-foreground: 212 16% 78%;
+    --sidebar-primary: 137 50% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 15% 16%;
+    --sidebar-accent-foreground: 210 30% 93%;
+    --sidebar-border: 215 15% 16%;
+    --sidebar-ring: 212 92% 62%;
+
+    --warning: 39 72% 52%;           /* #d6a02a */
+    --warning-foreground: 39 60% 8%;
+    --success: 128 46% 52%;          /* #3fb950-ish */
+    --success-foreground: 128 50% 6%;
+    --info: 212 92% 66%;             /* #58a6ff */
+    --info-foreground: 214 60% 8%;
+
+    --navbar-green: 137 50% 42%;
+
+    --shadow-tint: 0 0% 0%;
+    --shadow-xs: 0 1px 2px hsl(0 0% 0% / 0.25);
+    --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.25), 0 6px 16px -8px hsl(0 0% 0% / 0.4);
+    --shadow-md: 0 2px 4px hsl(0 0% 0% / 0.25), 0 16px 32px -14px hsl(0 0% 0% / 0.5);
+    --shadow-lg: 0 4px 10px hsl(0 0% 0% / 0.3), 0 28px 60px -22px hsl(0 0% 0% / 0.6);
+
+    /* fainter furrows: texture, not stripes */
+    --furrows: repeating-linear-gradient(
+      -38deg,
+      transparent 0 13px,
+      hsl(0 0% 100% / 0.025) 13px 14px
+    );
+  }
+}
+
+/* ---- Tables + charts ---- (src/index.css TABLES block + data-viz slots) */
+:root { --tbl-head-bg:hsl(160 18% 91%); --tbl-head-fg:hsl(var(--foreground)); --tbl-head-rule:hsl(160 14% 80%); --tbl-rule:hsl(var(--border));
+  --tbl-stripe:hsl(160 20% 97.5%); --tbl-hover:hsl(var(--primary)/.07); --tbl-selected:hsl(var(--primary)/.1);
+  --viz-1:#2a78d6; --viz-2:#eb6834; --viz-3:#1baf7a; --viz-4:#eda100; --viz-5:#e87ba4;
+  --viz-6:#008300; --viz-7:#4a3aa7; --viz-8:#e34948; --viz-other:#9a9a94; }
+.dark { --tbl-head-bg:hsl(215 15% 17%); --tbl-head-fg:hsl(var(--foreground)); --tbl-head-rule:hsl(212 12% 26%); --tbl-rule:hsl(var(--border));
+  --tbl-stripe:hsl(216 16% 14.5%); --tbl-hover:hsl(var(--primary)/.12); --tbl-selected:hsl(var(--primary)/.16);
+  --viz-1:#3987e5; --viz-2:#d95926; --viz-3:#199e70; --viz-4:#c98500; --viz-5:#d55181;
+  --viz-6:#008300; --viz-7:#9085e9; --viz-8:#e66767; --viz-other:#6e7681; color-scheme: dark; }
+
+/* ---- The real grid ---- (source scopes these to table.pos-table and every table in main / dock / dialogs) */
+table.pos-table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pos-table thead th { height: 2.6rem; padding: 0 .85rem; background: var(--tbl-head-bg); color: var(--tbl-head-fg); text-align: left; white-space: nowrap;
+  font-size: .68rem; font-weight: 700; letter-spacing: .06em; line-height: 1.2; text-transform: uppercase; vertical-align: middle;
+  border: 0; border-right: 1px solid var(--tbl-head-rule); border-bottom: 2px solid var(--tbl-head-rule); }
+.pos-table thead th[aria-sort] { color: hsl(var(--primary)); }
+.pos-table tbody tr, .pos-table tfoot tr { transition: background-color 120ms ease; }
+.pos-table tbody td { padding: .7rem .85rem; border: 0; border-right: 1px solid var(--tbl-rule); border-bottom: 1px solid var(--tbl-rule);
+  vertical-align: middle; transition: background-color 120ms ease; }
+.pos-table :is(th,td):first-child { padding-left: 1.1rem; }
+.pos-table :is(th,td):last-child { padding-right: 1.1rem; border-right: 0; }
+.pos-table tbody tr:last-child td { border-bottom: 0; }
+.pos-table tbody tr:nth-child(even):not([aria-hidden]):not(:has(> td[colspan])) td { background-color: var(--tbl-stripe); }
+.pos-table tbody tr:not([aria-hidden]):not(:has(> td[colspan])):hover td { background-color: var(--tbl-hover); }
+.pos-table tbody tr.cursor-pointer:hover td:first-child { box-shadow: inset 3px 0 hsl(var(--primary)); }
+.pos-table tbody :is(tr[data-state="selected"], tr[aria-selected="true"]) td { background-color: var(--tbl-selected); }
+.pos-table tfoot td { padding: .75rem .85rem; border: 0; border-top: 1px solid hsl(var(--border)); background: var(--tbl-head-bg); font-weight: 600; }
+.pos-table tbody td a:not([class*="text-"]) { color: hsl(var(--primary)); font-weight: 600; }
+
+/* ---- Motifs ---- (real selectors; source values shown with the light-theme variables resolved) */
+.pos-ph-slab { color: #fff; box-shadow: inset 0 3px 0 hsl(var(--brand-lime));
+  background: repeating-linear-gradient(-32deg, transparent 0 12px, hsl(0 0% 100% / .045) 12px 13px),
+    linear-gradient(115deg, hsl(168 50% 9%), hsl(164 58% 17%)); }
+@media (min-width: 768px) { .pos-ph-slab { max-width: 62%; padding: 10px 14px 10px 42px;
+  clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%); box-shadow: none; } }
+.ks-sec { padding: .4rem; border-radius: 1rem; background: rgba(3,20,15,.28); border: 1px solid rgba(255,255,255,.04);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.04); }
+.ks-row { min-height: 2.5rem; border-radius: .75rem; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08);
+  color: #f6f2e7; font-size: .84375rem; font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 5px -2px rgba(0,0,0,.45);
+  transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease; }
+.ks-row:hover { transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(246,242,231,.16); }
+.ks-row[aria-current="page"] { border: 1.5px solid #e2b864; background: rgba(226,184,100,.14); font-weight: 700; transform: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 4px 12px -6px rgba(0,0,0,.6); }
+.rg-sale { height: 2.2rem; border: 1.5px solid #2a1d02; border-radius: .6rem; background: #e2b864; color: #2a1d02;
+  font-size: .8125rem; font-weight: 800; box-shadow: 3px 3px 0 #061f18; transition: transform 120ms ease, box-shadow 120ms ease; }
+.rg-sale:hover { box-shadow: 4px 4px 0 #061f18; transform: translate(-1px,-1px); }
+.rg-sale:active { box-shadow: 1px 1px 0 #061f18; transform: translate(2px,2px); }
+.rg-stamp { padding: .05rem .4rem; border: 1.5px solid rgb(var(--rg-hue)); border-radius: .25rem; color: rgb(var(--rg-hue));
+  font-size: .59375rem; font-weight: 800; letter-spacing: .16em; line-height: 1.4; text-transform: uppercase;
+  transform: rotate(-1.5deg); transform-origin: left center; } /* --rg-hue default 226,194,122 */
+.rg-seal { width: 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 999px; background: #ebe2cc; color: #13302a;
+  font-family: "Fraunces", Georgia, serif; font-size: 1rem; font-weight: 700; box-shadow: 0 0 0 2px #13503f, 0 0 0 3.5px #e2b864; }
+
+/* ---- One scrollbar ---- */
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track, *::-webkit-scrollbar-corner { background: transparent; }
+*::-webkit-scrollbar-thumb { border-radius: 9999px; background-color: rgba(128,138,133,.42); }
+*::-webkit-scrollbar-thumb:hover { background-color: rgba(128,138,133,.7); }
+@supports (-moz-appearance:none) { * { scrollbar-width: thin; scrollbar-color: rgba(128,138,133,.5) transparent; } }
+.pos-app-main { scrollbar-width: none; }
+.pos-app-main::-webkit-scrollbar { display: none; }

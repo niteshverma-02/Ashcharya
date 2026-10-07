@@ -1,0 +1,13 @@
+{
+  "name": "ashcharya",
+  "owner": { "name": "Nitesh Verma", "url": "https://github.com/niteshverma-02" },
+  "metadata": { "description": "Ashcharya — UI skills built from the Katyayani / Prasar apps." },
+  "plugins": [
+    {
+      "name": "prasar-ui",
+      "source": "./",
+      "description": "Next-gen UI design system skill for the Prasar app, Franchisee POS and Franchise Hub (HO portal).",
+      "version": "1.0.0"
+    }
+  ]
+}

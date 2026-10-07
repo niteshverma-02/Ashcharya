@@ -1,0 +1,8 @@
+{
+  "name": "prasar-ui",
+  "version": "1.0.0",
+  "description": "Hand-crafted, next-gen UI design system for the Katyayani family of apps: Prasar field app (Expo/RN), Franchisee POS (Harvest: jade + gold) and Franchise Hub HO portal (Command OS: forest + mint). Real tokens, components, layout grammar and taste rules taken from the live code.",
+  "author": { "name": "Nitesh Verma", "url": "https://github.com/niteshverma-02" },
+  "repository": "https://github.com/niteshverma-02/Ashcharya",
+  "keywords": ["ui", "design-system", "react", "react-native", "tailwind", "shadcn", "nativewind", "pos", "dashboard"]
+}
