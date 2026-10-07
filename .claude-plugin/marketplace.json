@@ -5,14 +5,14 @@
     "url": "https://github.com/niteshverma-02"
   },
   "metadata": {
-    "description": "Ashcharya — one hand-crafted UI design language for Claude Code."
+    "description": "Ashcharya: a UI design approach for Claude Code."
   },
   "plugins": [
     {
       "name": "ashcharya-ui",
       "source": "./",
-      "description": "Ashcharya UI: one hand-crafted, next-gen design language for web and mobile apps.",
-      "version": "2.1.0"
+      "description": "Ashcharya: a UI design approach, not a theme. Teaches Claude to derive a unique, hand-crafted identity from any product's domain and build dense, keyboard-first, honest screens for web and mobile, distilled from three production apps.",
+      "version": "3.0.0"
     }
   ]
 }

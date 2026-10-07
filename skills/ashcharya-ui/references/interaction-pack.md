@@ -1,4 +1,4 @@
-# Interaction pack — making Ashcharya screens feel alive
+# Interaction pack — making screens feel alive
 
 Interactions that make a screen feel next-generation without decoration. Each one names its building
 blocks; libraries are suggestions (React + Tailwind + shadcn on web; Reanimated + Gesture Handler on mobile).

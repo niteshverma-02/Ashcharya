@@ -4,19 +4,10 @@ Patterns that make an operations app feel *next generation* without looking AI-m
 already ships (**POS**, **HO**, **Prasar**). Anything marked **(suggestion — not in code yet)** exists in none of
 the three codebases — treat it as a proposal, not as an established pattern.
 
-## 1. Applying Ashcharya to any app
+## 1. What these patterns are
 
-Use the one Ashcharya identity as-is (tokens in `assets/ashcharya-tokens.css` / `.ts`, specs in
-`foundations.md`). What may change per product is **content**, not skin:
-
-| Keep identical | Adapt per product |
-|---|---|
-| canopy green + harvest gold on warm paper, GitHub-dark night | module names, nav groups, KPI choices |
-| trays of raised keys, KPI slab header, real-grid tables, docked drawer | which filters, which 6 dashboard panels |
-| furrows, gold notch, diagonal slab, stamp, seal, hard-offset gold key | the one action that gets the gold key |
-| type scale, spacing, radii, motion | mobile vs web layout grammar (SKILL.md §3) |
-
-Section headings below name the source app where each pattern ships today.
+Patterns that already ship in the three source apps. They are **behaviours**: draw them in your product's own
+identity (see `method/identity.md`). Section headings name the app where each one ships today.
 
 ## 2. Command palette (⌘K) — POS + HO
 - One search pill in the top bar (`HeaderSearch.tsx`, cmdk); Ctrl/⌘K opens it and focuses + selects the field;

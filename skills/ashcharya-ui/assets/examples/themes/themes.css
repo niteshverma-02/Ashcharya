@@ -1,4 +1,4 @@
-/* Ashcharya UI — colour themes. Load after ashcharya-tokens.css.
+/* Ashcharya UI — colour themes. Load after canopy-tokens.css (or your own tokens with the same role names).
    Pick one with <html data-ash-theme="indigo"> (add class="dark" for night).
    Every theme keeps the same structure and craft; only the palette changes.
    All text pairs are contrast-checked (>= 4.5:1, non-text >= 3:1) in light and night. */

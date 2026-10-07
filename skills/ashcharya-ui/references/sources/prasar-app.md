@@ -1,6 +1,6 @@
 # Prasar app — field-staff mobile system (Expo / React Native)
 
-> **Source reference.** This documents the original mobile field app that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for everything else use `../foundations.md`.
+> **Source reference.** This documents the original mobile field app that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for a new product, follow the approach in `../../SKILL.md`.
 
 Source repo: `Nitesh_projects/Prasar`. Expo + **NativeWind 4** (Tailwind 3.4), **Inter only**, **Lucide only**.
 Light = forest `#15683F` on **sand ivory** `#F4EFE4`; dark = **GitHub Night** (`#0D1015` page, `#3FB950` green).

@@ -1,0 +1,16 @@
+{
+  "light": {
+    "canvas": "#F6F2F3", "surface": "#FFFFFF", "ink": "#2A0F1A", "ink2": "#5B4450", "inkFaint": "#8A7680",
+    "canopy": "#33101E", "canopy2": "#4A1A2D", "onCanopy": "#F6EEF1",
+    "action": "#8A2346", "actionHover": "#721C3A", "onAction": "#FFFFFF", "actionText": "#8A2346",
+    "brandSurface": "#F8E9EE",
+    "accent": "#8CCBE6", "accentInk": "#0E2A3A", "accentText": "#1D5E80"
+  },
+  "night": {
+    "canvas": "#15181D", "surface": "#1C2128", "ink": "#E6EDF3", "ink2": "#B9C2CC", "inkFaint": "#8B949E",
+    "canopy": "#161B22", "canopy2": "#21262D", "onCanopy": "#E6EDF3",
+    "action": "#E68DAA", "actionHover": "#F0A7BE", "onAction": "#0D1117", "actionText": "#EE9DB7",
+    "brandSurface": "#2A2026",
+    "accent": "#8CCBE6", "accentInk": "#0D1117", "accentText": "#8CCBE6"
+  }
+}

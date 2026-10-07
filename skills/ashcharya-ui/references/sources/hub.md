@@ -1,6 +1,6 @@
 # HO Portal — "Command OS" system (head-office app)
 
-> **Source reference.** This documents the original head-office portal that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for everything else use `../foundations.md`.
+> **Source reference.** This documents the original head-office portal that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for a new product, follow the approach in `../../SKILL.md`.
 
 Source repo: `Nitesh_projects/franchise-hub`. Everything is scoped to `.command-os`; portalled surfaces (Sheet, Dialog, Select, Dropdown) must add `className="command-os"` themselves.
 

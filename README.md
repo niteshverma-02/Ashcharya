@@ -1,29 +1,34 @@
-# Ashcharya UI — a design-language skill for Claude Code
+# Ashcharya — a UI design approach for Claude Code
 
-**Ashcharya UI** is one hand-crafted, next-generation design language for business and operations software,
-packaged as a Claude Code skill. Install it, ask Claude for a screen, and the result comes out in this one
-consistent style: dense, keyboard-first, calm, and never like an AI template.
+**Ashcharya is a way of designing, not a theme.** It teaches Claude the approach behind three hand-crafted
+production apps, so it can create **new, different UIs** for any product with the same quality: unique,
+dense, keyboard-first, calm, and never like an AI template.
 
-It was distilled from three production apps (a mobile field app, a store POS and a head-office portal).
-Every colour, size and rule in it exists in shipped code.
+Two products built with Ashcharya should look clearly different from each other and feel equally crafted.
 
-## 🎨 The look
+## 🧭 The approach
 
-| | |
+| Step | What Claude does |
 |---|---|
-| **Palette** | deep canopy green `#0F4033` + harvest gold `#E2B864` on warm paper `#F6F5F1`; actions in forest `#15683F` |
-| **Night** | GitHub-style dark: `#15181D` canvas, `#1C2128` cards, `#30363D` lines, green `#2EA043`, gold `#D29922` |
-| **Type** | Plus Jakarta Sans · Bricolage Grotesque · Fraunces (accent) · JetBrains Mono; Inter on mobile |
-| **Structure** | trays of raised keys, a page header with a KPI slab, real-grid tables, Dashboard ⇄ Table, docked drawers, forms in the drawer |
-| **Craft** | field furrows, gold notch, diagonal slab cut, rubber stamp, wax seal, pen underline, one hard-offset gold key |
-| **Mobile** | ivory capsule header, canopy tab bar with a gold beam, flat list cards, bottom sheets, offline-first sync states |
-| **Themes** | Canopy (default) · Indigo Ledger · Terracotta · Ocean · Graphite — or your own, with a contrast checker |
-| **Screens** | list pages plus recipes for dashboards, record pages, kanban, calendar, settings, analytics, inbox, maps, wizards, sign-in, landing |
-| **Interactions** | ⌘K palette, keyboard rows, click-to-filter charts, inline edit, drag, Undo toasts, live numbers, swipe + haptics |
-| **Never** | neon, glass, glow, gradient buttons, fake numbers, marketing copy |
+| **1. Understand** | who uses the product, where, on what device, and what they do 50 times a day |
+| **2. Derive an identity** | mines the product's own physical world (e.g. soil furrows and stamps for agriculture, ledgers for finance, shipping labels for logistics) and turns it into a palette, a texture, a signature shape, a hand-made mark and a type pairing, written down as an identity card |
+| **3. Structure** | builds screens from jobs with fixed principles: one shared component per role, a header that carries status, filters where the eyes are, real-grid tables, records beside lists, dashboards from data already loaded |
+| **4. Craft** | adds depth through physical metaphors (trays, keys, paper, ink, stamps), never glow, glass or gradient buttons; one accent moment per screen |
+| **5. Truth** | real copy, real numbers, honest loading / empty / error / offline states |
+| **6. Iterate** | builds the strongest version, shows it, turns every rejection into a rule, changes one shared thing at a time |
+| **7. Verify** | contrast checks, light + night, every width, keyboard and touch, reduced motion |
 
-Open `skills/ashcharya-ui/assets/showcase.html` in a browser to see it in light and night, and switch themes
-with the palette picker (or `?palette=ocean`).
+## 🎨 Examples of what it produces
+
+- **Three shipped looks** it was distilled from: "Harvest" (agri store POS), "Command OS" (head-office
+  portal) and "Prasar field" (mobile field app). Same approach, three different looks.
+- **Four new derivations:** "Ledger" (finance), "Manifest" (logistics), "Tandoor" (restaurant) and
+  "Signal" (dev tools). Each has its own palette, texture, shape, mark and type.
+- **A tested result:** "Register", a school-office app built end-to-end by an agent given only this skill
+  (maroon register binding, four-line copy texture, bookmark-ribbon shape, hand-circled numbers). Open
+  `skills/ashcharya-ui/assets/examples/register/fees.html`.
+- **A full worked spec** ("Canopy") and a live demo with five palettes:
+  `skills/ashcharya-ui/assets/examples/showcase.html`.
 
 ---
 
@@ -67,46 +72,47 @@ Restart Claude Code after installing.
 
 ## 🎯 Use
 
-It triggers by itself on UI work, or call it directly:
-
 ```
-/ashcharya-ui build a "Supplier Payments" list page with filters, KPIs and a drawer
-/ashcharya-ui make a retailer visit-history screen for the mobile app
-/ashcharya-ui design a sales performance dashboard in the Indigo Ledger theme
-/ashcharya-ui make a kanban board for the lead pipeline, Ocean theme
+/ashcharya-ui design a clinic appointment app — derive its identity first
+/ashcharya-ui build the dispatch dashboard for our logistics product
+/ashcharya-ui hamare school management app ke liye apni unique UI banao
 /ashcharya-ui ye screen basic lag rahi hai, isko extraordinary banao
 ```
 
-Works for **web** (React, Tailwind, shadcn) and **mobile** (React Native, NativeWind). In a project that
-already has shared components, Claude reuses them and applies the Ashcharya rules on top.
+For a new product, Claude first writes an **identity card** (materials → palette, texture, shape, mark,
+type), then builds screens with it. In an existing product, it keeps that product's identity and applies
+the structure, craft and truth rules on top.
 
 ---
 
 ## 📁 Inside
 
 ```
-.claude-plugin/              plugin + marketplace manifests
-install.sh                   one-line install
 skills/ashcharya-ui/
-├── SKILL.md                 the identity, 5 laws, web + mobile layout grammar, workflow, checklist
+├── SKILL.md                     the approach: understand → derive → structure → craft → truth → iterate → verify
 ├── references/
-│   ├── foundations.md       every token, the type scale, spacing, shape, motion and component specs
-│   ├── themes.md            other colour themes and how to make your own
-│   ├── page-recipes.md      dashboards, detail, kanban, calendar, settings, inbox, maps, wizards, landing
-│   ├── interaction-pack.md  ⌘K, inline edit, drag, undo, optimistic updates, live numbers, gestures
-│   ├── next-gen-patterns.md ⌘K, keyboard tables, live data, dashboards, forms, states, accessibility
-│   ├── taste-and-rejections.md  looks that were rejected, and what to do instead
-│   └── sources/             notes on the three original apps (only for editing those codebases)
+│   ├── method/
+│   │   ├── identity.md          deriving a unique identity from the domain (+ identity card template)
+│   │   ├── structure.md         structural principles, why each exists, layout skeletons
+│   │   ├── craft.md             depth, texture, shape, marks, type and motion without glow
+│   │   └── process.md           iterating with users, decoding feedback, guard rails, verification
+│   ├── examples/
+│   │   ├── derivations.md       3 shipped identities + 4 new-domain identities
+│   │   ├── canopy.md            one full identity spec, as a model
+│   │   └── palettes.md          five contrast-checked palettes
+│   ├── page-recipes.md          dashboard, record, kanban, calendar, settings, inbox, map, wizard, sign-in, landing
+│   ├── interaction-pack.md      ⌘K, inline edit, drag, undo, optimistic updates, live numbers, gestures
+│   ├── next-gen-patterns.md     patterns already shipping in the source apps
+│   ├── taste-and-rejections.md  a real taste log from the source apps
+│   └── sources/                 notes on the three original apps
 └── assets/
-    ├── ashcharya-tokens.css drop-in web tokens + grid + craft classes
-    ├── ashcharya-tokens.ts  drop-in mobile tokens
-    ├── themes/              themes.css · themes.ts · check-contrast.py
-    ├── showcase.html        live demo, light + night
-    ├── templates/           a full list-page example
-    └── sources/             the original apps' token files
+    ├── token-template.css       fill it from your identity card
+    ├── tools/check-contrast.py  validates any palette
+    ├── examples/                Canopy tokens (web + mobile), 5 palettes, live showcase, a list-page template
+    └── sources/                 the original apps' token files
 ```
 
 ## ⚠️ Notes
 
-- This is a design language (rules + tokens), not a component library. Review what Claude produces.
-- It works automatically only in **Claude Code**. Elsewhere, read the `.md` files as a design guide.
+- Ashcharya gives Claude a method, principles and examples, not a component library. Review what it builds.
+- It works automatically only in **Claude Code**. Elsewhere, the `.md` files work as a design handbook.

@@ -1,4 +1,8 @@
-# Ashcharya UI — foundations
+# Worked example — the "Canopy" identity (full spec)
+
+> One complete output of the approach: the unified look of the three source apps. Use it as a model of
+> how detailed an identity spec should be, or as-is when building inside that product family. For a new
+> product, derive its own identity with `../method/identity.md`.
 
 Every value here is in shipped code in at least one of the three source apps (see `sources/`).
 

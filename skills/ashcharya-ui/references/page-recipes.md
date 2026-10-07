@@ -1,10 +1,11 @@
 # Page recipes — more kinds of screens in Ashcharya UI
 
 The list page (header + filters + Dashboard ⇄ Table + drawer) is the core. These recipes extend the same
-language to other screens. Each keeps the five laws, the tokens and the craft; none adds a new hue.
+approach to other screens. Each uses the structural principles and is drawn in *your* identity
+(palette, texture, shape, mark, type from the identity card); none adds a hue outside it.
 
-> Recipes marked **(new)** are additions to the system — they are not taken from the source apps. They are
-> built only from existing Ashcharya parts.
+> Recipes marked **(new)** are additions — they are not taken from the source apps. "Accent", "canopy",
+> "tray", "key" refer to your identity's tokens and craft vocabulary.
 
 ## 1. Home / overview dashboard
 ```
@@ -19,7 +20,7 @@ Attention strip: 2–4 chips that need action now (overdue, low stock, failed sy
 ## 2. Record detail (full page) — opens from ⛶ in the drawer
 ```
 ← Back to list · prev / next
-Canopy hero band: avatar/glyph · name · status badges · 3 actions (one gold key)
+Canopy hero band: avatar/glyph · name · status badges · up to 3 actions (only the primary one in the accent style)
 Stat strip overlapping the band (hairline grid, 4–6 cells)
 Tabs: Overview · Orders · Payments · Notes · Activity (counts in tabs)
 Two columns ≥880px container: field list + timeline │ related tables (real grid)
@@ -40,7 +41,7 @@ Header: month title (serif accent) · ‹ › · Today · Day | Week | Month seg
 Grid with hairline rules; today = accent-ringed date; events = tone-tinted pills (one value each)
 Side drawer for the selected day: list cards + "New" in the drawer footer
 ```
-- Heat variant for attendance/sales: `--seq` steps of the action hue, legend under the grid.
+- Heat variant for attendance/sales: 5 sequential steps of the action hue (`--seq-1…5` in the token template), legend under the grid.
 
 ## 5. Settings
 ```
@@ -68,7 +69,7 @@ Conversation: messages on surface cards, own messages on brand-surface; composer
 
 ## 8. Map + list (field work)
 ```
-Map fills the page; floating panels use the mapPanel style (light card in both themes)
+Map fills the page; floating panels are light cards in both themes (maps stay readable under a light card)
 Left panel: today's route as numbered list cards; current stop ramped, others plain
 Bottom sheet on mobile: next stop · distance · Navigate (primary) · Skip
 ```
@@ -82,13 +83,15 @@ Footer: Back (outline) · Continue (primary) · "Saved as draft" note
 ```
 
 ## 10. Sign-in / OTP
-The "field notebook": paper + grain, solid card with tape, serif headline with a pen underline, a real
-photo, a ruled index of real modules, a stamp. OTP: big serif digits, countdown, step dots.
+The sign-in is where the identity's material and hand-made mark are strongest: one real photo or object
+from the domain, the mark (e.g. Harvest used a field notebook with tape, a pen underline and a stamp;
+"Register" would use a ruled register page with a ribbon), a headline naming what users do, a short index of
+the real modules. Solid card, solid button. OTP: large digits, countdown, step dots.
 
 ## 11. Public landing page (new)
 Allowed only when the product needs one. Same rules: no hero gradients, no glow, no stock 3D blobs.
 ```
-Canopy band with furrows: serif headline (what it does, in one line) · one gold CTA with hard offset
+Canopy band with the identity's texture: headline (what it does, in one line) · one primary key in the accent style
 Real product screenshot on paper, pinned with tape, slightly rotated
 Three "what you do in it" cards naming real modules · proof (real numbers only) · footer
 ```

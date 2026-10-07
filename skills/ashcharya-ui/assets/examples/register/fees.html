@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fee Collection — Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS (from identity.md / identity.json) ============ */
+:root{
+  --canvas:#F6F2F3; --surface:#FFFFFF; --surface-ivory:#FBF8F9; --line:#E4D9DD; --line-soft:#EFE7EA;
+  --ink:#2A0F1A; --ink-2:#5B4450; --ink-faint:#8A7680;
+  --canopy:#33101E; --canopy-1:#3D1425; --canopy-2:#4A1A2D; --on-canopy:#F6EEF1; --on-canopy-2:rgba(246,238,241,.72);
+  --tray:#260A16; --key:#45182A; --key-hover:#521F33;
+  --action:#8A2346; --action-hover:#721C3A; --on-action:#FFFFFF; --action-text:#8A2346; --brand-surface:#F8E9EE;
+  --accent:#8CCBE6; --accent-ink:#0E2A3A; --accent-text:#1D5E80;
+  --drop:#1E0811;
+  --success:#1F7A4D; --success-surface:#E4F2EA;
+  --warning:#93610E; --warning-surface:#F7EEDC;
+  --danger:#B4342C;  --danger-surface:#FAE7E4;
+  --info:#2C6E8F;    --info-surface:#E5EFF4;
+  --seq-1:#F3DCE4; --seq-2:#E2A9BC; --seq-3:#C66A8B; --seq-4:#8A2346;
+  --skeleton:#EFE7EA;
+  --texture:repeating-linear-gradient(180deg,transparent 0 7px,rgba(255,255,255,.05) 7px 8px,transparent 8px 13px,rgba(255,255,255,.05) 13px 14px,transparent 14px 19px,rgba(255,255,255,.05) 19px 20px,transparent 20px 25px,rgba(255,255,255,.09) 25px 26px,transparent 26px 30px);
+  --font-body:"Hind",system-ui,sans-serif; --font-display:"Zilla Slab","Hind",Georgia,serif; --font-accent:"Kalam",cursive;
+  --r-control:6px; --r-card:8px; --r-panel:10px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --tail:10px; /* swallowtail depth */
+  color-scheme:light;
+}
+:root[data-theme="night"]{
+  --canvas:#15181D; --surface:#1C2128; --surface-ivory:#161B22; --line:#30363D; --line-soft:#21262D;
+  --ink:#E6EDF3; --ink-2:#B9C2CC; --ink-faint:#8B949E;
+  --canopy:#161B22; --canopy-1:#161B22; --canopy-2:#21262D; --on-canopy:#E6EDF3; --on-canopy-2:rgba(230,237,243,.7);
+  --tray:#0F1216; --key:#1C2128; --key-hover:#252B33;
+  --action:#E68DAA; --action-hover:#F0A7BE; --on-action:#0D1117; --action-text:#EE9DB7; --brand-surface:#2A2026;
+  --accent:#8CCBE6; --accent-ink:#0D1117; --accent-text:#8CCBE6;
+  --drop:#000000;
+  --success:#3FB950; --success-surface:rgba(63,185,80,.14);
+  --warning:#D29922; --warning-surface:rgba(210,153,34,.14);
+  --danger:#FF7B72;  --danger-surface:rgba(255,123,114,.13);
+  --info:#58A6FF;    --info-surface:rgba(88,166,255,.13);
+  --seq-1:#3A2730; --seq-2:#6E3A50; --seq-3:#A85677; --seq-4:#E68DAA;
+  --skeleton:#252B33;
+  color-scheme:dark;
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--canvas);color:var(--ink);font:400 14px/1.45 var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+.num{font-family:var(--font-display);font-variant-numeric:tabular-nums lining-nums}
+.grid,.kpi,.stat-strip,.mini,.barrow,.col,.paybox,.rcpt,.top-list,.legend,.result-count{font-feature-settings:"lnum" 1,"tnum" 1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px;border:2px solid transparent;background-clip:padding-box}
+kbd{font:600 10.5px/1 var(--font-body);padding:3px 5px;border-radius:4px;border:1px solid var(--line);border-bottom-width:2px;color:var(--ink-2);background:var(--surface)}
+
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+
+/* ============ NAV (canopy, trays of raised keys) ============ */
+.nav{background:var(--canopy);background-image:var(--texture);color:var(--on-canopy);position:sticky;top:0;height:100vh;overflow-y:auto;padding:14px 12px 18px;display:flex;flex-direction:column;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 6px 8px}
+.crest{width:38px;height:38px;border-radius:8px;background:var(--canopy-2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);display:grid;place-items:center;font:700 17px var(--font-display);color:var(--on-canopy)}
+.brand b{display:block;font:700 15px/1.15 var(--font-display);letter-spacing:-.01em}
+.brand small{display:block;color:var(--on-canopy-2);font-size:11.5px}
+.group-label{font:700 10.5px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--on-canopy-2);padding:0 8px 7px}
+.tray{background:var(--tray);border-radius:10px;padding:5px;box-shadow:inset 0 1px 3px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:3px}
+.navkey{position:relative;display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:7px;border:0;background:transparent;color:var(--on-canopy-2);text-align:left;font-weight:500;font-size:13.5px;transition:background .13s,color .13s,transform .13s}
+.navkey svg{width:17px;height:17px;flex:none;opacity:.85}
+.navkey:hover{background:var(--key);color:var(--on-canopy);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 2px 5px -2px rgba(0,0,0,.45);transform:translateY(-1px)}
+.navkey .cnt{margin-left:auto;font:600 11.5px var(--font-body);color:var(--on-canopy-2)}
+/* SIGNATURE SHAPE #2 — active nav: raised key with a swallowtail ribbon tail in the ACCENT (the one accent moment) */
+.navkey[aria-current="page"]{background:var(--key-hover);color:var(--on-canopy);font-weight:600;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 5px -2px rgba(0,0,0,.5);padding-right:22px}
+.navkey[aria-current="page"]::after{content:"";position:absolute;right:-5px;top:6px;bottom:6px;width:14px;background:var(--accent);clip-path:polygon(0 0,100% 0,calc(100% - 6px) 50%,100% 100%,0 100%)}
+.nav-foot{margin-top:auto;font-size:12px;color:var(--on-canopy-2);padding:0 8px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--success);flex:none}
+
+/* ============ MAIN ============ */
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;height:58px;display:flex;align-items:center;gap:12px;padding:0 22px;background:var(--surface);border-bottom:1px solid var(--line)}
+.crumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);white-space:nowrap}
+.crumb b{color:var(--ink);font-weight:600}
+.iconbtn.menu-btn{display:none}
+[hidden]{display:none!important}
+.search{flex:1;max-width:440px;display:flex;align-items:center;gap:8px;height:38px;padding:0 10px;border:1px solid var(--line);border-radius:var(--r-control);background:var(--surface-ivory);color:var(--ink-faint)}
+.search input{flex:1;border:0;background:transparent;outline:0;min-width:0;color:var(--ink)}
+.search input::placeholder{color:var(--ink-faint)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+/* MARK #2 — handwritten date */
+.hand-date{font:400 16px/1 var(--font-accent);color:var(--ink-2);white-space:nowrap;transform:rotate(-1.5deg)}
+.sync{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.iconbtn{width:38px;height:38px;display:grid;place-items:center;border-radius:var(--r-control);border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:background .13s}
+.iconbtn:hover{background:var(--brand-surface);color:var(--action-text)}
+.iconbtn svg{width:18px;height:18px}
+.me{width:36px;height:36px;border-radius:50%;background:var(--brand-surface);color:var(--action-text);display:grid;place-items:center;font:700 13px var(--font-display);border:1px solid var(--line)}
+
+/* SIGNATURE SHAPE #3 — the ONE primary key: swallowtail right end + hard offset */
+.primary-wrap{filter:drop-shadow(3px 3px 0 var(--drop));transition:filter .13s,transform .13s}
+.primary-wrap:hover{filter:drop-shadow(4px 4px 0 var(--drop));transform:translate(-1px,-1px)}
+.primary-wrap:active{filter:drop-shadow(1px 1px 0 var(--drop));transform:translate(2px,2px)}
+.primary{display:flex;align-items:center;gap:8px;height:38px;padding:0 calc(16px + var(--tail)) 0 14px;border:0;background:var(--action);color:var(--on-action);font-weight:600;font-size:14px;white-space:nowrap;border-radius:6px 0 0 6px;clip-path:polygon(0 0,100% 0,calc(100% - var(--tail)) 50%,100% 100%,0 100%)}
+.primary:hover{background:var(--action-hover)}
+.primary kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.75}
+.primary svg{width:16px;height:16px}
+
+.content{padding:20px 22px 40px;display:flex;flex-direction:column;gap:14px;min-width:0}
+
+/* ============ PAGE HEADER (shared): identity paper | canopy status slab ============ */
+.ph{display:grid;grid-template-columns:minmax(260px,.9fr) 2.1fr;border-radius:var(--r-panel);overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:0 16px 32px -26px rgba(42,15,26,.45)}
+.ph-id{position:relative;padding:18px 20px 16px 62px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+/* SIGNATURE SHAPE #1 — register ribbon hanging from the header */
+.ph-id::before{content:"";position:absolute;left:22px;top:0;width:20px;height:58px;background:var(--action);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 9px),0 100%)}
+.eyebrow{display:flex;align-items:center;gap:8px;font:700 10.5px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow::after{content:"";width:22px;height:2px;background:var(--action)}
+.ph h1{margin:0;font:700 27px/1.1 var(--font-display);letter-spacing:-.025em}
+.ph-sub{color:var(--ink-2);font-size:13px}
+.slab{background:var(--canopy);background-image:var(--texture);display:grid;grid-template-columns:repeat(4,1fr);gap:1px;padding:0}
+.slab::before{display:none}
+.kpi{position:relative;background:transparent;border:0;border-left:1px solid rgba(255,255,255,.08);color:var(--on-canopy);text-align:left;padding:16px 18px 14px;display:flex;flex-direction:column;gap:4px;transition:background .13s;min-width:0}
+.kpi:first-child{border-left:0}
+.kpi:hover{background:rgba(255,255,255,.04)}
+.kpi[aria-pressed="true"]{background:var(--canopy-2);box-shadow:inset 0 -3px 0 var(--on-canopy)}
+.kpi .lbl{font:700 10.5px/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--on-canopy-2)}
+.kpi .val{font:700 26px/1.05 var(--font-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap}
+.kpi .hint{font-size:12px;color:var(--on-canopy-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* MARK #1 — the hand-circled hero figure */
+.circled{position:relative;display:inline-block;padding:0 6px}
+.circled svg{position:absolute;left:-8px;top:-9px;width:calc(100% + 16px);height:calc(100% + 18px);overflow:visible;pointer-events:none}
+.circled path{fill:none;stroke:var(--on-canopy);stroke-width:1.6;stroke-linecap:round;opacity:.7;stroke-dasharray:420;stroke-dashoffset:420;animation:pen 900ms .35s var(--ease-out) forwards}
+@keyframes pen{to{stroke-dashoffset:0}}
+
+/* ============ CONTROL BAR ============ */
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel)}
+.field{display:flex;align-items:center;gap:6px;height:36px;padding:0 10px;border:1px solid var(--line);border-radius:var(--r-control);background:var(--surface);font-size:13px;color:var(--ink-2)}
+.field select,.field input{border:0;background:transparent;outline:0;height:100%;font-size:13px;color:var(--ink);font-weight:500}
+.field select option{background:var(--surface);color:var(--ink)}
+.field.grow{flex:1;min-width:180px}
+.field.grow input{flex:1;min-width:0}
+.spacer{flex:1}
+.seg{display:inline-flex;padding:3px;border-radius:8px;background:var(--line-soft);box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}
+.seg button{height:30px;padding:0 12px;border:0;border-radius:6px;background:transparent;font-size:13px;font-weight:500;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 2px 4px -2px rgba(0,0,0,.35)}
+.seg svg{width:15px;height:15px}
+.btn{height:36px;padding:0 12px;border:1px solid var(--line);border-radius:var(--r-control);background:var(--surface);font-size:13px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:background .13s}
+.btn:hover{background:var(--brand-surface)}
+.btn svg{width:15px;height:15px}
+.btn.solid{background:var(--action);border-color:var(--action);color:var(--on-action)}
+.btn.solid:hover{background:var(--action-hover)}
+
+.chips-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:28px}
+.tabs{display:flex;gap:2px;margin-right:10px}
+.tab{height:30px;padding:0 10px;border:0;border-bottom:2px solid transparent;background:transparent;font-size:13px;font-weight:500;color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--action);font-weight:600}
+.tab .c{font-size:11.5px;color:var(--ink-faint);margin-left:3px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 4px 0 10px;border-radius:13px;background:var(--brand-surface);color:var(--action-text);font-size:12.5px;font-weight:600;border:1px solid transparent}
+.chip button{width:20px;height:20px;border-radius:50%;border:0;background:transparent;color:inherit;display:grid;place-items:center}
+.chip button:hover{background:rgba(0,0,0,.08)}
+.result-count{margin-left:auto;font-size:12.5px;color:var(--ink-2)}
+.result-count b{font-family:var(--font-display);color:var(--ink)}
+.linkbtn{border:0;background:none;color:var(--action-text);font-size:12.5px;font-weight:600;padding:2px 4px;text-decoration:underline;text-underline-offset:3px}
+
+/* ============ WORKSPACE: list + docked drawer ============ */
+.work{display:grid;grid-template-columns:1fr;gap:14px;align-items:start;min-width:0}
+.work.docked{grid-template-columns:minmax(0,1fr) 400px}
+
+/* ============ TABLE — the one real grid ============ */
+.grid-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);overflow:auto;max-height:calc(100vh - 150px);min-width:0}
+table.grid{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;min-width:1180px}
+.grid th,.grid td{border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:0 10px;height:38px;white-space:nowrap;text-align:left}
+.grid th:last-child,.grid td:last-child{border-right:0}
+.grid thead th{position:sticky;top:0;z-index:2;background:var(--surface-ivory);height:36px;font:700 11px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--line)}
+.grid thead th button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.grid thead th button:focus-visible{outline:2px solid var(--accent-text)}
+.grid th .arr{font-size:10px;color:var(--action-text);width:8px}
+.grid .r{text-align:right}
+.grid td.r{font-family:var(--font-display);font-variant-numeric:tabular-nums;font-weight:500;font-size:13.5px}
+.grid tbody tr{cursor:pointer;transition:background .12s}
+.grid tbody tr:hover td{background:var(--surface-ivory)}
+.grid tbody tr.cursor td{background:var(--brand-surface)}
+.grid tbody tr.open td{background:var(--brand-surface)}
+.grid tbody tr.open td:first-child,.grid tbody tr.cursor td:first-child{box-shadow:inset 3px 0 0 var(--action)}
+.grid td.name{font-weight:600;color:var(--ink)}
+.grid td.muted{color:var(--ink-2)}
+.grid td.code{font-family:var(--font-display);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.grid td.zero{color:var(--ink-faint)}
+.grid tbody tr.flash td{animation:flash .6s ease-out}
+@keyframes flash{from{background:var(--success-surface)}}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:4px;font-size:12px;font-weight:600}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.t-paid{color:var(--success);background:var(--success-surface)}
+.t-part{color:var(--info);background:var(--info-surface)}
+.t-unpaid{color:var(--warning);background:var(--warning-surface)}
+.t-over{color:var(--danger);background:var(--danger-surface)}
+.tag{display:inline-block;height:20px;line-height:20px;padding:0 7px;border-radius:4px;border:1px solid var(--line);font-size:11.5px;color:var(--ink-2);font-weight:500}
+.sk{height:10px;border-radius:4px;background:var(--skeleton);width:70%}
+@media (prefers-reduced-motion:no-preference){.sk{animation:sk 1.2s ease-in-out 3}}
+@keyframes sk{50%{opacity:.5}}
+
+/* faces */
+.face{padding:48px 20px;text-align:center;color:var(--ink-2)}
+.face h3{margin:0 0 6px;font:700 18px var(--font-display);color:var(--ink)}
+.face .note{font:400 17px var(--font-accent);color:var(--ink-2);margin-bottom:12px}
+.face .chips-row{justify-content:center;margin:10px 0 14px}
+
+/* ============ DASHBOARD ============ */
+.dash{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);padding:14px 16px;min-width:0}
+.panel.wide{grid-column:span 2}
+.panel h3{margin:0 0 2px;font:700 15px var(--font-display);letter-spacing:-.01em}
+.panel .ps{font-size:12px;color:var(--ink-faint);margin-bottom:12px}
+.bars{display:flex;flex-direction:column;gap:5px}
+.barrow{display:grid;grid-template-columns:62px 1fr 88px;align-items:center;gap:8px;border:0;background:transparent;padding:3px 4px;border-radius:5px;text-align:left;font-size:12.5px;color:var(--ink-2)}
+.barrow:hover{background:var(--surface-ivory)}
+.barrow .track{height:12px;background:var(--line-soft);border-radius:3px;overflow:hidden}
+.barrow .fill{height:100%;background:var(--seq-3);border-radius:3px;transform-origin:left;animation:grow .7s var(--ease-out) both}
+.barrow .v{text-align:right;font-family:var(--font-display);font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+@keyframes grow{from{transform:scaleX(0)}}
+.cols{display:flex;align-items:flex-end;gap:10px;height:150px;padding-top:6px}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;font-size:11.5px;color:var(--ink-2);border:0;background:none}
+.col .b{width:100%;max-width:46px;background:var(--seq-2);border-radius:3px 3px 0 0;transform-origin:bottom;animation:growy .7s var(--ease-out) both}
+.col.today .b{background:var(--seq-4)}
+.col .v{font:600 11.5px var(--font-display);color:var(--ink);white-space:nowrap}
+@media (max-width:480px){.col .v{font-size:9.5px}.cols{gap:5px}}
+@keyframes growy{from{transform:scaleY(0)}}
+.stack{display:flex;height:26px;border-radius:5px;overflow:hidden;gap:2px;margin-bottom:10px}
+.stack button{border:0;padding:0;min-width:3px}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
+.legend button{border:0;background:none;display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-2);padding:3px 2px;text-align:left;border-radius:4px}
+.legend button:hover{background:var(--surface-ivory)}
+.legend i{width:10px;height:10px;border-radius:2px;flex:none}
+.legend b{margin-left:auto;font-family:var(--font-display);color:var(--ink)}
+.top-list{list-style:none;margin:0;padding:0}
+.top-list li button{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 8px;border:0;border-bottom:1px solid var(--line-soft);background:none;padding:7px 2px;text-align:left}
+.top-list li button:hover{background:var(--surface-ivory)}
+.top-list .n{font-weight:600;font-size:13px}
+.top-list .m{font-size:12px;color:var(--ink-faint)}
+.top-list .a{grid-row:span 2;align-self:center;font:700 14px var(--font-display);color:var(--danger)}
+.foot-note{font-size:11.5px;color:var(--ink-faint);margin-top:10px}
+
+/* ============ DRAWER (record + form share it) ============ */
+.drawer{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);position:sticky;top:72px;max-height:calc(100vh - 86px);display:flex;flex-direction:column;overflow:hidden;animation:enter .28s var(--ease-out)}
+@keyframes enter{from{opacity:0;transform:translateX(16px)}}
+.dr-head{background:var(--canopy);background-image:var(--texture);color:var(--on-canopy);padding:14px 16px 0;position:relative}
+.dr-top{display:flex;align-items:flex-start;gap:12px}
+.avatar{width:44px;height:44px;border-radius:8px;background:var(--canopy-2);display:grid;place-items:center;font:700 16px var(--font-display);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);flex:none}
+.dr-title{flex:1;min-width:0}
+.dr-title h2{margin:0;font:700 19px/1.15 var(--font-display);letter-spacing:-.015em}
+.dr-title p{margin:2px 0 0;font-size:12.5px;color:var(--on-canopy-2)}
+.dr-x{width:34px;height:34px;border-radius:6px;border:1px solid rgba(255,255,255,.16);background:transparent;color:var(--on-canopy);display:grid;place-items:center}
+.dr-x:hover{background:rgba(255,255,255,.08)}
+.dr-tabs{display:flex;gap:2px;margin-top:12px}
+.dr-tabs button{height:34px;padding:0 12px;border:0;background:transparent;color:var(--on-canopy-2);font-size:13px;font-weight:500;border-bottom:2px solid transparent}
+.dr-tabs button[aria-selected="true"]{color:var(--on-canopy);border-bottom-color:var(--on-canopy);font-weight:600}
+.dr-body{padding:14px 16px;overflow:auto;flex:1}
+.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.stat-strip div{background:var(--surface);padding:9px 10px}
+.stat-strip span{display:block;font:700 10px/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.stat-strip b{font:700 17px var(--font-display);font-variant-numeric:tabular-nums}
+.sec-h{font:700 10.5px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:14px 0 8px}
+table.mini{width:100%;border-collapse:collapse;font-size:13px}
+.mini th,.mini td{border:1px solid var(--line-soft);padding:6px 8px;text-align:left}
+.mini th{background:var(--surface-ivory);font:700 10.5px var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.mini td.r,.mini th.r{text-align:right}
+.mini td.r{font-family:var(--font-display);font-variant-numeric:tabular-nums}
+.mini tfoot td{font-weight:700}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:0;border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;font-size:13px}
+.kv dt,.kv dd{margin:0;padding:7px 10px;border-bottom:1px solid var(--line-soft)}
+.kv dt{color:var(--ink-2);background:var(--surface-ivory)}
+.kv dt:last-of-type,.kv dd:last-of-type{border-bottom:0}
+.rcpt{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:13px}
+.rcpt .d{font:400 15px var(--font-accent);color:var(--ink-2)}
+.rcpt .amt{grid-row:span 2;align-self:center;font:700 15px var(--font-display)}
+.rcpt .m{font-size:12px;color:var(--ink-faint)}
+.dr-foot{border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;background:var(--surface-ivory)}
+.form{display:flex;flex-direction:column;gap:12px}
+.form label{display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.form input,.form select{width:100%;min-width:0;height:40px;border:1px solid var(--line);border-radius:var(--r-control);background:var(--surface);padding:0 10px;font-size:14px;color:var(--ink);font-weight:500}
+.form input:focus,.form select:focus{outline:2px solid var(--accent-text);outline-offset:0;border-color:transparent}
+.form .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form .help{font-weight:400;color:var(--ink-faint);font-size:12px}
+.paybox{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;background:var(--surface-ivory)}
+.paybox b{font:700 22px var(--font-display)}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--canvas);padding:10px 12px 10px 16px;border-radius:8px;display:flex;align-items:center;gap:14px;font-size:13.5px;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);z-index:80;animation:enter .28s var(--ease-out)}
+.toast button{border:0;background:transparent;color:var(--accent);font-weight:700;padding:4px 6px}
+:root[data-theme="night"] .toast{background:#2D333B;color:var(--ink)}
+
+/* palette */
+.pal-back{position:fixed;inset:0;background:rgba(20,8,13,.35);z-index:70;display:flex;justify-content:center;padding-top:12vh}
+.pal{width:min(560px,calc(100% - 32px));background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 24px 48px -20px rgba(0,0,0,.5);overflow:hidden;align-self:flex-start;animation:enter .22s var(--ease-out)}
+.pal input{width:100%;height:50px;border:0;border-bottom:1px solid var(--line);padding:0 16px;font-size:15px;background:transparent;outline:0}
+.pal ul{list-style:none;margin:0;padding:6px;max-height:340px;overflow:auto}
+.pal li button{width:100%;display:flex;align-items:center;gap:10px;padding:8px 10px;border:0;border-radius:6px;background:none;text-align:left;font-size:13.5px}
+.pal li button:hover,.pal li button.on{background:var(--brand-surface)}
+.pal .g{font:700 10px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:8px 10px 4px}
+.pal .h{margin-left:auto;color:var(--ink-faint);font-size:12px}
+
+/* bottom bar (phones) */
+.bottombar{display:none}
+.sheet-back{display:none}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1279px){ .work.docked{grid-template-columns:minmax(0,1fr) 360px} .hand-date{display:none} }
+@media (min-width:768px) and (max-width:1279px){
+  .app{grid-template-columns:72px 1fr}
+  .nav{padding:14px 8px}
+  .brand{justify-content:center;padding:4px 0 8px} .brand>div:last-child,.navkey .t,.navkey .cnt,.nav-foot span+*{display:none}
+  .group-label{font-size:0;padding:0 0 6px;border-top:1px solid rgba(255,255,255,.1);margin-top:2px}
+  .navkey{justify-content:center;padding:0;height:40px}
+  .navkey[aria-current="page"]{padding:0}
+  .navkey[aria-current="page"]::after{right:-11px;width:10px}
+  .nav-foot{justify-content:center;font-size:0}
+}
+@media (max-width:1023px){
+  .work.docked{grid-template-columns:1fr}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);max-height:none;border-radius:0;z-index:60;box-shadow:-20px 0 40px -20px rgba(0,0,0,.45)}
+  .dash{grid-template-columns:1fr 1fr} .panel.wide{grid-column:span 2}
+}
+@media (max-width:860px){ .ph{grid-template-columns:1fr} .slab{grid-template-columns:repeat(4,minmax(150px,1fr));overflow-x:auto;scroll-snap-type:x mandatory} .kpi{scroll-snap-align:start} }
+@media (max-width:767px){
+  .app{grid-template-columns:1fr}
+  .nav{position:fixed;left:0;top:0;bottom:0;width:280px;z-index:65;transform:translateX(-100%);transition:transform .28s var(--ease-out)}
+  .nav.open{transform:none;box-shadow:20px 0 40px -20px rgba(0,0,0,.5)}
+  .sheet-back.open{display:block;position:fixed;inset:0;background:rgba(20,8,13,.4);z-index:55}
+  .iconbtn.menu-btn{display:grid;flex:none}
+  .crumb{display:none}
+  .search{min-width:0;flex:1 1 0;width:0}
+  .tab{white-space:nowrap}
+  .topbar{padding:0 12px;gap:8px;height:56px}
+  .crumb .grp,.crumb .sep,.hand-date,.sync span,.me{display:none}
+  .top-right{gap:8px}
+  .search{max-width:none;height:40px}
+  .search kbd{display:none}
+  .primary .lbl,.primary kbd{display:none}
+  .primary{height:40px;padding:0 calc(12px + var(--tail)) 0 12px}
+  .content{padding:14px 16px 96px}
+  .ph-id{padding:16px 16px 14px 52px}
+  .ph-id::before{left:16px;width:18px;height:50px}
+  .ph h1{font-size:23px}
+  .controls{padding:8px}
+  .controls .field{flex:1 1 calc(50% - 8px);min-width:0}
+  .controls .field select{flex:1;min-width:0}
+  .controls .field.grow{flex-basis:100%}
+  .controls .spacer{display:none}
+  .seg{flex:1} .seg button{flex:1;justify-content:center;height:36px}
+  .tabs{width:100%;overflow-x:auto;margin:0}
+  .result-count{margin-left:0}
+  .grid-wrap{max-height:none}
+  .dash{grid-template-columns:1fr} .panel.wide{grid-column:auto}
+  .drawer{top:auto;left:0;right:0;width:100%;height:88vh;border-radius:14px 14px 0 0;animation:sheet .28s var(--ease-out)}
+  @keyframes sheet{from{transform:translateY(40px);opacity:0}}
+  .dr-head::before{content:"";position:absolute;top:6px;left:50%;width:38px;height:4px;margin-left:-19px;border-radius:2px;background:rgba(255,255,255,.3)}
+  .dr-head{padding-top:18px}
+  .bottombar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;height:64px;background:var(--canopy);background-image:var(--texture);z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+  .bottombar button{border:0;background:none;color:var(--on-canopy-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:500;min-height:48px;position:relative}
+  .bottombar button svg{width:20px;height:20px}
+  .bottombar button[aria-current="page"]{color:var(--on-canopy);font-weight:700}
+  .bottombar button[aria-current="page"]::before{content:"";position:absolute;top:0;width:14px;height:12px;background:var(--accent);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 4px),0 100%)}
+  .kv{grid-template-columns:110px 1fr}
+  .btn,.iconbtn,.field{min-height:40px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.circled path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ============ NAV ============ -->
+  <nav class="nav" id="nav" aria-label="Modules">
+    <div class="brand">
+      <div class="crest" aria-hidden="true">SV</div>
+      <div><b>Saraswati Vidya Niketan</b><small>Sr. Sec. · Jaipur · CBSE</small></div>
+    </div>
+    <div id="navGroups"></div>
+    <div class="nav-foot"><span class="dot"></span>All entries saved · 11:42</div>
+  </nav>
+  <div class="sheet-back" id="navBack"></div>
+
+  <div class="main">
+    <!-- ============ TOP BAR ============ -->
+    <header class="topbar">
+      <button class="iconbtn menu-btn" id="menuBtn" aria-label="Open modules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <div class="crumb"><span class="grp">Accounts</span><span class="sep">/</span><b>Fee collection</b></div>
+      <label class="search" id="searchPill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span class="sr">Find a student</span>
+        <input id="q" placeholder="Name, adm. no., father's name, phone" autocomplete="off">
+        <kbd>Ctrl K</kbd>
+      </label>
+      <div class="top-right">
+        <span class="hand-date" title="Today">Wed, 7 Oct 2026</span>
+        <span class="sync"><span class="dot"></span><span>Saved</span></span>
+        <button class="iconbtn hide-s" id="themeBtn" aria-label="Switch to night mode" title="Night mode (Shift+D)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></svg></button>
+        <span class="primary-wrap"><button class="primary" id="collectTop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">Collect fee</span> <kbd>N</kbd></button></span>
+        <div class="me" title="Rekha Bhatnagar · Fee clerk">RB</div>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <!-- ============ PAGE HEADER ============ -->
+      <section class="ph" aria-label="Fee collection status">
+        <div class="ph-id">
+          <div class="eyebrow">Accounts · AY 2026–27</div>
+          <h1>Fee collection</h1>
+          <div class="ph-sub">Quarter 3 (Oct–Dec) · due by <b>10 Oct</b> · late fee ₹50/week after</div>
+        </div>
+        <div class="slab" id="slab"></div>
+      </section>
+
+      <!-- ============ CONTROL BAR ============ -->
+      <section class="controls" aria-label="Filters">
+        <label class="field grow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q2" placeholder="Filter this list" aria-label="Filter this list"></label>
+        <label class="field">Class <select id="fClass"></select></label>
+        <label class="field">Section <select id="fSec"><option value="">All</option><option>A</option><option>B</option><option>C</option></select></label>
+        <label class="field">Mode <select id="fMode"><option value="">All</option><option>Cash</option><option>UPI</option><option>Cheque</option><option>NEFT</option><option>Card</option></select></label>
+        <label class="field">Concession <select id="fCon"><option value="">All</option><option>None</option><option>Sibling</option><option>Staff ward</option><option>RTE</option><option>Merit</option></select></label>
+        <div class="spacer"></div>
+        <button class="btn" id="remindBtn" title="SMS + WhatsApp reminder to parents of the rows shown"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H8l-4 4z"/></svg>Remind</button>
+        <button class="btn" id="exportBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Export</button>
+        <div class="seg" role="group" aria-label="View">
+          <button id="vDash" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Dashboard</button>
+          <button id="vTable" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M3 15h18M9 4v16"/></svg>Table</button>
+        </div>
+      </section>
+
+      <div class="chips-row" id="chipsRow"></div>
+
+      <div class="work" id="work">
+        <div id="view" style="min-width:0"></div>
+        <aside class="drawer" id="drawer" hidden aria-label="Student fee record"></aside>
+      </div>
+    </main>
+  </div>
+</div>
+
+<nav class="bottombar" aria-label="Quick modules">
+  <button data-go="Dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11 12 4l9 7v9H3z"/></svg>Home</button>
+  <button aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Fees</button>
+  <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM8 9l2 2 4-4M8 15h8"/></svg>Attendance</button>
+  <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg>Students</button>
+  <button id="moreBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>More</button>
+</nav>
+
+<div id="layer"></div>
+
+<script>
+/* ================= DATA (deterministic sample) ================= */
+let seed = 20261007;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const pick = a => a[Math.floor(rnd() * a.length)];
+const first = ["Aarav","Vivaan","Aditya","Ishaan","Reyansh","Kabir","Arjun","Sai","Krishna","Dhruv","Ananya","Diya","Aadhya","Saanvi","Myra","Kiara","Ira","Prisha","Riya","Navya","Harsh","Yash","Tanvi","Kavya","Pranav","Ayaan","Zoya","Mehak","Simran","Gurleen","Rohan","Nikhil","Pooja","Sneha","Aryan","Devansh","Lakshya","Bhavya","Khushi","Mohit","Nandini","Ritika","Tushar","Vedant","Shreya","Arnav","Faiz","Ayesha","Jaspreet","Kunal"];
+const last = ["Sharma","Verma","Gupta","Agarwal","Meena","Choudhary","Rathore","Shekhawat","Jain","Khandelwal","Saini","Yadav","Singh","Mathur","Bansal","Goyal","Kumawat","Joshi","Sethi","Khan","Qureshi","Mittal","Pareek","Soni","Bhargava"];
+const fathersFirst = ["Rajesh","Sunil","Mahesh","Rakesh","Vikram","Anil","Sanjay","Manoj","Deepak","Ashok","Naresh","Pradeep","Ramesh","Imran","Harpreet","Gopal","Dinesh","Mukesh","Suresh","Kamal"];
+const classes = ["Nur","LKG","UKG","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+const tuition = {Nur:7200,LKG:7200,UKG:7500,I:8400,II:8400,III:8700,IV:8700,V:9000,VI:9900,VII:9900,VIII:10200,IX:11400,X:11700,XI:13500,XII:13500};
+const modes = ["Cash","UPI","UPI","Cheque","NEFT","Card","Cash","UPI"];
+const cons = ["None","None","None","None","None","None","Sibling","Sibling","Staff ward","RTE","Merit"];
+const days = ["01 Oct","02 Oct","03 Oct","05 Oct","06 Oct","07 Oct"];
+let rc = 4381;
+const rows = [];
+for (let i = 0; i < 138; i++) {
+  const cl = classes[Math.floor(rnd() * classes.length)];
+  const fn = pick(first), ln = pick(last);
+  const con = cons[Math.floor(rnd() * cons.length)];
+  const transport = rnd() < .55 ? pick([2400, 2850, 3300]) : 0;
+  const comp = ["Nur","LKG","UKG"].includes(cl) ? 0 : 900;
+  const activity = 600;
+  let tu = tuition[cl];
+  const disc = con === "Sibling" ? Math.round(tu * .1) : con === "Staff ward" ? Math.round(tu * .5) : con === "RTE" ? tu : con === "Merit" ? Math.round(tu * .25) : 0;
+  const heads = [["Tuition", tu], ["Transport", transport], ["Computer lab", comp], ["Activity", activity]].filter(h => h[1] > 0);
+  const due = heads.reduce((s, h) => s + h[1], 0) - disc - (con === "RTE" ? activity : 0);
+  const arrears = rnd() < .14 ? pick([1500, 2400, 3900, 8700, 4350]) : 0;
+  const r = rnd();
+  let paid = 0, receipts = [];
+  const mode = pick(modes);
+  if (r < .52) { paid = due; }
+  else if (r < .66) { paid = Math.round(due * pick([.4, .5, .6]) / 100) * 100; }
+  if (paid > 0) receipts.push({ no: "R/26-27/" + (rc++), date: pick(days), amt: paid, mode, head: "Q3 fee" });
+  if (arrears === 0 && rnd() < .7) receipts.push({ no: "R/26-27/" + (2100 + Math.floor(rnd() * 900)), date: pick(["08 Jul", "10 Jul", "14 Jul", "02 Jul"]), amt: due, mode: pick(modes), head: "Q2 fee" });
+  const phone = "98" + Math.floor(10000000 + rnd() * 89999999);
+  rows.push({
+    adm: "SVN/" + (2014 + Math.floor(rnd() * 13)) + "/" + String(100 + Math.floor(rnd() * 900)).padStart(4, "0"),
+    name: fn + " " + ln, cls: cl, sec: pick(["A","A","B","B","C"]), roll: 1 + Math.floor(rnd() * 42),
+    father: fathersFirst[Math.floor(rnd() * fathersFirst.length)] + " " + ln, phone,
+    con, heads, disc, due, arrears, paid, receipts,
+    mode: paid ? mode : "", last: paid ? receipts[0].date : (receipts[0] ? receipts[0].date : ""), rcpt: paid ? receipts[0].no : ""
+  });
+}
+const bal = r => r.due + r.arrears - r.paid;
+const status = r => r.due === 0 && r.arrears === 0 ? "Paid" : bal(r) <= 0 ? "Paid" : r.arrears > 0 ? "Overdue" : r.paid > 0 ? "Part paid" : "Unpaid";
+const tone = { "Paid": "t-paid", "Part paid": "t-part", "Unpaid": "t-unpaid", "Overdue": "t-over" };
+const toneVar = { "Paid": "var(--success)", "Part paid": "var(--info)", "Unpaid": "var(--warning)", "Overdue": "var(--danger)" };
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const inrShort = n => n >= 100000 ? "₹" + (n / 100000).toFixed(2) + " L" : inr(n);
+
+/* ================= STATE ================= */
+const S = { q: "", cls: "", sec: "", mode: "", con: "", status: "", kpi: "", today: false, sort: { k: "bal", dir: -1 }, view: "table", open: null, drawerMode: "record", drawerTab: "fees", cursor: -1, loading: true };
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ================= NAV ================= */
+const I = {
+  home:'<path d="M3 11 12 4l9 7v9H3z"/>', enq:'<path d="M4 5h16v11H8l-4 4z"/>', adm:'<path d="M12 3 2 8l10 5 10-5zM6 10v5c3 2.5 9 2.5 12 0v-5"/>', stu:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/>',
+  fee:'<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>', str:'<path d="M4 4h16v4H4zM4 12h10M4 16h7M4 20h12"/>', con:'<path d="m5 19 14-14M7 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM17 15a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>', exp:'<path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/>',
+  att:'<path d="M4 4h16v16H4zM8 9l2 2 4-4M8 15h8"/>', tt:'<rect x="3" y="4" width="18" height="17" rx="1"/><path d="M3 9h18M8 2v4M16 2v4"/>', exm:'<path d="M6 3h9l4 4v14H6zM9 12h6M9 16h6"/>', rep:'<path d="M5 3h14v18H5zM9 8h6M9 12h6M9 16h3"/>',
+  tc:'<path d="M5 4h14v12l-7 4-7-4z"/>', stf:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', bus:'<rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 10h16M7 21v-4M17 21v-4"/>', lib:'<path d="M4 4h5v16H4zM10 4h4v16h-4zM15 5l4-1 2 15-4 1z"/>', set:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>'
+};
+const NAV = [
+  ["Front office", [["Dashboard","home"],["Enquiries","enq","14"],["Admissions","adm","6"],["Students","stu","1,284"]]],
+  ["Accounts", [["Fee collection","fee"],["Fee structure","str"],["Concessions","con","3"],["Expenses","exp"]]],
+  ["Academics", [["Attendance","att"],["Timetable","tt"],["Exams & marks","exm"],["Report cards","rep"]]],
+  ["Records", [["TC & certificates","tc","2"],["Staff","stf"],["Transport","bus"],["Library","lib"],["Settings","set"]]]
+];
+$("navGroups").innerHTML = NAV.map(([g, items]) => `<div style="margin-bottom:12px"><div class="group-label">${g}</div><div class="tray">${items.map(([l, ic, c]) => `<button class="navkey" title="${l}" ${l === "Fee collection" ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${I[ic]}</svg><span class="t">${l}</span>${c ? `<span class="cnt">${c}</span>` : ""}</button>`).join("")}</div></div>`).join("");
+
+/* ================= FILTERING ================= */
+$("fClass").innerHTML = '<option value="">All</option>' + classes.map(c => `<option>${c}</option>`).join("");
+function filtered() {
+  const q = S.q.trim().toLowerCase();
+  let out = rows.filter(r =>
+    (!q || (r.name + " " + r.adm + " " + r.father + " " + r.phone).toLowerCase().includes(q)) &&
+    (!S.cls || r.cls === S.cls) && (!S.sec || r.sec === S.sec) && (!S.mode || r.mode === S.mode) &&
+    (!S.con || r.con === S.con) && (!S.status || status(r) === S.status) &&
+    (!S.today || r.receipts.some(x => x.date === "07 Oct")) &&
+    (S.kpi !== "cheque" || r.mode === "Cheque"));
+  const k = S.sort.k, d = S.sort.dir;
+  const val = r => k === "bal" ? bal(r) : k === "cls" ? classes.indexOf(r.cls) * 10 + "ABC".indexOf(r.sec) : r[k];
+  out.sort((a, b) => { const x = val(a), y = val(b); return (x > y ? 1 : x < y ? -1 : 0) * d; });
+  return out;
+}
+
+/* ================= HEADER SLAB (computed from rows) ================= */
+function slab() {
+  const todayAmt = rows.reduce((s, r) => s + r.receipts.filter(x => x.date === "07 Oct").reduce((a, x) => a + x.amt, 0), 0);
+  const todayN = rows.filter(r => r.receipts.some(x => x.date === "07 Oct")).length;
+  const pending = rows.reduce((s, r) => s + Math.max(0, bal(r)), 0);
+  const pendingN = rows.filter(r => bal(r) > 0).length;
+  const over = rows.filter(r => status(r) === "Overdue");
+  const chq = rows.filter(r => r.mode === "Cheque");
+  const k = [
+    ["today", "Collected today", `<span class="circled">${inr(todayAmt)}<svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M14 34C10 14 70 4 120 6s78 12 72 30-60 22-108 20S6 48 18 24c4-7 13-12 22-14"/></svg></span>`, `${todayN} receipts · till 11:42`],
+    ["pending", "Q3 balance", inrShort(pending), `${pendingN} students yet to clear`],
+    ["over", "Overdue (Q2 arrears)", over.length, inrShort(over.reduce((s, r) => s + bal(r), 0)) + " incl. late fee"],
+    ["cheque", "Cheques to clear", chq.length, inr(chq.reduce((s, r) => s + r.paid, 0)) + " in bank"]
+  ];
+  $("slab").innerHTML = k.map(([id, l, v, h]) => `<button class="kpi" data-kpi="${id}" aria-pressed="${S.kpi === id}"><span class="lbl">${l}</span><span class="val">${v}</span><span class="hint">${h}</span></button>`).join("");
+}
+$("slab").addEventListener("click", e => {
+  const b = e.target.closest(".kpi"); if (!b) return;
+  const id = b.dataset.kpi; const on = S.kpi === id;
+  S.kpi = on ? "" : id; S.today = false; S.status = ""; S.mode = "";
+  if (!on) { if (id === "today") S.today = true; if (id === "over") S.status = "Overdue"; if (id === "pending") S.sort = { k: "bal", dir: -1 }; }
+  syncSelects(); render();
+});
+
+/* ================= CHIPS ================= */
+function chips(n) {
+  const c = [];
+  if (S.q) c.push(["q", `“${S.q}”`]);
+  if (S.cls) c.push(["cls", "Class " + S.cls]);
+  if (S.sec) c.push(["sec", "Section " + S.sec]);
+  if (S.mode) c.push(["mode", S.mode]);
+  if (S.con) c.push(["con", "Concession: " + S.con]);
+  if (S.today) c.push(["today", "Paid today"]);
+  if (S.kpi === "pending") c.push(["kpi", "Sorted by balance"]);
+  if (S.kpi === "cheque") c.push(["kpi", "Cheque payments"]);
+  const counts = {}; ["Paid","Part paid","Unpaid","Overdue"].forEach(s => counts[s] = rows.filter(r => status(r) === s).length);
+  const tabs = [["", "All", rows.length], ...["Unpaid","Part paid","Overdue","Paid"].map(s => [s, s, counts[s]])];
+  $("chipsRow").innerHTML = `<div class="tabs" role="tablist">${tabs.map(([v, l, n]) => `<button class="tab" role="tab" data-st="${v}" aria-selected="${S.status === v}">${l}<span class="c">${n}</span></button>`).join("")}</div>` +
+    c.map(([k, l]) => `<span class="chip">${esc(l)}<button data-rm="${k}" aria-label="Remove ${esc(l)}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span>`).join("") +
+    (c.length ? `<button class="linkbtn" data-rm="all">Clear all</button>` : "") +
+    `<span class="result-count"><b>${n}</b> of ${rows.length} students</span>`;
+}
+$("chipsRow").addEventListener("click", e => {
+  const t = e.target.closest("[data-st]"); if (t) { S.status = t.dataset.st; if (S.kpi === "over") S.kpi = ""; render(); return; }
+  const rm = e.target.closest("[data-rm]"); if (!rm) return;
+  const k = rm.dataset.rm;
+  if (k === "all") Object.assign(S, { q: "", cls: "", sec: "", mode: "", con: "", status: "", kpi: "", today: false });
+  else if (k === "today") { S.today = false; S.kpi = ""; } else if (k === "kpi") S.kpi = ""; else S[k] = "";
+  syncSelects(); render();
+});
+function syncSelects() { $("fClass").value = S.cls; $("fSec").value = S.sec; $("fMode").value = S.mode; $("fCon").value = S.con; $("q2").value = S.q; }
+[["fClass","cls"],["fSec","sec"],["fMode","mode"],["fCon","con"]].forEach(([id, k]) => $(id).addEventListener("change", e => { S[k] = e.target.value; render(); }));
+$("q2").addEventListener("input", e => { S.q = e.target.value; render(); });
+
+/* ================= TABLE ================= */
+const COLS = [
+  ["adm","Adm. no.",""],["name","Student",""],["cls","Class",""],["sec","Sec.",""],["roll","Roll","r"],["father","Father's name",""],["con","Concession",""],
+  ["due","Q3 fee","r"],["arrears","Arrears","r"],["paid","Paid","r"],["bal","Balance","r"],["status","Status",""],["last","Last paid",""],["mode","Mode",""],["rcpt","Receipt no.",""]
+];
+function table(list) {
+  const head = `<thead><tr>${COLS.map(([k, l, c]) => {
+    const on = S.sort.k === k; const sortable = !["status"].includes(k);
+    return `<th class="${c}" ${on ? `aria-sort="${S.sort.dir > 0 ? "ascending" : "descending"}"` : ""}>${sortable ? `<button data-sort="${k}">${l}<span class="arr">${on ? (S.sort.dir > 0 ? "▲" : "▼") : ""}</span></button>` : l}</th>`;
+  }).join("")}</tr></thead>`;
+  if (S.loading) return `<div class="grid-wrap"><table class="grid">${head}<tbody>${Array.from({ length: 10 }, () => `<tr>${COLS.map(([, , c]) => `<td class="${c}"><div class="sk" style="width:${40 + Math.random() * 50}%;${c ? "margin-left:auto" : ""}"></div></td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  if (!list.length) return `<div class="grid-wrap"><div class="face"><h3>No students match these filters</h3><div class="note">try a different class or clear a filter</div><button class="btn solid" data-rm-all>Clear filters</button></div></div>`;
+  const body = list.map((r, i) => {
+    const st = status(r), b = bal(r);
+    return `<tr data-i="${rows.indexOf(r)}" class="${S.open === r ? "open" : ""} ${S.cursor === i ? "cursor" : ""}" tabindex="-1">
+      <td class="code">${r.adm}</td><td class="name">${esc(r.name)}</td><td>${r.cls}</td><td>${r.sec}</td><td class="r">${r.roll}</td>
+      <td class="muted">${esc(r.father)}</td><td>${r.con === "None" ? '<span style="color:var(--ink-faint)">—</span>' : `<span class="tag">${r.con}</span>`}</td>
+      <td class="r">${inr(r.due)}</td><td class="r ${r.arrears ? "" : "zero"}">${r.arrears ? inr(r.arrears) : "—"}</td><td class="r ${r.paid ? "" : "zero"}">${r.paid ? inr(r.paid) : "—"}</td>
+      <td class="r" style="${b > 0 ? "font-weight:700" : "color:var(--ink-faint)"}">${b > 0 ? inr(b) : "₹0"}</td>
+      <td><span class="badge ${tone[st]}">${st}</span></td><td class="muted">${r.last || "—"}</td><td class="muted">${r.mode || "—"}</td><td class="code">${r.rcpt || "—"}</td></tr>`;
+  }).join("");
+  const sumDue = list.reduce((s, r) => s + r.due, 0), sumPaid = list.reduce((s, r) => s + r.paid, 0), sumBal = list.reduce((s, r) => s + Math.max(0, bal(r)), 0);
+  return `<div class="grid-wrap" id="gw"><table class="grid">${head}<tbody>${body}</tbody>
+    <tfoot><tr>${COLS.map(([k, , c]) => `<td class="${c}" style="position:sticky;bottom:0;background:var(--surface-ivory);font-weight:700;border-top:1px solid var(--line)">${k === "adm" ? "Total" : k === "name" ? list.length + " students" : k === "due" ? inr(sumDue) : k === "paid" ? inr(sumPaid) : k === "bal" ? inr(sumBal) : ""}</td>`).join("")}</tr></tfoot></table></div>`;
+}
+
+/* ================= DASHBOARD (from rows on screen) ================= */
+function dashboard(list) {
+  if (S.loading) return `<div class="dash">${Array.from({ length: 6 }, (_, i) => `<div class="panel ${i === 0 ? "wide" : ""}" style="height:230px"><div class="sk" style="width:40%;height:14px"></div></div>`).join("")}</div>`;
+  if (!list.length) return table(list);
+  // balance by class
+  const byClass = classes.map(c => [c, list.filter(r => r.cls === c).reduce((s, r) => s + Math.max(0, bal(r)), 0)]).filter(x => x[1] > 0);
+  const maxC = Math.max(...byClass.map(x => x[1]), 1);
+  // status split
+  const sts = ["Paid","Part paid","Unpaid","Overdue"].map(s => [s, list.filter(r => status(r) === s).length]);
+  // daily collection
+  const dayList = ["01 Oct","02 Oct","03 Oct","05 Oct","06 Oct","07 Oct"];
+  const daily = dayList.map(d => [d, list.reduce((s, r) => s + r.receipts.filter(x => x.date === d).reduce((a, x) => a + x.amt, 0), 0)]);
+  const maxD = Math.max(...daily.map(x => x[1]), 1);
+  // modes
+  const md = ["Cash","UPI","Cheque","NEFT","Card"].map(m => [m, list.filter(r => r.mode === m).reduce((s, r) => s + r.paid, 0)]);
+  const maxM = Math.max(...md.map(x => x[1]), 1);
+  const top = list.filter(r => bal(r) > 0).sort((a, b) => bal(b) - bal(a)).slice(0, 6);
+  const cn = ["Sibling","Staff ward","RTE","Merit"].map(c => [c, list.filter(r => r.con === c).length, list.filter(r => r.con === c).reduce((s, r) => s + r.disc, 0)]);
+  return `<div class="dash">
+    <div class="panel wide"><h3>Collected per day</h3><div class="ps">Q3 receipts in the rows shown · school closed Sun 4 Oct</div>
+      <div class="cols">${daily.map(([d, v], i) => `<button class="col ${d === "07 Oct" ? "today" : ""}" data-day="${d}" title="${d}: ${inr(v)}"><span class="v">${v ? inrShort(v) : "—"}</span><span class="b" style="height:${(v / maxD) * 100}%;animation-delay:${i * 18}ms"></span><span>${d}</span></button>`).join("")}</div></div>
+    <div class="panel"><h3>Where students stand</h3><div class="ps">Click a part to show only those students</div>
+      <div class="stack">${sts.filter(s => s[1]).map(([s, n]) => `<button data-status="${s}" title="${s}: ${n}" style="flex:${n};background:${toneVar[s]}"></button>`).join("")}</div>
+      <div class="legend">${sts.map(([s, n]) => `<button data-status="${s}"><i style="background:${toneVar[s]}"></i>${s}<b>${n}</b></button>`).join("")}</div></div>
+    <div class="panel"><h3>Balance by class</h3><div class="ps">Q3 + arrears, click to filter</div>
+      <div class="bars">${byClass.map(([c, v], i) => `<button class="barrow" data-cls="${c}"><span>Class ${c}</span><span class="track"><span class="fill" style="display:block;width:${(v / maxC) * 100}%;animation-delay:${i * 18}ms"></span></span><span class="v">${inr(v)}</span></button>`).join("")}</div></div>
+    <div class="panel"><h3>Largest balances</h3><div class="ps">Open a record to collect or remind</div>
+      <ul class="top-list">${top.map(r => `<li><button data-open="${rows.indexOf(r)}"><span class="n">${esc(r.name)}</span><span class="a">${inr(bal(r))}</span><span class="m">${r.cls}-${r.sec} · ${r.adm}</span></button></li>`).join("")}</ul></div>
+    <div class="panel"><h3>Paid by mode</h3><div class="ps">Q3 receipts, click to filter</div>
+      <div class="bars">${md.map(([m, v], i) => `<button class="barrow" data-mode="${m}"><span>${m}</span><span class="track"><span class="fill" style="display:block;background:var(--seq-4);width:${(v / maxM) * 100}%;animation-delay:${i * 18}ms"></span></span><span class="v">${v ? inr(v) : "—"}</span></button>`).join("")}</div>
+      <div class="foot-note">Cheques count as paid once deposited; clearing takes 2 working days.</div></div>
+    <div class="panel wide" style="grid-column:span 1"><h3>Concessions given</h3><div class="ps">This quarter, in the rows shown</div>
+      <table class="mini"><thead><tr><th>Type</th><th class="r">Students</th><th class="r">Waived</th></tr></thead><tbody>${cn.map(([c, n, v]) => `<tr><td><button class="linkbtn" data-con="${c}" style="padding:0">${c}</button></td><td class="r">${n}</td><td class="r">${v ? inr(v) : "—"}</td></tr>`).join("")}</tbody></table></div>
+  </div>`;
+}
+$("view").addEventListener("click", e => {
+  const t = e.target;
+  const s = t.closest("[data-sort]"); if (s) { const k = s.dataset.sort; S.sort = { k, dir: S.sort.k === k ? -S.sort.dir : (["due","arrears","paid","bal"].includes(k) ? -1 : 1) }; render(); return; }
+  if (t.closest("[data-rm-all]")) { Object.assign(S, { q: "", cls: "", sec: "", mode: "", con: "", status: "", kpi: "", today: false }); syncSelects(); render(); return; }
+  const st = t.closest("[data-status]"); if (st) { S.status = st.dataset.status; setView("table"); return; }
+  const c = t.closest("[data-cls]"); if (c) { S.cls = c.dataset.cls; syncSelects(); setView("table"); return; }
+  const m = t.closest("[data-mode]"); if (m) { S.mode = m.dataset.mode; syncSelects(); setView("table"); return; }
+  const cn = t.closest("[data-con]"); if (cn) { S.con = cn.dataset.con; syncSelects(); setView("table"); return; }
+  const d = t.closest("[data-day]"); if (d && d.dataset.day === "07 Oct") { S.today = true; S.kpi = "today"; setView("table"); return; }
+  const o = t.closest("[data-open]"); if (o) { openRecord(rows[+o.dataset.open]); return; }
+  const tr = t.closest("tbody tr[data-i]"); if (tr) openRecord(rows[+tr.dataset.i]);
+});
+
+/* ================= DRAWER ================= */
+function openRecord(r, mode = "record") { S.open = r; S.drawerMode = mode; S.drawerTab = "fees"; renderDrawer(); renderView(); }
+function closeDrawer() { S.open = null; renderDrawer(); renderView(); }
+function renderDrawer() {
+  const d = $("drawer"), w = $("work");
+  if (!S.open && S.drawerMode !== "new") { d.hidden = true; w.classList.remove("docked"); return; }
+  d.hidden = false; w.classList.add("docked");
+  const r = S.open;
+  const initials = r ? r.name.split(" ").map(x => x[0]).join("") : "+";
+  const title = r ? esc(r.name) : "Collect fee";
+  const sub = r ? `Class ${r.cls}-${r.sec} · Roll ${r.roll} · ${r.adm}` : "Find the student, then enter the amount";
+  const tabs = S.drawerMode === "record" ? [["fees","Fees"],["receipts","Receipts"],["profile","Profile"]] : [["form", r ? "Collect fee" : "New receipt"]];
+  let body = "", foot = "";
+  if (S.drawerMode === "record") {
+    const b = bal(r);
+    const strip = `<div class="stat-strip"><div><span>Q3 fee</span><b>${inr(r.due)}</b></div><div><span>Paid</span><b>${r.paid ? inr(r.paid) : "—"}</b></div><div><span>Balance</span><b style="color:${b > 0 ? "var(--danger)" : "var(--success)"}">${inr(Math.max(0, b))}</b></div></div>`;
+    if (S.drawerTab === "fees") body = strip + `<div class="sec-h">Q3 heads · Oct–Dec</div><table class="mini"><thead><tr><th>Head</th><th class="r">Amount</th></tr></thead><tbody>${r.heads.map(h => `<tr><td>${h[0]}</td><td class="r">${inr(h[1])}</td></tr>`).join("")}${r.disc ? `<tr><td>${r.con} concession</td><td class="r">−${inr(r.disc + (r.con === "RTE" ? 600 : 0))}</td></tr>` : ""}${r.arrears ? `<tr><td>Q2 arrears (incl. late fee)</td><td class="r">${inr(r.arrears)}</td></tr>` : ""}</tbody><tfoot><tr><td>Total payable</td><td class="r">${inr(r.due + r.arrears)}</td></tr></tfoot></table>
+      <div class="sec-h">Status</div><span class="badge ${tone[status(r)]}">${status(r)}</span>${r.arrears ? `<p style="font-size:13px;color:var(--ink-2);margin:8px 0 0">Q2 unpaid since 10 Jul. Report card for Term 1 is on hold until arrears clear.</p>` : ""}`;
+    if (S.drawerTab === "receipts") body = r.receipts.length ? r.receipts.map(x => `<div class="rcpt"><span><b>${x.no}</b> · ${x.head}</span><span class="amt">${inr(x.amt)}</span><span class="m"><span class="d">${x.date} 2026</span> · ${x.mode}</span></div>`).join("") : `<div class="face" style="padding:30px 0"><h3>No receipts this year</h3><div class="note">first payment pending since April</div></div>`;
+    if (S.drawerTab === "profile") body = `<dl class="kv"><dt>Father</dt><dd>${esc(r.father)}</dd><dt>Mobile</dt><dd>+91 ${r.phone.slice(0, 5)} ${r.phone.slice(5)}</dd><dt>Concession</dt><dd>${r.con}</dd><dt>Transport</dt><dd>${r.heads.find(h => h[0] === "Transport") ? "Route " + (3 + (r.roll % 9)) + " · Bus stop: " + pick(["Vaishali Nagar","Mansarovar","Malviya Nagar","C-Scheme","Jagatpura"]) : "Own arrangement"}</dd><dt>Admitted</dt><dd>${r.adm.split("/")[1]}</dd></dl>`;
+    foot = b > 0 ? `<button class="btn solid" data-act="collect">Collect ${inr(b)}</button><button class="btn" data-act="remind">Send reminder</button>` : `<button class="btn" data-act="print">Print last receipt</button>`;
+    foot += `<button class="btn" data-act="print2" style="margin-left:auto">Fee card</button>`;
+  } else {
+    const b = r ? Math.max(0, bal(r)) : 0;
+    body = `<form class="form" id="payForm">${r ? `<div class="paybox"><span>Balance due<br><span class="help">${r.arrears ? "includes Q2 arrears" : "Q3 Oct–Dec"}</span></span><b>${inr(b)}</b></div>` : `<label>Student<input id="pfStudent" placeholder="Name or adm. no." list="stuList" required><datalist id="stuList">${rows.slice(0, 60).map(x => `<option value="${x.adm}">${esc(x.name)} · ${x.cls}-${x.sec}</option>`).join("")}</datalist></label>`}
+      <div class="row2"><label>Amount (₹)<input id="pfAmt" type="number" inputmode="numeric" min="1" value="${b || ""}" required></label><label>Date<input type="text" value="07 Oct 2026" readonly></label></div>
+      <label>Mode<select id="pfMode"><option>Cash</option><option>UPI</option><option>Cheque</option><option>NEFT</option><option>Card</option></select></label>
+      <label>Reference <span class="help">UPI ref., cheque no. or bank txn id — blank for cash</span><input id="pfRef" placeholder="e.g. 427613098812"></label>
+      <label>Received from<input value="${r ? esc(r.father) : ""}" placeholder="Parent / guardian name"></label></form>`;
+    foot = `<button class="btn solid" data-act="save">Save &amp; print receipt</button><button class="btn" data-act="cancel">Cancel</button>`;
+  }
+  d.innerHTML = `<div class="dr-head"><div class="dr-top"><div class="avatar">${initials}</div><div class="dr-title"><h2>${title}</h2><p>${sub}</p></div><button class="dr-x" data-act="close" aria-label="Close (Esc)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="dr-tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${S.drawerMode !== "record" || S.drawerTab === k}">${l}</button>`).join("")}</div></div>
+    <div class="dr-body">${body}</div><div class="dr-foot">${foot}</div>`;
+  if (S.drawerMode !== "record") setTimeout(() => ($("pfAmt") && r ? $("pfAmt") : $("pfStudent"))?.focus(), 50);
+}
+$("drawer").addEventListener("click", e => {
+  const t = e.target.closest("[data-tab]"); if (t && S.drawerMode === "record") { S.drawerTab = t.dataset.tab; renderDrawer(); return; }
+  const a = e.target.closest("[data-act]"); if (!a) return;
+  const act = a.dataset.act;
+  if (act === "close") closeDrawer();
+  if (act === "collect") { S.drawerMode = "collect"; renderDrawer(); }
+  if (act === "cancel") { if (S.open) { S.drawerMode = "record"; renderDrawer(); } else { S.drawerMode = "record"; closeDrawer(); } }
+  if (act === "remind") toast(`Reminder sent to ${S.open.father} by SMS + WhatsApp`);
+  if (act === "print" || act === "print2") toast("Sent to office printer (HP LaserJet, Accounts)");
+  if (act === "save") savePayment();
+});
+function savePayment() {
+  let r = S.open;
+  if (!r) { const v = ($("pfStudent").value || "").trim().toLowerCase(); r = rows.find(x => x.adm.toLowerCase() === v || x.name.toLowerCase() === v); if (!r) { $("pfStudent").setCustomValidity("No student with that name or adm. no."); $("pfStudent").reportValidity(); return; } }
+  const amt = +$("pfAmt").value; if (!amt || amt < 1) { $("pfAmt").reportValidity(); return; }
+  const mode = $("pfMode").value;
+  const snap = JSON.parse(JSON.stringify({ paid: r.paid, receipts: r.receipts, mode: r.mode, last: r.last, rcpt: r.rcpt, arrears: r.arrears }));
+  const no = "R/26-27/" + (rc++);
+  r.paid += amt; r.receipts.unshift({ no, date: "07 Oct", amt, mode, head: "Q3 fee" }); r.mode = mode; r.last = "07 Oct"; r.rcpt = no;
+  if (r.paid > r.due) { const extra = r.paid - r.due; r.arrears = Math.max(0, r.arrears - extra); r.paid = Math.min(r.paid, r.due); }
+  S.open = r; S.drawerMode = "record"; S.drawerTab = "receipts"; render(); renderDrawer();
+  const tr = document.querySelector(`tr[data-i="${rows.indexOf(r)}"]`); if (tr) tr.classList.add("flash");
+  toast(`${no} · ${inr(amt)} from ${r.name}`, () => { Object.assign(r, snap); rc--; render(); renderDrawer(); toast("Receipt cancelled"); });
+}
+
+/* ================= TOAST / PALETTE ================= */
+let tt;
+function toast(msg, undo) {
+  clearTimeout(tt); const L = $("layer"); L.querySelector(".toast")?.remove();
+  const el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status");
+  el.innerHTML = `<span>${esc(msg)}</span>${undo ? '<button>Undo</button>' : ""}`;
+  if (undo) el.querySelector("button").onclick = () => { el.remove(); undo(); };
+  L.appendChild(el); tt = setTimeout(() => el.remove(), 6000);
+}
+function palette() {
+  const back = document.createElement("div"); back.className = "pal-back";
+  back.innerHTML = `<div class="pal" role="dialog" aria-label="Find or go to"><input placeholder="Find a student, receipt or module…" aria-label="Search"><ul></ul></div>`;
+  $("layer").appendChild(back);
+  const inp = back.querySelector("input"), ul = back.querySelector("ul"); let items = [], idx = 0;
+  const draw = () => {
+    const q = inp.value.trim().toLowerCase();
+    const stu = (q ? rows.filter(r => (r.name + r.adm + r.father + r.phone).toLowerCase().includes(q)) : rows.filter(r => r.receipts.some(x => x.date === "07 Oct"))).slice(0, 6);
+    const acts = [["Collect fee","N",() => newCollect()],["Send reminders to overdue","",() => { S.status = "Overdue"; render(); }],["Switch to dashboard","D",() => setView("dash")],["Night / light mode","Shift D",toggleTheme]].filter(a => !q || a[0].toLowerCase().includes(q));
+    const go = NAV.flatMap(g => g[1].map(x => x[0])).filter(n => !q || n.toLowerCase().includes(q)).slice(0, q ? 6 : 4);
+    items = [];
+    let h = "";
+    if (stu.length) { h += `<li class="g">${q ? "Look up" : "Paid today"}</li>`; stu.forEach(r => { items.push(() => openRecord(r)); h += `<li><button data-k="${items.length - 1}"><b>${esc(r.name)}</b> <span style="color:var(--ink-faint)">${r.cls}-${r.sec}</span><span class="h">${r.adm}</span></button></li>`; }); }
+    if (acts.length) { h += `<li class="g">Quick actions</li>`; acts.forEach(a => { items.push(a[2]); h += `<li><button data-k="${items.length - 1}">${a[0]}${a[1] ? `<span class="h"><kbd>${a[1]}</kbd></span>` : ""}</button></li>`; }); }
+    if (go.length) { h += `<li class="g">Go to</li>`; go.forEach(n => { items.push(() => toast(n + " — opens in the full app")); h += `<li><button data-k="${items.length - 1}">${n}<span class="h">module</span></button></li>`; }); }
+    if (!items.length) h = `<li class="g">Nothing found for “${esc(q)}” — try an admission no. like SVN/2019/0412</li>`;
+    ul.innerHTML = h; idx = Math.min(idx, items.length - 1); ul.querySelectorAll("[data-k]").forEach(b => b.classList.toggle("on", +b.dataset.k === idx));
+  };
+  const close = () => back.remove();
+  inp.addEventListener("input", () => { idx = 0; draw(); });
+  inp.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown") { idx = Math.min(items.length - 1, idx + 1); draw(); e.preventDefault(); }
+    if (e.key === "ArrowUp") { idx = Math.max(0, idx - 1); draw(); e.preventDefault(); }
+    if (e.key === "Enter" && items[idx]) { close(); items[idx](); }
+    if (e.key === "Escape") close();
+  });
+  ul.addEventListener("click", e => { const b = e.target.closest("[data-k]"); if (b) { close(); items[+b.dataset.k](); } });
+  back.addEventListener("click", e => { if (e.target === back) close(); });
+  draw(); inp.focus();
+}
+$("q").addEventListener("focus", e => { e.target.blur(); palette(); });
+
+/* ================= VIEW / RENDER ================= */
+function setView(v) { S.view = v; $("vDash").setAttribute("aria-pressed", v === "dash"); $("vTable").setAttribute("aria-pressed", v === "table"); render(); }
+$("vDash").onclick = () => setView("dash"); $("vTable").onclick = () => setView("table");
+function renderView() { const list = filtered(); $("view").innerHTML = S.view === "dash" ? dashboard(list) : table(list); return list; }
+function render() { slab(); const list = renderView(); chips(list.length); }
+function newCollect() { S.open = null; S.drawerMode = "new"; renderDrawer(); renderView(); }
+$("collectTop").onclick = newCollect;
+$("remindBtn").onclick = () => { const n = filtered().filter(r => bal(r) > 0).length; toast(n ? `Reminder queued for ${n} parents with a balance (SMS + WhatsApp)` : "No one in this list has a balance"); };
+$("exportBtn").onclick = () => toast(`${filtered().length} rows exported to Fee_Q3_07-Oct-2026.xlsx`);
+
+/* theme */
+function toggleTheme() {
+  const n = document.documentElement.dataset.theme === "night" ? "light" : "night";
+  document.documentElement.dataset.theme = n;
+  $("themeBtn").setAttribute("aria-label", n === "night" ? "Switch to light mode" : "Switch to night mode");
+  try { localStorage.setItem("register-theme", n); } catch (e) {}
+}
+try { const t = localStorage.getItem("register-theme"); if (t) document.documentElement.dataset.theme = t; else if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.dataset.theme = "night"; } catch (e) {}
+$("themeBtn").onclick = toggleTheme;
+
+/* mobile nav */
+const openNav = o => { $("nav").classList.toggle("open", o); $("navBack").classList.toggle("open", o); };
+$("menuBtn").onclick = () => openNav(true); $("moreBtn").onclick = () => openNav(true); $("navBack").onclick = () => openNav(false);
+
+/* keyboard */
+document.addEventListener("keydown", e => {
+  const typing = /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); if (!document.querySelector(".pal")) palette(); return; }
+  if (e.key === "Escape") { if (document.querySelector(".pal")) return; if ($("nav").classList.contains("open")) return openNav(false); if (!$("drawer").hidden) { S.drawerMode = "record"; closeDrawer(); } return; }
+  if (typing || document.querySelector(".pal")) return;
+  if (e.key === "n" || e.key === "N") { if (e.shiftKey) return; e.preventDefault(); newCollect(); }
+  if (e.key === "D" && e.shiftKey) toggleTheme();
+  else if (e.key === "d") setView(S.view === "dash" ? "table" : "dash");
+  if (S.view === "table" && (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "j" || e.key === "k")) {
+    e.preventDefault(); const list = filtered(); const down = e.key === "ArrowDown" || e.key === "j";
+    S.cursor = Math.max(0, Math.min(list.length - 1, S.cursor + (down ? 1 : -1))); renderView();
+    document.querySelector("tr.cursor")?.scrollIntoView({ block: "nearest" });
+  }
+  if (e.key === "Enter" && S.cursor >= 0 && S.view === "table") openRecord(filtered()[S.cursor]);
+});
+
+/* first load: skeleton in the real shape, then data */
+render();
+setTimeout(() => { S.loading = false; render();
+  const h = location.hash; if (h.includes("night")) toggleTheme(); if (h.includes("dash")) setView("dash"); if (h.includes("open")) openRecord(filtered()[1]); if (h.includes("collect")) newCollect(); }, 450);
+</script>
+</body>
+</html>

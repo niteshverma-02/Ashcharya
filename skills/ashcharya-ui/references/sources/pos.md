@@ -1,6 +1,6 @@
 # Prasar POS — "Harvest" system (store counter app)
 
-> **Source reference.** This documents the original store POS that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for everything else use `../foundations.md`.
+> **Source reference.** This documents the original store POS that Ashcharya UI was distilled from. Use it only when editing that codebase (match its existing tokens there); for a new product, follow the approach in `../../SKILL.md`.
 
 Source repo: `Nitesh_projects/franchise-pos`. Light = **Harvest** (jade + harvest gold, cool field-mist).
 Dark = **GitHub dark** (#15181d canvas). Fonts: Plus Jakarta Sans (body), Bricolage Grotesque (display/numbers),

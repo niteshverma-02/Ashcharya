@@ -1,6 +1,10 @@
-# Taste guide — what this team accepts and rejects
+# A real taste log — what this team accepted and rejected
 
-These came from real review rounds on the Franchisee POS (Oct 2026) and the Prasar field app (Aug–Oct 2026). Treat them as hard rules; they beat any
+> This is the log the source apps produced while following `method/process.md`. Keep one like it for every
+> product: the *principles* behind these rows (human craft over glow, shared components, real grids, real data)
+> transfer to any identity; the specific colours do not.
+
+These came from real review rounds on the Franchisee POS (Oct 2026) and the Prasar field app (Aug–Oct 2026). Treat the principles behind them as hard rules; they beat any
 generic "modern UI" instinct.
 
 ## ❌ Rejected (never ship these)

@@ -1,0 +1,68 @@
+/* Token template — fill this from your identity card (references/method/identity.md).
+   Role names are the same in every product, so structural components never change.
+   Check contrast with: python3 assets/tools/check-contrast.py identity.json
+   A filled example: assets/examples/canopy-tokens.css */
+:root {
+  /* Surfaces */
+  --canvas: ;          /* near-white tinted toward your hue (saturation <= 25%) */
+  --surface: #FFFFFF;  /* cards, tables, drawers */
+  --surface-ivory: ;   /* a lighter step of the canvas: headers, list cards */
+  --line: ;            /* hairlines, table rules */
+  --line-soft: ;       /* inner dividers */
+
+  /* Ink */
+  --ink: ;             /* very dark tone of your hue — >= 4.5:1 on canvas + surface */
+  --ink-2: ;           /* secondary text — >= 4.5:1 on surface */
+  --ink-faint: ;       /* captions — >= 3:1 on surface */
+
+  /* Canopy: the deep surfaces (nav, header slab, hero, tab bar) */
+  --canopy: ;  --canopy-1: ;  --canopy-2: ;   /* L 10–20% of your hue. A shallow 1→2 ramp (115deg) is the ONLY
+                                              allowed gradient: canopy surfaces, never buttons or cards */
+  --on-canopy: ;                              /* >= 4.5:1 on canopy */
+
+  /* Action */
+  --action: ;  --action-hover: ;  --on-action: #FFFFFF;   /* white text >= 4.5:1 */
+  --action-text: ;     /* hue as text on white — >= 4.5:1 */
+  --brand-surface: ;   /* very light tint of the hue for tiles and soft buttons */
+
+  /* The one accent (from your material) */
+  --accent: ;          /* >= 3:1 on canopy */
+  --accent-ink: ;      /* text on accent — >= 4.5:1 */
+  --accent-text: ;     /* accent as text on white — >= 4.5:1 */
+  --drop: ;            /* hard offset shadow under the one primary key (darkest canopy) */
+
+  /* Status — keep standard meanings */
+  --success: #1F7A4D; --success-surface: #E4F2EA;
+  --warning: #93610E; --warning-surface: #F7EEDC;
+  --danger:  #B4342C; --danger-surface:  #FAE7E4;
+  --info:    #2C6E8F; --info-surface:    #E5EFF4;
+
+  /* Identity craft */
+  --texture: ;         /* one CSS pattern from your material, 3–6% alpha */
+  --font-body: ;  --font-display: ;  --font-accent: ;
+  --r-control: ;  --r-card: ;  --r-panel: ;   /* + your signature shape in components */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* Sequential steps of the action hue for heatmaps (light → dark) */
+  --seq-1: ; --seq-2: ; --seq-3: ; --seq-4: ; --seq-5: ;
+  /* Fixed categorical chart series (keep across products; never cycle) */
+  --viz-1:#2A78D6; --viz-2:#EB6834; --viz-3:#1BAF7A; --viz-4:#EDA100; --viz-5:#E87BA4;
+  --viz-6:#008300; --viz-7:#4A3AA7; --viz-8:#E34948; --viz-other:#9A9A94;
+}
+
+.dark {
+  /* Calm night: GitHub-style neutrals for canvas/cards/lines; brand lives on the canopy only */
+  --canvas: #15181D; --surface: #1C2128; --surface-ivory: #161B22; --line: #30363D; --line-soft: #21262D;
+  --ink: #E6EDF3; --ink-2: #B1BAC4; --ink-faint: #8B949E;
+  --canopy: ; --canopy-1: ; --canopy-2: ;   /* very dark, low-saturation hue: L 10–16%, HSL S <= 30% */
+  --on-canopy: #E6EDF3;
+  --action: ; --action-hover: ; --on-action: #0D1117; --action-text: ;   /* lighten until #0D1117 reads */
+  --brand-surface: ;   /* hue at L ~20%, S ~20% */
+  --accent: ; --accent-ink: ; --accent-text: ;
+  --success: #3FB950; --success-surface: #2A3D30;
+  --warning: #D29922; --warning-surface: #403828;
+  --danger:  #FF7B72; --danger-surface:  #4A3335;
+  --info:    #58A6FF; --info-surface:    #303A47;
+  --viz-1:#3987E5; --viz-2:#D95926; --viz-3:#199E70; --viz-4:#C98500; --viz-5:#D55181;
+  --viz-6:#008300; --viz-7:#9085E9; --viz-8:#E66767; --viz-other:#6E7681;
+}

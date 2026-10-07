@@ -1,11 +1,14 @@
-# Themes — the same Ashcharya UI in other colours
+# Palette examples — five palettes produced with the identity method
 
-A theme changes **only the palette**. Structure, craft, type, spacing, motion and every law stay the same:
-trays of raised keys, the KPI slab, the real grid, the docked drawer, furrows, notch, stamp, seal and the one
-hard-offset accent key all carry over.
+These palettes recolour the **Canopy example** (its furrows, notch, stamp and seal stay because they are
+Canopy's craft). For a new product, a palette is only step 3 of the identity: pick its texture, shape, mark
+and type from that product's own material (`../method/identity.md`), not from Canopy.
 
-Files: `assets/themes/themes.css` (web), `assets/themes/themes.ts` (mobile), `assets/themes/check-contrast.py`.
-Live preview: open `assets/showcase.html` and use the palette picker, or add `?palette=indigo`.
+> These are **palette examples** from step 3 of `../method/identity.md`. A real product needs its own full identity
+> (palette + texture + shape + mark + type); a palette alone is not an identity. See `derivations.md`.
+
+Files: `assets/examples/themes/themes.css` (web), `assets/examples/themes/themes.ts` (mobile), `assets/tools/check-contrast.py`.
+Live preview: open `assets/examples/showcase.html` and use the palette picker, or add `?palette=indigo`.
 
 ## 1. Built-in themes
 
@@ -26,7 +29,7 @@ Status colours (success / warning / danger / info) are **the same in every theme
 
 **Web**
 ```html
-<link rel="stylesheet" href="ashcharya-tokens.css">
+<link rel="stylesheet" href="canopy-tokens.css">
 <link rel="stylesheet" href="themes/themes.css">   <!-- after the tokens -->
 <html data-ash-theme="indigo">                       <!-- add class="dark" for night -->
 ```
@@ -39,6 +42,8 @@ const palette = themes.indigo[colorScheme === "dark" ? "night" : "light"];
 
 The variable names are the same in every theme (`--canvas`, `--canopy`, `--action`, `--on-action`,
 `--accent` alias `--gold`, `--accent-ink`, `--accent-text`…), so components never change.
+Night switching uses the `.dark` class everywhere; `data-ash-theme` exists only to switch between these
+example palettes in the demo.
 
 ## 3. Making a new theme
 
@@ -51,7 +56,7 @@ The variable names are the same in every theme (`--canvas`, `--canopy`, `--actio
    `accent-text` shade dark enough for white surfaces (≥ 4.5:1).
 5. **Night:** keep the GitHub-dark neutrals; lighten the action until dark ink `#0D1117` reads on it.
 6. **Check it:** write `{ "light": {...}, "night": {...} }` with the keys from `themes.ts` and run
-   `python3 assets/themes/check-contrast.py my-theme.json`. Every pair must pass before use.
+   `python3 assets/tools/check-contrast.py my-theme.json`. Every pair must pass before use.
 
 ## 4. Rules that don't change with the theme
 

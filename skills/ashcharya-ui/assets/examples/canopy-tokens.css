@@ -1,4 +1,4 @@
-/* Ashcharya UI — web tokens (light + night), default theme Canopy. Drop into your global CSS.
+/* Example identity "Canopy" — web tokens (light + night). A filled-in token-template.css.
    For other colours, also load themes/themes.css and set <html data-ash-theme="indigo|terracotta|ocean|graphite">.
    Night follows `.dark` on <html> (next-themes / Tailwind darkMode: "class"). */
 :root {
